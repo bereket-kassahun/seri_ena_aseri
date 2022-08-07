@@ -16,16 +16,16 @@ async function sendEmail(reciever, code) {
         //   port: 587,
         //   secure: false, // true for 465, false for other ports
         auth: {
-            user: "beckykassahun@gmail.com", // generated ethereal user
-            pass: "jsovbvpeeumwxlpf", // generated ethereal password
+            user: process.env.EMAIL, // generated ethereal user
+            pass: process.env.EMAIL_PASSWORD, // generated ethereal password
         },
     });
 
     // send mail with defined transport object
     let info = await transporter.sendMail({
-        from: "SRA ALE" + '" 👻"', // sender address
+        from: "SERI ENA ASERI", // sender address
         to: reciever, // list of receivers
-        subject: "Confirm Your Email Please", // Subject line
+        subject: "Confirmation Code", // Subject line
         // text: "Hello world?", // plain text body
         html: confirmationPage(code), // html body
     });
