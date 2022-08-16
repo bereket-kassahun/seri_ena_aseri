@@ -1,19 +1,17 @@
 
 
-const RecommendationItem = ({ url, img_url, body, price }) => {
+import { Link } from 'react-router-dom'
 
-    const imageStyle = {
-        backgroundImage: 'url(' + img_url + ')'
-    }
+const RecommendationItem = ({ body }) => {
+
     return (
-        <a href={url} class="search_servie_image_content text-left text-white">
-            <div class="search_thumb bg-image" style={imageStyle}></div>
-            <span class="search-text-item">
-                {body}
-                <br />
-                {price}
-            </span>
-        </a>
+        <div style={{ padding: "10px" }}>
+            <Link to="/search" state={ body } >
+                <span class="search-text-item">
+                    {body}
+                </span>
+            </Link>
+        </div>
     )
 }
 

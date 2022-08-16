@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 
 
 export const Items = ({ items }) => {
@@ -13,9 +14,11 @@ export const Items = ({ items }) => {
                                     <ul className="sub-menu">
                                         {
                                             item.subitems.map((subitem, index) => (
-                                                <li key={index}>
-                                                    <a href={subitem.href} key={index}>{subitem.name}</a>
-                                                </li>
+                                                <Link to={subitem.href}>
+                                                    <li key={index}>
+                                                        <a key={index}>{subitem.name}</a>
+                                                    </li>
+                                                </Link>
                                             ))
                                         }
                                     </ul>

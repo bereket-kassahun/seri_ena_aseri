@@ -2,7 +2,7 @@ import RecommendationItem from './RecommendationItem'
 const RecommendationContainer = ({ searchResult }) => {
 
 
-    console.log(typeof ("type", searchResult))
+    // console.log(typeof ("type", searchResult))
     const img_url = "https://elouzeir.sprintstudio.net/assets/uploads/media-uploader/frame-221651124049.jpg"
     return (
         <>
@@ -12,7 +12,7 @@ const RecommendationContainer = ({ searchResult }) => {
                     <div class="card-body home_servie_serach_wrapper">
                         {
                             searchResult.map(result => (
-                                <RecommendationItem img_url={img_url} url={result.url} body={result.body} price={result.price} />
+                                <RecommendationItem body={result} />
                             ))
                         }
                     </div>
