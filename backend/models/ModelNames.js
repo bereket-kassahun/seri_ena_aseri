@@ -1,5 +1,5 @@
 module.exports = {
-    WORKER: "Worker",
-    CUSTOMER: "Customer",
-    PROFESSIONAL: "Professional"
+    SERVICE: "Service",
+    PROFESSIONAL: "Professional", 
+    EMAILVERIFICATION: "EmailVerification"
 }

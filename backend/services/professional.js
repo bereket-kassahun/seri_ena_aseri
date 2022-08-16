@@ -1,8 +1,9 @@
+require('dotenv').config({ path: '../config.env' });
 const Models = require('../models')
 const nodemailer = require("nodemailer");
 const confirmationPage = require("../utils/confirmationHtmlEmail")
-async function getAllProfessionals(page) {
-    return await Models.Professional.paginate({}, { page: page, limit: 3 })
+async function getAllProfessionals(filter, page) {
+    return await Models.Professional.paginate(filter, { page: page, limit: 3 })
 }
 
 async function sendEmail(reciever, code) {
@@ -39,7 +40,7 @@ async function sendEmail(reciever, code) {
     // console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
 }
 
-// sendEmail("bereket_kasahun@yahoo.com")
+// sendEmail("bereket_kasahun@yahoo.com", "4545")
 module.exports = {
     getAllProfessionals,
     sendEmail
