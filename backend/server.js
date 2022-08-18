@@ -73,7 +73,6 @@ app.use('/professional', professionalsRouter)
 app.use('/services', servicesRouter)
 app.use('/verification', verificationRouter)
 
-
 app.listen(PORT, () => {
     console.log("Listening on PORT "+ PORT);
 })
