@@ -11,58 +11,40 @@ router.get('/list', async function (req, res) {
         res.json(result)
     })
 })
-router.post('/register', function (req, res) {
 
-    // console.log(req)
-    // console.log(req.body.email)
-    const professional = new Models.Professional({
-        username: req.body.username,
-        email: req.body.email,
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        phoneNumber: req.body.phoneNumber,
-        verified: false,
-        services: []
-    })
-
-
-    // professional.save((err, professional) => {
-    //     if (err)
-    //         res.send("UNABLE TO SAVE DATA")
-    //     else
-    //         res.send("SAVED THE DATA")
-    // })
-
-    Models.Professional.register(professional, req.body.password, function (err, user) {
-        if (err) {
-            // console.log(err);
-            return res.json(err);
-        }
-        res.json({ success: true })
-    })
-})
-
-router.post("/login", async function (req, res) {
-    passport.authenticate("local", function (err, user, info) {
-        if (err) {
-            res.json({ success: false, message: err })
-        } else {
-            if (!user) {
-                res.json({ success: false, message: info })
-            } else {
-                req.login(user, function (error) {
-                    if (error)
-                        return next(error)
-                    return res.send({ success: true, message: 'Login successful' })
-                });
-                // res.json({ success: true, message: info })
-            }
-        }
-    })(req, res);
+router.post("/login", passport.authenticate('local', {failureMessage: true }) ,function (req, res) {
+    res.json({success: true})
 });
 
-router.get("/dashboard", isLoggedIn, function (req, res) {
+// router.post("/login", async function (req, res) {
+//     passport.authenticate("local", function (err, user, info) {
+//         if (err) {
+//             res.json({ success: false, ...err })
+//         } else {
+//             if (!user) {
+//                 res.json({ success: false, ...info })
+//             } else {
+//                 req.login(user, function (error) {
+//                     if (error){
+//                         console.log("error occured")
+//                         return next(error)
+//                     }
+//                     console.log(req.session)
+//                     return res.send({ success: true, message: 'Login successful' })
+//                 });
+//                 // res.json({ success: true, message: info })
+//             }
+//         }
+//     })(req, res);
+// });
+
+
+router.get("/is_logged_in", isLoggedIn, function (req, res) {
     res.json({ success: true });
+});
+
+router.get("/get_seller", isLoggedIn, function (req, res) {
+    res.json(req.user);
 });
 
 router.get("/logout", function (req, res) {

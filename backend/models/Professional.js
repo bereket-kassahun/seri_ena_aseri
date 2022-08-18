@@ -4,7 +4,6 @@ var mongoosePaginate = require('mongoose-paginate');
 const passport_local_mongoose = require("passport-local-mongoose")
 
 const Professional = Schema({
-    username: {type: String, default: ""},
     firstName: {type: String, default: ""},
     lastName: {type: String, default: ""},
     phoneNumber: {type: String, default: ""},

@@ -39,8 +39,7 @@ function sendEmail(email, code, req, res) {
     transport.sendMail(mailOptions, function (err, result) {
         if (err) {
             res.send({
-                success: false,
-                message: err
+                success: false, ...err
             })
         } else {
             transport.close();
@@ -60,13 +59,14 @@ router.post('/send_email', async function (req, res) {
 
     Models.EmailVerification.findOneAndUpdate({ email: email }, { code: code }, (err, result) => {
         if (err) {
-            res.json({ success: false })
+            res.json({ success: false, err })
         } else {
             if (result == null) {
                 emailVerification.save(async (err, result) => {
                     if (err) {
-                        res.json({ success: false })
+                        res.json({ success: false, err })
                     } else {
+                        console.log('saved verification')
                         sendEmail(email, code, req, res)
                     }
                 })
@@ -82,15 +82,40 @@ router.post('/send_email', async function (req, res) {
 router.post('/verify_email', async function (req, res) {
     const email = req.body.email
     const code = req.body.code
+
+    const professional = new Models.Professional({
+        email: req.body.email,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        phoneNumber: req.body.phoneNumber,
+        verified: false,
+        services: []
+    })
+
+
+    console.log(email)
+    console.log(code)
+   
     Models.EmailVerification.findOneAndDelete({ email: email, code: code }, (err, value) => {
         if (err) {
+            console.log("unable to find")
             res.json({ success: false })
         } else {
             if(value == null){
+                res.json({success: false})
+                console.log("registered")
                 //here is where the professional data is saved
-                res.json({ success: false, value })
             }else{
-                res.json({success: true, value})
+                Models.Professional.register(professional, req.body.password, function (err, user) {
+                    if (err) {
+                        // console.log(err);
+                        console.log("unable to register")
+                        return res.json({ success: false, ...err });
+                    }
+                    
+                console.log("shit")
+                    res.json({ success: true })
+                })
             }
         }
     })
