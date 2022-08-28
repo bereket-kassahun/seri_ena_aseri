@@ -6,7 +6,7 @@ import { CategoryHeader } from "../components/category/CategoryHeader"
 import { CategoryBody } from "../components/category/CategoryBody"
 import {category} from "../api/category"
 import { useLocation } from "react-router-dom"
-const PAGE_LIMIT = 3
+const PAGE_LIMIT = 6
 const Category = () => {
 
     const location = useLocation()
@@ -35,7 +35,7 @@ const Category = () => {
 
     return (
         <>
-            <Header />
+        <Header/>
             <CategoryHeader title={cat}/>
             <CategoryBody results={data} />
             <div class="col-lg-12">
@@ -67,7 +67,7 @@ const Category = () => {
                     </div>
                 </div>
             </div>
-            <Footer />
+            <Footer/>
         </>
     )
 }

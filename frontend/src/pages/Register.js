@@ -3,8 +3,14 @@ import { Footer } from "../components/footer/Footer"
 import { Header } from "../components/header"
 import { sendEmail } from "../api/send_email"
 import { verifyEmail } from "../api/verifyEmail"
-
+import { useNavigate } from "react-router-dom"
 const Register = () => {
+
+    const navigate = useNavigate()
+
+    const [isClient, setIsClient] = useState(false)
+
+
 
     const [activeElement, setActiveElement] = useState(1)
     const [errorMsg, setErrorMsg] = useState("")
@@ -71,10 +77,11 @@ const Register = () => {
     }
 
     const verifyEmailAddress = () => {
-        verifyEmail(email, code, (result) => {
+        verifyEmail({ email, code, firstName, lastName, phoneNumber, password }, (result) => {
             if (result.success) {
                 setVerificationSuccessMsg("You have Been Successfully Registered")
                 setVerificationErrorMsg("")
+                navigate("/login")
             } else {
                 setVerificationErrorMsg("Invalid code!")
                 setVerificationSuccessMsg("")
@@ -82,25 +89,53 @@ const Register = () => {
         })
     }
 
+    const toggleButton = (isClient) => {
+        setIsClient(isClient)
+    }
     return (
         <>
             <Header />
-            <section class="registration-step-area padding-top-100 padding-bottom-100">
+            <section class="banner-area home-three-banner  padding-top-100 padding-bottom-100">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-12">
+                            <div class="registration-seller-btn">
+                                <ul class="registration-tabs tabs">
+                                    <li data-tab="tab_one"  className={"is_user_seller" && (isClient ? 'active' : '')} onClick={() => {toggleButton(true)}}>
+
+                                        <div class="single-tabs-registration">
+                                            <div class="icon">
+                                                <i class="las la-user-alt"></i>
+                                            </div>
+                                            <div class="contents">
+                                                <h4 class="title" id="buyer"> Client</h4>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li data-tab="tab_two"  className={"is_user_seller" && (!isClient ? 'active' : '')} onClick={() => {toggleButton(false)}}>
+                                        <div class="single-tabs-registration">
+                                            <div class="icon">
+                                                <i class="las la-briefcase"></i>
+                                            </div>
+                                            <div class="contents">
+                                                <h4 class="title" id="seller"> Seller</h4>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
                             <div class="tab-content active" id="tab_one">
                                 <div class="registration-step-form margin-top-55 tabs">
                                     <form id="msform-one" class="msform user-register-form" >
                                         <input type="hidden" name="_token" value="j2GQTyV58fE2r1Frt47jJ33U5IqEQshEsHnmOLYW" />
                                         <ul class="registration-list step-list-two">
-                                            <li className={"list " + (activeElement == 1 || activeElement == 2 || activeElement == 3 ? 'active' : '')} data-tab="tab1" onClick={() => { setActiveElement(1) }}>
+                                            <li className={"list " + (activeElement == 1 || activeElement == 2 || activeElement == 3 ? 'active' : '')} data-tab="tab1" >
                                                 <a class="list-click" href="javascript:void(0)"> 1 </a>
                                             </li>
-                                            <li className={"list " + (activeElement == 2 || activeElement == 3 ? 'active' : '')} data-tab="tab2" onClick={() => { setActiveElement(2) }}>
+                                            <li className={"list " + (activeElement == 2 || activeElement == 3 ? 'active' : '')} data-tab="tab2" >
                                                 <a class="list-click" href="javascript:void(0)"> 2 </a>
                                             </li>
-                                            <li className={"list " + (activeElement == 3 ? 'active' : '')} data-tab="tab3" onClick={() => { setActiveElement(3) }}>
+                                            <li className={"list " + (activeElement == 3 ? 'active' : '')} data-tab="tab3" >
                                                 <a class="list-click" href="javascript:void(0)"> 3 </a>
                                             </li>
                                         </ul>
@@ -120,12 +155,12 @@ const Register = () => {
                                                         <div class="single-content margin-top-30">
                                                             <label class="forms-label"> First Name </label>
                                                             <input class="form--control" type="text" name="name" id="name"
-                                                                placeholder="Full Name" onChange={(evnt) => { setFirstName(evnt.target.value) }} />
+                                                                placeholder="First Name" onChange={(evnt) => { setFirstName(evnt.target.value) }} />
                                                         </div>
                                                         <div class="single-content margin-top-30">
                                                             <label class="forms-label">Last Name </label>
                                                             <input class="form--control" type="text" name="username"
-                                                                id="username" placeholder="User Name" onChange={(evnt) => { setLastName(evnt.target.value) }} />
+                                                                id="username" placeholder="Last Name" onChange={(evnt) => { setLastName(evnt.target.value) }} />
                                                         </div>
                                                     </div>
                                                     <div class="single-forms">

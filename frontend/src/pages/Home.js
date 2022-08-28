@@ -1,16 +1,17 @@
 
-import {Header} from '../components/header'
+import { Header } from '../components/header'
 import Banner from '../components/banner/Banner'
 import { Footer } from '../components/footer/Footer';
-import {JoinUs} from '../components/sections/JoinUs'
+import { JoinUs } from '../components/sections/JoinUs'
 import { Categories } from '../components/sections/Categories';
-const Home  = () => {
+import '../style/custom-column.css'
+const Home = () => {
   return (
     <div className="">
       <Header/>
-      <Banner/>
-      <Categories/>
-      <JoinUs/>
+      <Banner />
+      <Categories />
+      <JoinUs />
       <Footer/>
     </div>
   );

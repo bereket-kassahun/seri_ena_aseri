@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 
 export const Footer = () => {
     return (
-        <footer class="footer-area gradient-footer color-two">
+        <footer class="footer-area gradient-bg-2 color-two">
             <div class="footer-top padding-top-100 padding-bottom-70">
                 <div class="container container-two">
                     <div class="row">
@@ -10,7 +10,7 @@ export const Footer = () => {
                             <div class="footer-widget widget ">
                                 <div class="about_us_widget">
                                     <a href="index.html" class="footer-logo"><img
-                                        src="https://i.imgur.com/4bjlGhE.png" alt="" /></a>
+                                        src="imgs/new_logo.jpg" alt="" /></a>
                                 </div>
                                 <div class="footer-inner">
                                     <p class="footer-para">We believe enabling you to work to your full potential is the key to your success in life</p>

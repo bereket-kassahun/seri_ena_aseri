@@ -1,8 +1,7 @@
 
 export const ServiceHeader = ({ title }) => {
     return (
-        <div class="banner-inner-area section-bg-2 padding-top-40 padding-bottom-40
-        ">
+        <div class="banner-inner-area section-bg-2 padding-top-180 padding-bottom-40" style={{paddingTop: "200px"}}>
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">

@@ -1,6 +1,6 @@
 
 const axios = require('axios');
-
+axios.defaults.withCrendentails = true
 export async function getLocations() {
     // const response = await axios.get('https://jsonplaceholder.typicode.com/posts')
     // return response.data

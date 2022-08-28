@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom'
 const SearchBar = () => {
 
     const [searchResult, setSearchResult] = useState([])
-
+    const [searchWord, setSearchWord] = useState("")
     // useEffect(() => {
     //     // resp => {
 
@@ -31,6 +31,7 @@ const SearchBar = () => {
 
     const recommendation = async (evn) => {
         let search_word = evn.target.value
+        setSearchWord(search_word)
         if (search_word == ""){
             setSearchResult([])
             return
@@ -49,7 +50,7 @@ const SearchBar = () => {
 
     return (
         <div className="banner-bottom-content">
-            <form action="https://elouzeir.sprintstudio.net/home-search/single-page"
+            <form 
                 className="banner-search-form">
                 <div className="single-input">
                     <input className="form--control" name="home_search" id="home_search" type="text"
@@ -58,7 +59,8 @@ const SearchBar = () => {
                     <div className="icon-search">
                         <i className="las la-search"></i>
                     </div>
-                    <button type="submit"> <i className="las la-search"></i> </button>
+                    
+                    <Link to="/search" state={ searchWord } ><button type="submit"> <i className="las la-search"></i> </button></Link>
                 </div>
             </form>
 
@@ -69,11 +71,11 @@ const SearchBar = () => {
             <div className="banner-keywords">
                 <span className="keyword-title"> Popular: </span>
                 <ul className="keyword-tag">
-                <Link to="/search" state={ 'Cleaning' } ><li><a href="service-list/category/cleaning.html"> Cleaning </a></li></Link>
-                <Link to="/search" state={ 'Electronics' } ><li><a href="service-list/category/cleaning.html"> Electronics </a></li></Link>
-                <Link to="/search" state={ 'Painting' } ><li><a href="service-list/category/cleaning.html"> Painting </a></li></Link>
-                <Link to="/search" state={ 'Salon And Spa' } ><li><a href="service-list/category/cleaning.html"> Salon And Spa </a></li></Link>
-                <Link to="/search" state={ 'Home Move' } ><li><a href="service-list/category/cleaning.html"> Home Move </a></li></Link>
+                <Link to="/search" state={ 'Cleaning' } ><li><a > Cleaning </a></li></Link>
+                <Link to="/search" state={ 'Electronics' } ><li><a > Electronics </a></li></Link>
+                <Link to="/search" state={ 'Painting' } ><li><a > Painting </a></li></Link>
+                <Link to="/search" state={ 'Salon And Spa' } ><li><a > Salon And Spa </a></li></Link>
+                <Link to="/search" state={ 'Home Move' } ><li><a > Home Move </a></li></Link>
                 </ul>
             </div>
         </div>

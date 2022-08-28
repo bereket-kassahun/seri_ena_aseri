@@ -6,6 +6,8 @@ import { useLocation } from "react-router-dom"
 import { professional_services } from "../api/professional_services"
 import { ServiceBody } from "../components/service/ServiceBody"
 
+import '../style/dark-paragraph.css'
+
 const Service = () => {
 
     const location = useLocation()
@@ -70,7 +72,7 @@ const Service = () => {
                                                 <div class="single-slider">
                                                     <div class="gallery-images single-featured">
                                                         <li>
-                                                            <img src={"imgs/"+currentService.img} alt="" />
+                                                            <img src={"" + currentService.img} alt="" />
                                                         </li>
                                                     </div>
                                                 </div>
@@ -105,8 +107,8 @@ const Service = () => {
                                         </li>
                                     </ul>
                                     <div className={"tab-content another-tab-content " + (activeElement == 1 ? 'active' : '')} id="tab1">
-                                        <div class="details-content-tab padding-top-10">
-                                            <p class="details-tap-para"> {currentService.overview} </p>
+                                        <div class="details-content-tab padding-top-10 " dangerouslySetInnerHTML={{ __html: currentService.detail }} className="custom-editor">
+
                                         </div>
                                     </div>
                                     <div className={"tab-content another-tab-content " + (activeElement == 2 ? 'active' : '')} id="tab2">
@@ -125,7 +127,7 @@ const Service = () => {
                                                         <li class="box-list"> From
                                                             <strong>
                                                                 <h6>
-                                                                    {currentService.location}
+                                                                    {currentService.city}, {currentService.specificAdress}
                                                                 </h6>
                                                             </strong>
                                                         </li>
@@ -146,7 +148,7 @@ const Service = () => {
                                                             </strong>
                                                         </li>
                                                     </ul>
-                                                    <p class="seller-details-para">{currentService.about_seller} </p>
+                                                    <p class="seller-details-para">{currentService.bio} </p>
                                                 </div>
                                             </div>
                                         </div>
@@ -249,6 +251,10 @@ const Service = () => {
                                                 <li><i class="las la-clock"></i> Delivery Days: {currentService.deliveryDay}</li>
                                             </ul>
                                         </span>
+
+                                        <ul class="available-list">
+                                            <li> Category: {currentService.category}</li>
+                                        </ul>
                                     </div>
                                     <div class="btn-wrapper text-center margin-top-30">
                                         <a class="cmn-btn btn-bg-1 d-block" href="book-now/are-you-looking-some-who-able-to-rich-you-business.html"> Call Now </a>

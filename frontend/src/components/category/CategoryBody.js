@@ -1,17 +1,14 @@
-import { VerifiedServiceCard } from "../cards/VerifiedServiceCard"
-import { UnverifiedServiceCard } from "../cards/UnverifiedServiceCard"
+import { UnpaidCard } from "../cards/UnpaidCard"
+import { PaidCard } from "../cards/PaidCard"
+import "../../style/custom-column.css"
 export const CategoryBody = ({results}) => {
     return (
-        <section class="category-services-area padding-top-5 padding-bottom-100">
-            <div class="container">
-                <div class="row">
-                    {
-                        results.map((value, index) => (
-                            value.verified ? <VerifiedServiceCard data={value}/> : <UnverifiedServiceCard data={value}/>
-                        ))
-                    }
-                </div>
-            </div>
-        </section>
+        <div class="card-columns custom-columns" style={{padding: "10px"}}>
+            {
+                results.map((value, index) => (
+                    value.professionalPaid ? <PaidCard data={value} /> : <UnpaidCard data={value} />
+                ))
+            }
+        </div>
     )
 }

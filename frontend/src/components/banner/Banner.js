@@ -25,7 +25,7 @@ const Banner = () => {
 
 
     return (
-        <div className="banner-area gradient-bg-1" style={{ padding: "50px 0px 30px 0px" }}>
+        <div className="banner-area home-three-banner gradient-bg-2" >
             <div className="container container-two">
                 <div className="row ">
 

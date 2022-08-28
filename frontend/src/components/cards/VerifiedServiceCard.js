@@ -5,7 +5,7 @@ export const VerifiedServiceCard = ({ data }) => {
     if (data.overview.length < 120) {
         body = data.overview
     } else {
-        body = data.overview.trim(0, 120) + '...'
+        body = data.overview.substring(0, 69) + '...'
     }
 
     return (
@@ -13,9 +13,9 @@ export const VerifiedServiceCard = ({ data }) => {
             <div class="single-service service-two style-03 service-padding section-bg-2 wow fadeInUp"
                 data-wow-delay=".2s">
                 <Link to="/service" state={{professionalId: data.professionalId, currentServiceId:data._id}} >
-                    <a href=""
+                    <a 
                         class="service-thumb service-bg-thumb-format"
-                        style={{ backgroundImage: 'url(imgs/'+ data.img +')' }}>
+                        style={{ backgroundImage: 'url('+ data.img +')' }}>
                         <div class="award-icons style-02">
                             <i class="las  la-check"></i>
                         </div>
@@ -23,7 +23,7 @@ export const VerifiedServiceCard = ({ data }) => {
                         <i class="las la-check"></i>
                     </div> */}
                         <div class="country_city_location color-three">
-                            <span class="single_location"> <i class="las la-map-marker-alt"></i> {data.location}
+                            <span class="single_location"> <i class="las la-map-marker-alt"></i> {data.city} {data.specificAdress}
                             </span>
                         </div>
                     </a>
@@ -38,7 +38,7 @@ export const VerifiedServiceCard = ({ data }) => {
                                         alt="" />
                                     <span class="notification-dot"></span>
                                 </div>
-                                <span class="author-title"> {data.professionalUsername} </span>
+                                <span class="author-title"> {data.professionalFirstName} {data.professionalLastName} </span>
                             </div>
                             {/* </a> */}
                         </li>
@@ -55,7 +55,7 @@ export const VerifiedServiceCard = ({ data }) => {
                             <span class="prices style-02"> {data.price} Birr</span>
                         </div>
                         <div class="btn-wrapper">
-                            <a href=""
+                            <a 
                                 class="cmn-btn btn-bg-3" style={{ background: `` }}> Call Now </a>
                         </div>
                     </div>

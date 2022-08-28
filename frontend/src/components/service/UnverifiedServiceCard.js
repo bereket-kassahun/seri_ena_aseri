@@ -5,7 +5,7 @@ export const UnverifiedServiceCard = ({ data }) => {
     if (data.overview.length < 70) {
         body = data.overview
     } else {
-        body = data.overview.trim(0, 70) + '...'
+        body = data.overview.substring(0, 69) + '...'
     }
     return (
         <div class="col-md-6" >
@@ -14,14 +14,14 @@ export const UnverifiedServiceCard = ({ data }) => {
                 <div class="services-contents content-padding-reverse">
                     <ul class="author-tag">
                         <li class="tag-list">
-                            <a href="test_seller.html">
+                            <a >
                                 <div class="authors">
                                     <div class="thumb">
                                         <img src="imgs/seller-s21644057790.jpg"
                                             alt="" />
                                         <span class="notification-dot"></span>
                                     </div>
-                                    <span class="author-title">{data.username}</span>
+                                    <span class="author-title">{data.professionalFirstName} {data.professionalLastName}</span>
                                 </div>
                             </a>
                         </li>
@@ -31,7 +31,7 @@ export const UnverifiedServiceCard = ({ data }) => {
                     </ul>
                     <Link to="/service" state={{professionalId: data.professionalId, currentServiceId:data._id}} >
                         <h5 class="common-title"> <a
-                            href="service-list/painting-%26-renovation-service-from-us-at-affordable-price.html">
+                           >
                             {data.title} </a> </h5>
                         <p class="common-para"> {body} </p>
                     </Link>
@@ -40,7 +40,7 @@ export const UnverifiedServiceCard = ({ data }) => {
                             <span class="prices style-02"> {data.price} Birr</span>
                         </div>
                         <div class="btn-wrapper">
-                            <a href="service-list/book-now/painting-%26-renovation-service-from-us-at-affordable-price.html"
+                            <a 
                                 class="cmn-btn btn-bg-3" style={{ background: `` }}> Call Now </a>
                         </div>
                     </div>

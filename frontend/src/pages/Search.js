@@ -7,7 +7,7 @@ import { search } from '../api/search'
 import { useLocation } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 
-const PAGE_LIMIT = 2
+const PAGE_LIMIT = 6
 const Search = () => {
   const location = useLocation()
 
@@ -28,6 +28,7 @@ const Search = () => {
   },[searchWord])
   function getData(page){
     search({word: searchWord, page: page, limit: PAGE_LIMIT},(results) => {
+      console.log(results.docs)
       const tmp = results.docs
       const pageNo = results.total / PAGE_LIMIT
       setData([...tmp])
@@ -42,7 +43,7 @@ const Search = () => {
   }
   return (
     <div className="">
-      <Header />
+      <Header/>
       <SearchHeader hint={word} callback={callback}/>
       <SearchBody data={data} />
       <div class="col-lg-12">
@@ -74,7 +75,7 @@ const Search = () => {
           </div>
         </div>
       </div>
-      <Footer />
+      <Footer/>
     </div>
   );
 }

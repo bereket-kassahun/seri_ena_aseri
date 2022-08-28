@@ -10,12 +10,17 @@ const itemsData = [
         subitems: []
     },
     {
-        name: "Contact",
-        href: "/",
+        name: "Contact Us",
+        href: "contact_us",
         subitems: []
     },
     {
-        name: "Blog",
+        name: "Categories",
+        href: "/category_list",
+        subitems: []
+    },
+    {
+        name: "Download App",
         href: "/",
         subitems: []
     },

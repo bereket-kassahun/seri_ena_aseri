@@ -16,9 +16,9 @@ export const JoinUs = () => {
                         <span class="join-para">Its free to join</span>
                         <div class="btn-wrapper margin-top-50">
 
-                            <Link to="/register">
+                            <Link to="/login">
                                 <a href="register20b9.html?type=seller" class="cmn-btn btn-bg-3"
-                                    style={{ background: `rgb(255, 107, 43)` }}>
+                                    >
                                     Sell Your Services
                                 </a>
                             </Link>
