@@ -15,15 +15,19 @@ const Service = Schema({
     professionalId: {type: Schema.Types.ObjectId, ref: modelNames.PROFESSIONAL},
     professionalFirstName: {type: String, default: ""},
     professionalLastName: {type: String, default: ""},
-    professionalPaid: {type: Boolean, default: false},
+    professionalStatus: {type: Number, default: 0},
+    serviceType: {type: Number, default: 0},
     professionalImage:  {type: String, default: ""},
     priority: {type: Number, default: 1},
     img: {type: String, default: ""},
-    deliveryDay:{type: Number, default: 1}
+    deliveryDay:{type: Number, default: 1},
+    rating: {type: Number, default: 0},
+    numberOfRating: {type: Number, default: 0},
+    status: {type: Number, default: 0}
 })
 
 Service.plugin(mongoosePaginate);
 
 // Service.index({ '$**': 'text' });
-Service.index({ title: 'text', overview: 'text' , city: 'text', specificAdress: 'text'});
+Service.index({ title: 'text', category: 'text', overview: 'text' , city: 'text', specificAdress: 'text'});
 module.exports = model(modelNames.SERVICE, Service)

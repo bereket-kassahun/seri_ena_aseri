@@ -21,7 +21,10 @@ router.post('/register', function (req, res) {
         professionalFirstName: req.body.professionalFirstName,
         professionalLastName: req.body.professionalLastName,
         professionalImage: req.body.professionalImage,
-        professionalPaid: false,
+        // professionalStatus: req.body.professionalStatus,
+        serviceType: req.body.serviceType,
+        rating: 0,
+        numberOfRating: 0
     })
 
 
@@ -96,13 +99,63 @@ router.get("/category", async function (req, res) {
     })
 })
 
-router.post("get_service", function (req, res) {
+router.post("/get_service", function (req, res) {
     const id = req.body.id
     Models.Service.find({ id: id }, (err, professional) => {
         if (err) {
             res.json({ success: false })
         } else {
             res.json(professional)
+        }
+    })
+})
+
+router.post("/update_service", function (req, res) {
+
+    // const { title, price, overview, category, bio, city, specificAdress, detail, img, deliveryDay, professionalId, professionalFirstName, professionalLastName, professionalImg, professionalStatus } = req.body
+    const service = req.body
+    const id = req.body._id
+    Models.Service.updateOne({ _id: Types.ObjectId(id) }, service,{returnOriginal: false }, function (err, doc) {
+            if (err) {
+                res.json(err);
+                console.log(service)
+            } else {
+                res.json({ success: true })
+                console.log("hurray updated ")
+            }
+        })
+})
+
+router.post("/update_service", function (req, res) {
+
+    // const { title, price, overview, category, bio, city, specificAdress, detail, img, deliveryDay, professionalId, professionalFirstName, professionalLastName, professionalImg, professionalStatus } = req.body
+    const service = req.body
+    const id = req.body._id
+    Models.Service.updateOne({ _id: Types.ObjectId(id) }, service,{returnOriginal: false }, function (err, doc) {
+            if (err) {
+                res.json(err);
+                console.log(service)
+            } else {
+                res.json({ success: true })
+                console.log("hurray updated ")
+            }
+        })
+})
+
+
+router.post("/get_featured_services", function (req, res) {
+    console.log("hey ho ho")
+    $match: { size: "medium" }
+    Models.Service.aggregate([
+        { $match: { $or: [ { serviceType: 1 }, {  serviceType: 2 } ]  }},
+        { $sample: { size: 6 } }
+    ], function(err, services) {
+        if(err){
+            console.log("shit", err)
+            res.json({ success: false })
+        }else{
+            console.log(services)
+            res.json({ success: true, services });
         }
     })
 })

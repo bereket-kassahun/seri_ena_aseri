@@ -11,7 +11,14 @@ const Professional = Schema({
     verified: {type: Boolean, default: false},
     services: [
         {type: Schema.Types.ObjectId, ref: modelNames.SERVICE},
-    ]
+    ], 
+    img: {type: String, default: ""},
+    numOfCalls: {type: Number, default: 0},
+    weeklyCalls: {type: Number, default: 0},
+    monthlyCalls: {type: Number, default: 0},
+    currentWeek: {type: Number, default: 0},
+    currentMonth: {type: Number, default: 0},
+    paymentLevel: {type: Number, default: 0},
 })
 
 Professional.plugin(passport_local_mongoose, {usernameField: "email"})
