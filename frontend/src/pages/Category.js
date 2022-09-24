@@ -6,7 +6,8 @@ import { CategoryHeader } from "../components/category/CategoryHeader"
 import { CategoryBody } from "../components/category/CategoryBody"
 import {category} from "../api/category"
 import { useLocation } from "react-router-dom"
-const PAGE_LIMIT = 6
+import { SearchBody } from "../components/search/SearchBody"
+const PAGE_LIMIT = 20
 const Category = () => {
 
     const location = useLocation()
@@ -37,7 +38,7 @@ const Category = () => {
         <>
         <Header/>
             <CategoryHeader title={cat}/>
-            <CategoryBody results={data} />
+            <SearchBody data={data} />
             <div class="col-lg-12">
                 <div class="blog-pagination margin-top-55">
                     <div class="custom-pagination mt-4 mt-lg-5">

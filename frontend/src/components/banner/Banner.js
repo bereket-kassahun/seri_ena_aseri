@@ -1,11 +1,35 @@
 
 import SearchBar from './SearchBar'
 // import locations from './sample_locations'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
+import {ThemeContext} from '../../context/theme-context'
 import { getLocations } from '../../api/LocationService'
+
+const displayText =  {
+    english: [
+        "One-stop Solution for your  Services ",
+        "Order any service, anytime from anywhere"
+    ],
+    amharic: [
+        "ለእርስዎ አገልግሎቶች አንድ ጊዜ የሚቆም መፍትሔ",
+        "ማንኛውንም አገልግሎት በማንኛውም ጊዜ ከየትኛውም ቦታ ይዘዙ"
+    ],
+}
+
 const Banner = () => {
+    
+    const { currentTheme, updateLanguage } = useContext(ThemeContext);
+    const [currentText, setCurrentText] = useState(displayText.english)
+    
     const [locations, setLocations] = useState([])
 
+    // useEffect(() => {
+    //     if(currentTheme.language == "amharic"){
+    //         setCurrentText(displayText.amharic)
+    //     }else{
+    //         setCurrentText(displayText.english)
+    //     }
+    // }, currentTheme)
     // useEffect(() => {
     //     // resp => {
 
@@ -23,9 +47,9 @@ const Banner = () => {
     //     })
     // },[])
 
-
+    // style={{ backgroundColor: "#3399ff" }}
     return (
-        <div className="banner-area home-three-banner gradient-bg-2" >
+        <div className="banner-area home-three-banner " style={{backgroundImage: "url(imgs/home_banner_background.svg)", padding: "110px 0px 120px 0px"}} >
             <div className="container container-two">
                 <div className="row ">
 
@@ -33,57 +57,10 @@ const Banner = () => {
                         <div id="carouselExample1" class="carousel slide z-depth-1-half" data-ride="carousel">
                             <div class="carousel-inner">
                                 <div class="carousel-item active">
-                                    <div class="gallery-images single-featured d-block w-100">
-                                        <div className="banner-right-contents style-02">
-                                            <div className="banner-right-thumb wow " data-wow-delay=".3s">
-                                                <img src="imgs/programmer.jpg" alt="" />
-                                                <div className="banner-dot-shape">
-                                                    <img src="imgs/dot-square1641971791.png" alt="" />
-                                                </div>
-                                            </div>
-                                            <div className="banner-cleaning-service">
-                                                <div class="icon">
-                                                    <i class="las la-laptop-code"></i>
-                                                </div>
-                                                <div className="icon-contents">
-                                                    <span className="thumb-cleaning-title"> <a href="/"> Programming Service </a> </span>
-                                                    <ul className="review-cleaning">
-                                                        <li> <i className="las la-star"></i> </li>
-                                                        <li> <i className="las la-star"></i> </li>
-                                                        <li> <i className="las la-star"></i> </li>
-                                                        <li> <i className="las la-star"></i> </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <img src="imgs/intro_1.png" alt="" />
                                 </div>
                                 <div class="carousel-item">
-                                    <div class="gallery-images single-featured d-block w-100">
-                                        <div className="banner-right-contents style-02">
-                                            <div className="banner-right-thumb wow " data-wow-delay=".3s">
-                                                <img src="imgs/seller_sample.jpg" alt="" />
-                                                <div className="banner-dot-shape">
-                                                    <img src="imgs/dot-square1641971791.png" alt="" />
-                                                </div>
-                                            </div>
-                                            <div className="banner-cleaning-service">
-                                                <div className="icon">
-                                                    <i className="las la-broom"></i>
-                                                </div>
-                                                <div className="icon-contents">
-                                                    <span className="thumb-cleaning-title"> <a href="/"> Clening Service </a> </span>
-                                                    <ul className="review-cleaning">
-                                                        <li> <i className="las la-star"></i> </li>
-                                                        <li> <i className="las la-star"></i> </li>
-                                                        <li> <i className="las la-star"></i> </li>
-                                                        <li> <i className="las la-star"></i> </li>
-                                                        <li> <i className="las la-star"></i> </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <img src="imgs/intro_2.png" alt="" />
                                 </div>
                             </div>
                             <a class="carousel-control-prev" href="#carouselExample1" role="button" data-slide="prev">
@@ -95,13 +72,11 @@ const Banner = () => {
                                 <span class="sr-only">Next</span>
                             </a>
                         </div>
-
                     </div>
                     <div className="col-xl-7">
                         <div className="banner-contents style-03">
-                            <h1 className="banner-title">One-stop Solution for your <span className="color-three"> Services </span>
-                            </h1>
-                            <span className="title-top">Order any service, anytime from anywhere</span>
+                            <h1 className="banner-title" style={{color: "white"}}>{currentTheme.language == "amharic" ? displayText.amharic[0] : displayText.english[0]}</h1>
+                            <span className="title-top" style={{color: "white"}}>{currentTheme.language == "amharic" ? displayText.amharic[1] : displayText.english[1]}</span>
                             <SearchBar locations={locations} />
                         </div>
                     </div>

@@ -6,6 +6,7 @@ const getSeller = async (callback) => {
         headers: {
             'Content-Type': 'application/json; charset=utf-8',
             "Access-Control-Allow-Credentials":	true,
+            "Cache-control": "no-store"
         },
     })
         .then((response) => response.json())

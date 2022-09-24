@@ -7,6 +7,7 @@ export const seller = {
     lastName: "",
     email: "",
     services: [],
+    phoneNumber: ""
 }
 
 export const SellerContext = createContext(

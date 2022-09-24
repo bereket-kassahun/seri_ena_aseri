@@ -1,15 +1,135 @@
-import { VerifiedServiceCard } from "../cards/VerifiedServiceCard"
-import { UnverifiedServiceCard } from "../cards/UnverifiedServiceCard"
-import { UnpaidCard } from "../cards/UnpaidCard"
-import { PaidCard } from "../cards/PaidCard"
+
+import Rating from 'react-rating'
+import { useEffect, useState, useContext } from "react"
+import { ClientContext } from "../../context/client-context"
+import { saveRating } from "../../api"
+import { PremiumServiceCard } from "../cards/PremiumServiceCard"
+import { StandardServiceCard } from "../cards/StandardServiceCard"
+import { BasicServiceCard } from "../cards/BasicServiceCard"
 export const SearchBody = ({ data }) => {
-    return (
-        <div class="card-columns custom-columns" style={{padding: "10px"}}>
-            {
-                data.map((value, index) => (
-                    value.professionalPaid ? <PaidCard data={value} /> : <UnpaidCard data={value} />
-                ))
+
+    const { currentClient, addServiceIdToRatings, updateClient } = useContext(ClientContext);
+
+
+
+    const [currentServiceId, setCurrentServiceId] = useState("")
+    const [clientRatedService, setClientRatedService] = useState(false)
+    const [ratingValue, setRatingValue] = useState(0)
+
+    const [premiumTitle, setPremiumTitle] = useState(false)
+    useEffect(() => {
+        data.map((value, index) => {
+            if (value.serviceType == 2 || value.serviceType == 1) {
+                setPremiumTitle(true)
             }
-        </div>
+        })
+        updateClient()
+    }, [])
+
+
+    const setRatingId = (_id, clientAlreadyRated) => {
+        setClientRatedService(clientAlreadyRated)
+        setCurrentServiceId(_id)
+    }
+
+    const saveCurrentRating = () => {
+        console.log(currentClient._id, currentServiceId)
+        if(currentClient._id != "" && currentServiceId != ""){
+            saveRating({clientId: currentClient._id, serviceId: currentServiceId, value: ratingValue}, (data) => {
+                if(data.success){
+                    console.log("success")
+                }
+            })
+        }
+    }
+
+    return (
+        <>
+            {/* {
+                premiumTitle
+                &&
+                (
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="banner-inner-contents">
+                                    <h2 class="banner-inner-title"> Premium Services
+                                    </h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )
+
+            } */}
+
+            <div class="row" style={{ padding: "20px" }}>
+                {
+                    data.map((value, index) => {
+                        if (value.serviceType == 2)
+                            return <PremiumServiceCard data={value} setRatingId={setRatingId} />
+                        else if (value.serviceType == 1)
+                            return <StandardServiceCard data={value} setRatingId={setRatingId} />
+                    })
+                }
+            </div>
+            <hr style={{
+                marginTop: "1rem",
+                marginBottom: "1rem",
+                border: "0",
+                borderTop: "1px solid rgba(0, 0, 0, 0.1)"
+            }}
+            />
+            <div class="row" style={{ padding: "10px" }}>
+                {
+                    data.map((value, index) => (
+                        value.serviceType == 0 && <BasicServiceCard data={value} setRatingId={setRatingId} />
+                    ))
+                }
+            </div>
+
+
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body" style={{ textAlign: "center" }}>
+                            {
+                            clientRatedService ? (<h3>You have already rated this service</h3>)
+                            :
+                            (<Rating
+                                emptySymbol={<span class="fa fa-star"></span>}
+                                fullSymbol={<span class="fa fa-star checked"></span>}
+                                onChange={(rate) => {setRatingValue(rate)}}
+                            />)
+                            }
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal" onClick={(evnt) => {
+                                if(!clientRatedService){
+                                    addServiceIdToRatings(currentServiceId)
+                                    saveCurrentRating()
+                                }
+                            }}>
+                               {
+                                clientRatedService ? (
+                                    <p>Close</p>
+                                ) : (
+                                    <p>Save</p>
+                                )
+                               } 
+                            </button>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </>
     )
 }

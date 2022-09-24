@@ -9,9 +9,9 @@ function sendEmail(email, callback){
     networkCall({email: email}, callback, 'POST', 'verification/send_email')
 }
 
-function sellerLogin(data, callback){
-    networkCall(data, callback, 'POST', 'professional/login')
-}
+// function sellerLogin(data, callback){
+//     networkCall(data, callback, 'POST', 'professional/login')
+// }
 function search(query, callback){
     networkCall({}, callback, 'GET', 'services/search?word=' + query.word+'&page='+query.page+'&limit='+query.limit)
 }
@@ -25,6 +25,8 @@ function sellerLogin(data, callback){
     networkCall(data, callback, 'POST', 'professional/login')
 }
 
+
+
 function isLoggedIn(callback){
     networkCall({}, callback, 'GET', 'professional/is_logged_in')
 }
@@ -37,6 +39,38 @@ function category(query, callback){
     networkCall({}, callback, 'GET', 'services/category?category=' + query.category+'&page='+query.page+'&limit='+query.limit)
 }
 
+function logoutClient(callback){
+    networkCall({}, callback, 'GET', 'client/logout')
+}
+
+function registerClient(data, callback){
+    networkCall(data, callback, 'POST', 'client/register')
+}
+
+function isClientLoggedIn(callback){
+    networkCall({}, callback, 'GET', 'client/is_logged_in')
+}
+
+function loginClient(data, callback){
+    networkCall(data, callback, 'POST', 'client/login')
+}
+
+
+function getCurrentClient(callback){
+    networkCall({}, callback, 'GET', 'client/get_client')
+}
+
+function saveRating(data, callback){
+    networkCall(data, callback, 'POST', 'client/rate')
+}
+
+function get_featured_services(callback){
+    networkCall({}, callback, 'POST', 'services/get_featured_services')
+}
+
+function updateCallNumber(data, callback){
+    networkCall(data, callback, 'POST', 'professional/update_call_count')
+}
 export {
     sendEmail,
     verifyEmail,
@@ -44,9 +78,15 @@ export {
     search,
     recommend,
     professional_services,
-    sellerLogin,
     isLoggedIn,
     getSeller,
-    getSeller,
-    category
+    category,
+    isClientLoggedIn,
+    logoutClient,
+    registerClient,
+    loginClient,
+    getCurrentClient,
+    saveRating,
+    updateCallNumber,
+    get_featured_services
 }

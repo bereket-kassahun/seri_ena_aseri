@@ -10,7 +10,7 @@ export const Footer = () => {
                             <div class="footer-widget widget ">
                                 <div class="about_us_widget">
                                     <a href="index.html" class="footer-logo"><img
-                                        src="imgs/new_logo.jpg" alt="" /></a>
+                                        src="imgs/new_logo_1.png" alt="" /></a>
                                 </div>
                                 <div class="footer-inner">
                                     <p class="footer-para">We believe enabling you to work to your full potential is the key to your success in life</p>

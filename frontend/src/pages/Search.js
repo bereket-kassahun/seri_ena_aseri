@@ -7,7 +7,7 @@ import { search } from '../api/search'
 import { useLocation } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 
-const PAGE_LIMIT = 6
+const PAGE_LIMIT = 20
 const Search = () => {
   const location = useLocation()
 

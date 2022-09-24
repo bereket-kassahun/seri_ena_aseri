@@ -106,7 +106,7 @@ const Service = () => {
                                             About Seller
                                         </li>
                                     </ul>
-                                    <div className={"tab-content another-tab-content " + (activeElement == 1 ? 'active' : '')} id="tab1">
+                                    <div className={"tab-content another-tab-content " + (activeElement == 1 ? 'active' : '')} id="tab1" style={{marginTop: "20px"}}>
                                         <div class="details-content-tab padding-top-10 " dangerouslySetInnerHTML={{ __html: currentService.detail }} className="custom-editor">
 
                                         </div>

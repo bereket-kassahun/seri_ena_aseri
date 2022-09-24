@@ -54,7 +54,7 @@ const SearchBar = () => {
                 className="banner-search-form">
                 <div className="single-input">
                     <input className="form--control" name="home_search" id="home_search" type="text"
-                        placeholder="What are you look for" autoComplete="off"
+                        placeholder="What are you looking for" autoComplete="off"
                         onKeyUp={recommendation} />
                     <div className="icon-search">
                         <i className="las la-search"></i>
@@ -69,7 +69,7 @@ const SearchBar = () => {
             </span>
 
             <div className="banner-keywords">
-                <span className="keyword-title"> Popular: </span>
+                <span className="keyword-title" style={{color: "white"}}> Popular: </span>
                 <ul className="keyword-tag">
                 <Link to="/search" state={ 'Cleaning' } ><li><a > Cleaning </a></li></Link>
                 <Link to="/search" state={ 'Electronics' } ><li><a > Electronics </a></li></Link>

@@ -4,10 +4,12 @@ import { Header } from "../components/header"
 import { useState } from "react"
 import { sellerLogin } from "../api/sellerLogin"
 import { useNavigate } from "react-router-dom";
-
+import { loginClient } from "../api"
 export const Login = () => {
 
     const navigate = useNavigate();
+
+    const [isClient, setIsClient] = useState(true)
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -37,27 +39,71 @@ export const Login = () => {
     }
 
     const login = () => {
-        sellerLogin({ email, password }, (res) => {
-            
-            if (!res.success) {
-                if (res.message)
-                    setErrorMsg(res.message)
-                else
-                    setErrorMsg("Incorrect email or password!!")
-            } else {
-                setErrorMsg("")
-                navigate("/seller")
-            }
-        })
+        if(isClient){
+            loginClient({ email, password }, (res) => {
+
+                if (!res.success) {
+                    if (res.message){
+                        setErrorMsg("Incorrect email or password!!")
+                    }
+                    else
+                        setErrorMsg("Incorrect email or password!!")
+                } else {
+                    setErrorMsg("")
+                    navigate("/")
+                }
+            })
+        }else{
+            sellerLogin({ email, password }, (res) => {
+
+                if (!res.success) {
+                    if (res.message)
+                        setErrorMsg(res.message)
+                    else
+                        setErrorMsg("Incorrect email or password!!")
+                } else {
+                    setErrorMsg("")
+                    navigate("/seller")
+                }
+            })
+        }
+        
     }
     return (
         <>
             <Header />
-            <div class="banner-area home-three-banner signup-area padding-top-70 padding-bottom-100">
+            <div class="banner-area  signup-area margin-top-50 margin-bottom-100">
                 <div class="container">
                     <div class="signup-wrapper">
                         <div class="signup-contents">
+
                             <h3 class="signup-title"> Sign In</h3>
+
+                            <div class="registration-seller-btn">
+                                <ul class="registration-tabs tabs">
+                                    <li data-tab="tab_one" className={"is_user_seller " + (isClient ? 'active' : '')} onClick={() => { setIsClient(true) }}>
+
+                                        <div class="single-tabs-registration">
+                                            <div class="icon">
+                                                <i class="las la-user-alt"></i>
+                                            </div>
+                                            <div class="contents">
+                                                <h4 class="title" id="buyer"> User </h4>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li data-tab="tab_two" className={"is_user_seller " + (!isClient ? 'active' : '')} onClick={() => { setIsClient(false) }}>
+                                        <div class="single-tabs-registration">
+                                            <div class="icon">
+                                                <i class="las la-briefcase"></i>
+                                            </div>
+                                            <div class="contents">
+                                                <h4 class="title" id="seller"> Seller</h4>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
 
                             <div class="error-message">
                                 {

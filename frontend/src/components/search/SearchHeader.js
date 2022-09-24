@@ -40,7 +40,7 @@ export const SearchHeader = ({ hint, callback }) => {
     return (
 
 
-        <div class="banner-inner-area section-bg-2 padding-top-140 padding-bottom-40" >
+        <div class="banner-inner-area section-bg-2 padding-top-40 padding-bottom-40" >
             <div class="container">
                 <div class="row">
                     <div class="col-lg-6">

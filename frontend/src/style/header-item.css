@@ -1,0 +1,8 @@
+.header_item{
+    color: black;
+    font-weight: bold;  
+}
+
+.header_item :hover{
+    background: #0051fd
+}
