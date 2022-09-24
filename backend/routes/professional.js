@@ -140,6 +140,46 @@ router.post("/get_professional_services", async function (req, res) {
     })
 })
 
+router.post("/get_professional_average_rating", async function (req, res) {
+    const id = req.body._id
+
+    Models.Professional.aggregate([
+        { $match: { _id: new Mongoose.Types.ObjectId(id) } },
+        {
+            $lookup:
+            {
+                from: 'services',
+                localField: 'services',
+                foreignField: '_id',
+                as: 'service_data'
+            }
+        }
+    ], (err, response) => {
+        if (err) {
+            console.log(err)
+        }
+
+        let count = 0
+        let sum = 0
+        let average = 0
+        if(response.length > 0 && response[0].service_data){
+            response[0].service_data.forEach((value, index) => {
+                console.log("data", value.rating)
+                count += 1
+                sum += value.rating
+            })
+            if (count > 0)
+                average = sum / count
+
+            average = Math.floor(average)
+            res.json({ success: true, average_rating: average})
+        }else{
+            res.json({ success: false, average_rating: 0})
+        }
+        
+    })
+})
+
 router.post("/update_call_count", async function (req, res) {
     const id = req.body.id
     const week = getWeek()

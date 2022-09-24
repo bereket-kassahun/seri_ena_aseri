@@ -13,7 +13,7 @@ function sendEmail(email, code, req, res) {
     )
 
     myOAuth2Client.setCredentials({
-        refresh_token: "1//04I8yhJY3DA63CgYIARAAGAQSNwF-L9Ir8mBZYqEtVaEw7RG8acR-EEy_I5y3-53w0eSzk95fqSMWcQGo9Kw6e3B0GU83GfDZk6o"
+        refresh_token: "1//04Cb_GpXrDM9LCgYIARAAGAQSNwF-L9IrQAMN4yfsRNCTNTAK0FPXdSPc-0DOYHBjybeUFiGlBFbGKr0ioN4n92ZPp_-5sjnPj1s"
     });
 
     const myAccessToken = myOAuth2Client.getAccessToken()
@@ -25,7 +25,7 @@ function sendEmail(email, code, req, res) {
             user: "bereketkassahun456@gmail.com", //your gmail account you used to set the project up in google cloud console"
             clientId: "53639379402-7hcspbggrmngh9dh2oh62reot11q683l.apps.googleusercontent.com",
             clientSecret: "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",
-            refreshToken: "1//04I8yhJY3DA63CgYIARAAGAQSNwF-L9Ir8mBZYqEtVaEw7RG8acR-EEy_I5y3-53w0eSzk95fqSMWcQGo9Kw6e3B0GU83GfDZk6o",
+            refreshToken: "1//04Cb_GpXrDM9LCgYIARAAGAQSNwF-L9IrQAMN4yfsRNCTNTAK0FPXdSPc-0DOYHBjybeUFiGlBFbGKr0ioN4n92ZPp_-5sjnPj1s",
             accessToken: myAccessToken //access token variable we defined earlier
         }
     });

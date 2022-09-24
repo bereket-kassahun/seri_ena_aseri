@@ -13,6 +13,7 @@ const professionalsRouter = require("./routes/professional")
 const clientsRouter = require("./routes/client")
 const servicesRouter = require("./routes/service")
 const verificationRouter = require("./routes/verification")
+const transactionRouter = require("./routes/transaction")
 const Models = require("./models")
 const app = express()
 
@@ -60,8 +61,8 @@ app.use(express.json());
 const PORT = process.env.PORT || 5000;
 
 var corsOptions = {
-    origin: 'https://seri-ena-aseri.herokuapp.com',
-    // origin: 'http://localhost:3000',
+    // origin: 'https://seri-ena-aseri.herokuapp.com',
+    origin: 'http://localhost:3000',
     credentials: true
 }
 app.use(cors(corsOptions))
@@ -83,6 +84,7 @@ app.use('/professional', professionalsRouter)
 app.use('/client', clientsRouter)
 app.use('/services', servicesRouter)
 app.use('/verification', verificationRouter)
+app.use('/transaction', transactionRouter)
 app.get('/*', function (req, res) {
     res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });

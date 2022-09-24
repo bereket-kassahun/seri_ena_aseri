@@ -21,6 +21,7 @@ router.post('/register', function (req, res) {
         professionalFirstName: req.body.professionalFirstName,
         professionalLastName: req.body.professionalLastName,
         professionalImage: req.body.professionalImage,
+        professionalPhoneNumber: req.body.professionalPhoneNumber,
         // professionalStatus: req.body.professionalStatus,
         serviceType: req.body.serviceType,
         rating: 0,
@@ -50,10 +51,10 @@ router.post('/register', function (req, res) {
 router.get("/recommend", async function (req, res) {
     const word = req.query.word
     const filter = { $text: { $search: word } }
-    const required_fields = { "_id": true, "title": true, "overview": true }
 
 
-    Models.Service.find(filter, function (err, docs) {
+
+    Models.Service.find(filter, { score: { $meta: "textScore" } }, function (err, docs) {
         if (err) {
             console.log(err)
             return res.json(err);
@@ -64,7 +65,7 @@ router.get("/recommend", async function (req, res) {
             title: true,
             overview: true
         }
-    )
+    ).sort({ score: { $meta: "textScore" } })
 })
 
 router.get("/search", async function (req, res) {
@@ -114,6 +115,7 @@ router.post("/update_service", function (req, res) {
 
     // const { title, price, overview, category, bio, city, specificAdress, detail, img, deliveryDay, professionalId, professionalFirstName, professionalLastName, professionalImg, professionalStatus } = req.body
     const service = req.body
+    console.log(service)
     const id = req.body._id
     Models.Service.updateOne({ _id: Types.ObjectId(id) }, service,{returnOriginal: false }, function (err, doc) {
             if (err) {

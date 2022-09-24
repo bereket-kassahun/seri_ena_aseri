@@ -18,6 +18,7 @@ const Service = Schema({
     professionalStatus: {type: Number, default: 0},
     serviceType: {type: Number, default: 0},
     professionalImage:  {type: String, default: ""},
+    professionalPhoneNumber:  {type: String, default: ""},
     priority: {type: Number, default: 1},
     img: {type: String, default: ""},
     deliveryDay:{type: Number, default: 1},

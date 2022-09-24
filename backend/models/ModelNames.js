@@ -2,5 +2,6 @@ module.exports = {
     SERVICE: "Service",
     PROFESSIONAL: "Professional", 
     CLIENT: "Client",
-    EMAILVERIFICATION: "EmailVerification"
+    EMAILVERIFICATION: "EmailVerification",
+    TRANSACTION: "Transaction"
 }
