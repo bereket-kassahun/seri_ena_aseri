@@ -14,6 +14,7 @@ const clientsRouter = require("./routes/client")
 const servicesRouter = require("./routes/service")
 const verificationRouter = require("./routes/verification")
 const transactionRouter = require("./routes/transaction")
+const info = require("./routes/info")
 const Models = require("./models")
 const app = express()
 
@@ -85,6 +86,7 @@ app.use('/client', clientsRouter)
 app.use('/services', servicesRouter)
 app.use('/verification', verificationRouter)
 app.use('/transaction', transactionRouter)
+app.use('/info', info)
 app.get('/*', function (req, res) {
     res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });

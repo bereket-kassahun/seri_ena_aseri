@@ -16,10 +16,13 @@ function getMonth(){
 function getDay(){
     return (new Date).getDay()
 }
-
+function getDayOfMonth(){
+    return (new Date).getDate()
+}
 console.log(getWeek())
 module.exports = {
     getDay,
     getWeek,
-    getMonth
+    getMonth,
+    getDayOfMonth
 }

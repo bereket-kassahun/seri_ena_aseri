@@ -104,6 +104,13 @@ router.post("/rate", function (req, res) {
     // });
 })
 
+router.post("/get_user_count", function (req, res) {
+
+    Models.Client.estimatedDocumentCount({}, (err, count) => {
+        return res.json({ success: true, count: count });
+    })
+})
+
 // router.get("/get_seller", isLoggedIn, function (req, res) {
 //     res.json(req.user);
 // });

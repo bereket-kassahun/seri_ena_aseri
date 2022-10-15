@@ -3,5 +3,6 @@ module.exports = {
     PROFESSIONAL: "Professional", 
     CLIENT: "Client",
     EMAILVERIFICATION: "EmailVerification",
-    TRANSACTION: "Transaction"
+    TRANSACTION: "Transaction",
+    INFO: "Info"
 }

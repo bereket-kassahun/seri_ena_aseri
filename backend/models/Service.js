@@ -7,7 +7,7 @@ const Service = Schema({
     title: {type: String, default: ""},
     overview: {type: String, default: ""},
     category: {type: String, default: ""},
-    price: {type: String, default: ""},
+    price: {type: Number, default: 0},
     city: {type: String, default: ""},
     specificAdress: {type: String, default: ""},
     bio: {type: String, default: ""},

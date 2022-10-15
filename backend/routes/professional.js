@@ -5,8 +5,9 @@ const isLoggedIn = require("../utils/isLoggedIn")
 const passport = require("passport")
 const { response } = require("express")
 const Mongoose = require("mongoose")
-const { getWeek, getMonth } = require("../utils/time")
+const { getWeek, getMonth, getDayOfMonth } = require("../utils/time")
 const { Types } = require("mongoose")
+const { updateInfoSellers } = require("../utils/update")
 
 router.get('/list', async function (req, res) {
     getAllProfessionals({}, req.query.page).then(result => {
@@ -162,7 +163,7 @@ router.post("/get_professional_average_rating", async function (req, res) {
         let count = 0
         let sum = 0
         let average = 0
-        if(response.length > 0 && response[0].service_data){
+        if (response.length > 0 && response[0].service_data) {
             response[0].service_data.forEach((value, index) => {
                 console.log("data", value.rating)
                 count += 1
@@ -172,13 +173,16 @@ router.post("/get_professional_average_rating", async function (req, res) {
                 average = sum / count
 
             average = Math.floor(average)
-            res.json({ success: true, average_rating: average})
-        }else{
-            res.json({ success: false, average_rating: 0})
+            res.json({ success: true, average_rating: average })
+        } else {
+            res.json({ success: false, average_rating: 0 })
         }
-        
+
     })
 })
+
+
+
 
 router.post("/update_call_count", async function (req, res) {
     const id = req.body.id
@@ -221,6 +225,14 @@ router.post("/update_call_count", async function (req, res) {
                 res.json({ success: false })
             }
         }
+    })
+})
+
+
+router.post("/get_professional_count", function (req, res) {
+
+    Models.Professional.estimatedDocumentCount({}, (err, count) => {
+        return res.json({ success: true, count: count });
     })
 })
 // router.post("/send_email", async function (req, res) {
