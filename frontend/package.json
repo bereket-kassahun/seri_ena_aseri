@@ -11,6 +11,9 @@
     "axios": "^0.27.2",
     "babel-polyfill": "^6.26.0",
     "bootstrap": "^5.2.0",
+    "bootstrap-icons": "^1.9.1",
+    "d3-scale": "^4.0.2",
+    "d3fc-discontinuous-scale": "^2.0.5",
     "draft-js": "^0.11.7",
     "draftjs-to-html": "^0.9.1",
     "html-to-draftjs": "^1.5.0",
@@ -23,7 +26,10 @@
     "react-rating": "^2.0.5",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
+    "react-toastify": "^9.0.8",
+    "sass": "^1.55.0",
     "styled-components": "^5.3.5",
+    "victory": "^36.6.7",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
