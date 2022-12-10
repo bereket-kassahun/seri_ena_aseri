@@ -1,0 +1,9 @@
+.three-dot:after {
+    content: '\2807';
+    font-size: 20px;
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: 0rem;
+}
