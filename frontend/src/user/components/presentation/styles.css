@@ -1,0 +1,182 @@
+#presentation {
+    width: 100%;
+    max-width: 900px;
+    padding: 0 10px;
+    margin: 0 auto 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: left;
+    background-position: center;
+    background-size: cover;
+    /*background-image: linear-gradient(
+        rgba(0, 0, 0, 1),
+        rgba(0, 0, 0, 0.6),
+        rgba(0, 0, 0, 0.6),
+        rgba(0, 0, 0, 1)
+      ),
+      url(../../assets/presentation.jpg);*/
+  }
+  
+  #presentation .presentation-container h1 {
+    font-size: 5rem;
+    letter-spacing: -0.2rem;
+    font-weight: 800;
+    background: -webkit-linear-gradient(#1cffb3, #5996f0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    border-right: 2px solid #5996f0;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  
+  .typing-animation {
+    animation: blinkCursor 500ms steps(40) infinite normal,
+      typing 2s steps(40) 0.8s normal both;
+  }
+  
+  @keyframes typing {
+    from {
+      width: 0%;
+    }
+    to {
+      width: 100%;
+    }
+  }
+  
+  @keyframes blinkCursor {
+    from {
+      border-right-color: #5996f0;
+    }
+    to {
+      border-right-color: transparent;
+    }
+  }
+  
+  #presentation .presentation-container h2 {
+    font-size: 3rem;
+    line-height: 1em;
+    letter-spacing: -0.2rem;
+    font-weight: 800;
+    background: -webkit-linear-gradient(#1cffb3, #5996f0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  #presentation .presentation-container p {
+    font-size: 1.2rem;
+    line-height: 32px;
+    margin: 10px 0 40px;
+    font-weight: 500;
+  }
+  
+  /* #presentation .presentation-container . {
+    background: -webkit-linear-gradient(#1cffb3, #5996f0);
+    color: var(--color_text);
+    border-radius: 0.4rem;
+    padding: 0.7rem 4rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.9s ease-in;
+  } */
+  
+  #presentation .presentation-container a:hover {
+    background: transparent;
+  }
+  
+  #presentation section img {
+    padding: 10px;
+    width: 100%;
+  }
+  
+  #presentation section {
+    padding: 10px;
+    width: 100%;
+  }
+  
+  @media (max-width: 800px) {
+    #presentation {
+      height: auto;
+      height: auto;
+      display: grid;
+      justify-content: center;
+    }
+  
+    #presentation .presentation-container {
+      display: grid;
+      justify-content: center;
+      align-items: center;
+    }
+  
+    #presentation .presentation-container h1 {
+      width: 500px;
+      margin: 0 auto;
+      margin-top: 3rem;
+      font-size: 6em;
+    }
+  
+    #presentation .presentation-container h2 {
+      width: 500px;
+      margin: 0 auto;
+      font-size: 4em;
+    }
+  
+    #presentation .presentation-container p {
+      width: 500px;
+      margin: 0 auto;
+      font-size: 1.3em;
+    }
+  
+    #presentation .presentation-container .presentation-button {
+      margin: 30px 0;
+    }
+  
+    #presentation .presentation-container a {
+      padding: 1.1rem 6.2rem;
+      display: flex;
+      justify-content: center;
+    }
+  
+    #presentation .presentation-container a:hover {
+      background: -webkit-linear-gradient(#1cffb3, #5996f0);
+      border: none;
+    }
+  
+    #presentation section img {
+      padding: 0;
+      width: 100%;
+    }
+  }
+  
+  @media (max-width: 500px) {
+    #presentation .presentation-container h1 {
+      width: 100%;
+      margin-top: 3rem;
+      font-size: 6em;
+    }
+  
+    #presentation .presentation-container h2 {
+      width: 100%;
+      padding: 0 2px;
+      font-size: 3.5em;
+    }
+  
+    #presentation .presentation-container p {
+      width: 100%;
+      padding: 0 2px;
+      padding-top: 20px;
+      font-size: 1.2em;
+    }
+  
+    #presentation .presentation-container button {
+      width: 100%;
+      font-size: 1.4rem;
+    }
+  
+    #presentation .presentation-container .presentation-button {
+      margin: 30px 0;
+      padding: 0 2px;
+    }
+  }
+  

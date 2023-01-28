@@ -95,7 +95,7 @@ export const DetailPreview = ({ professional, currentService }) => {
                                                             <a href="../test_seller.html">
                                                                 <div class="authors">
                                                                     <div class="thumb">
-                                                                        <img src={currentService.professionalImage != "" ? currentService.professionalImage :  "imgs/seller-s21644057790.jpg"} alt="" />
+                                                                        <img src={currentService.professionalImage != "" ? currentService.professionalImage : "imgs/seller-s21644057790.jpg"} alt="" />
                                                                         <span class="notification-dot"></span>
                                                                     </div>
                                                                     <span class="author-title"> {professional.firstName} {professional.lastName} </span>
@@ -116,7 +116,7 @@ export const DetailPreview = ({ professional, currentService }) => {
                                                             About Seller
                                                         </li>
                                                     </ul>
-                                                    <div className={"tab-content another-tab-content " + (activeElement == 1 ? 'active' : '')} id="tab1" style={{marginTop: "20px"}}>
+                                                    <div className={"tab-content another-tab-content " + (activeElement == 1 ? 'active' : '')} id="tab1" style={{ marginTop: "20px" }}>
                                                         <div class="details-content-tab padding-top-10 " dangerouslySetInnerHTML={{ __html: currentService.detail }} className="custom-editor">
 
                                                         </div>
@@ -126,7 +126,7 @@ export const DetailPreview = ({ professional, currentService }) => {
                                                             <div class="about-seller-tab margin-top-30">
                                                                 <div class="about-seller-flex-content">
                                                                     <div class="about-seller-thumb">
-                                                                        <img src={currentService.professionalImage != "" ? currentService.professionalImage :  "imgs/seller-s21644057790.jpg"} alt="" />
+                                                                        <img src={currentService.professionalImage != "" ? currentService.professionalImage : "imgs/seller-s21644057790.jpg"} alt="" />
                                                                     </div>
                                                                     <div class="about-seller-content">
                                                                         <h5 class="title"> <a href="../test_seller.html"> {professional.firstName} {professional.lastName}</a> </h5>
@@ -137,7 +137,7 @@ export const DetailPreview = ({ professional, currentService }) => {
                                                                         <li class="box-list"> From
                                                                             <strong>
                                                                                 <h6>
-                                                                                    {currentService.city}, {currentService.specificAdress}
+                                                                                    {currentService.city}, lat:{currentService.latitude}, lon:{currentService.longitude}
                                                                                 </h6>
                                                                             </strong>
                                                                         </li>
@@ -171,7 +171,19 @@ export const DetailPreview = ({ professional, currentService }) => {
                                                 <div class="single-packages">
                                                     <ul class="package-price">
                                                         <li> Package </li>
-                                                        <li> {currentService.price} Birr </li>
+                                                        {
+                                                            currentService.paymentType == 3 ?
+                                                                (
+                                                                    <li class="card-title">
+                                                                        Negotiable Price
+                                                                    </li>
+                                                                ) :
+                                                                (
+                                                                    <li>
+                                                                        {currentService.paymentType == 2 && "Starting From"} {currentService.price} Birr{currentService.paymentType == 1 && "/Hr"}
+                                                                    </li>
+                                                                )
+                                                        }
                                                     </ul>
                                                     <div class="details-available-price margin-top-20">
                                                         <span class="summery-title">

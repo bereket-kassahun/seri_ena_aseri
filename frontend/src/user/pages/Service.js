@@ -22,9 +22,9 @@ const Service = () => {
     const [activeElement, setActiveElement] = useState(1)
 
     useEffect(() => {
-        professional_services(professionalId, (data) => {
-            if (data.length > 0) {
-                setProfessional(data[0])
+        professional_services(professionalId, (res) => {
+            if (res.success) {
+                setProfessional(res.data)
             }
         })
 
@@ -115,7 +115,7 @@ const Service = () => {
                                             <div class="about-seller-tab margin-top-30">
                                                 <div class="about-seller-flex-content">
                                                     <div class="about-seller-thumb">
-                                                        <img src="imgs/sample_category.jpg" alt="" />
+                                                        <img src={currentService.professionalImage != "" ? currentService.professionalImage : "imgs/user_profile.png"}  alt="" />
                                                     </div>
                                                     <div class="about-seller-content">
                                                         <h5 class="title"> <a href="../test_seller.html"> {professional.firstName} {professional.lastName}</a> </h5>
@@ -126,7 +126,7 @@ const Service = () => {
                                                         <li class="box-list"> From
                                                             <strong>
                                                                 <h6>
-                                                                    {currentService.city}, {currentService.specificAdress}
+                                                                    {currentService.city}, Latitude: {currentService.latitude}, Longitude: {currentService.longitude}
                                                                 </h6>
                                                             </strong>
                                                         </li>

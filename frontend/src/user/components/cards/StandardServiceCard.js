@@ -40,6 +40,7 @@ export const StandardServiceCard = ({ data, setRatingId, cardCount = 6, ratingEn
 
 
     useEffect(() => {
+        console.log("this is my data" , data)
         let rating = data.rating ? data.rating : 0
         let tmp = []
 
@@ -91,7 +92,7 @@ export const StandardServiceCard = ({ data, setRatingId, cardCount = 6, ratingEn
     let cardClass = ""
     switch(cardCount){
         case 4:
-            cardClass = "col-xl-3 col-lg-4 col-sm-6 col-12 fadeInUp wow"
+            cardClass = "col-xl-4 col-lg-6 col-sm-6 col-12 fadeInUp wow"
             break;
         default:
             cardClass = "col-xl-2 col-lg-3 col-sm-4 col-12 fadeInUp wow"
@@ -147,7 +148,19 @@ export const StandardServiceCard = ({ data, setRatingId, cardCount = 6, ratingEn
                                     </div>
                                 </div>
                                 <div >
-                                    <h6 class="card-title"> {data.price} Birr</h6>
+                                {
+                                        data.paymentType == 3 ?
+                                            (
+                                                <h6 class="card-title">
+                                                    Negotiable Price
+                                                </h6>
+                                            ) :
+                                            (
+                                                <h6 class="card-title">
+                                                    {data.paymentType == 2 && "Starting From"} {data.price} Birr{data.paymentType == 1 && "/Hr"}
+                                                </h6>
+                                            )
+                                    }
                                 </div>
                             </div>
 

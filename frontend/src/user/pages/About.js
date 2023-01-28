@@ -29,19 +29,17 @@ const About = () => {
                             <div class="single-about">
                                 <h2 class="about-title">Know About Us</h2>
                                 <div class="about-contents">
-                                    <p class="about-para">It is a long established fact that a reader will be distracted by the
-                                        readable content of a page when looking at its layout. It is a long established fact
-                                        that a reader will be distracted by the readable content of a page when looking at its
-                                        layout.</p>
+                                    <p class="about-para">Welcome to SERA, a platform connecting professionals and qualified individuals
+                                        with local and international users. We pride ourselves on providing a secure and user-friendly
+                                        experience for both clients and professionals.</p>
 
                                     <div class="overview-single style-03">
                                         <ul class="overview-benefits margin-top-30">
-                                            <li class="list"> Complete Sanitization and cleaning of bathroom </li>
-                                            <li class="list"> It's a long established way </li>
-                                            <li class="list"> Biodegradable chemicals are used </li>
-                                            <li class="list"> It's a long established way </li>
-                                            <li class="list"> Biodegradable chemicals are used </li>
-                                            <li class="list"> It's a long established way </li>
+                                            <li class="list"> Our team of experts work tirelessly to ensure that our platform is always up to date and running smoothly. </li>
+                                            <li class="list"> We carefully vet all of our professionals to ensure that they have the qualifications and experience needed to provide top-quality service. </li>
+                                            <li class="list"> Our goal is to make it easy for clients to find the professional they need, and for professionals to find the clients and projects they want.</li>
+                                            <li class="list"> Our platform is accessible from anywhere, and it is mobile-friendly, making it easy for users to access it from any device </li>
+
 
                                         </ul>
                                     </div>
@@ -55,11 +53,12 @@ const About = () => {
                 style={{ backgroundColor: `rgb(242, 247, 255)` }}>
                 <div class="container">
                     <div class="row justify-content-center">
-                        <div class="col-xl-6 col-lg-7 col-md-10">
+                        <div class="col-xl-9 col-lg-10 col-md-12">
                             <div class="section-title">
                                 <h2 class="title"> Why Our <span >Marketplace? </span> </h2>
-                                <span class="section-para">It is a long established fact that a reader will be distracted by the
-                                    readable content of a page when looking at its layout.</span>
+                                <span class="section-para">
+                                    We are dedicated to providing a seamless experience for our users to find the right professional for their needs, and for professionals to showcase their skills and services. We understand that connecting with the right professional can be a daunting task, which is why we've made it our mission to make the process as simple and straightforward as possible, and experience the power of connecting with the right professional for your project.
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -72,12 +71,13 @@ const About = () => {
                                 </div>
                                 <div class="marketplace-contents">
                                     <h5 class="common-title">Service Commitment </h5>
-                                    <p class="common-para">It is a long established fact that a reader will be distracted by the
-                                        readable. It is a long established fact that a reader.</p>
+                                    <p class="common-para">
+                                        Our dedicated customer service team is always available to assist you in finding the right professional for the service you require and ensuring a smooth experience. We also take great pride in the quality of our professionals and strive to maintain a high standard of excellence 0ur platform. Join us today and experience the power of connecting with the right professionals.
+                                    </p>
                                 </div>
                             </div>
                         </div>
-
+{/* 
                         <div class="col-lg-4 col-md-6 margin-top-30 marketplace-child">
                             <div class="single-marketplace wow fadeInUp" data-wow-delay=".2s">
                                 <div class="icon">
@@ -89,7 +89,7 @@ const About = () => {
                                         readable. It is a long established fact that a reader.</p>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
 
                         <div class="col-lg-4 col-md-6 margin-top-30 marketplace-child">
                             <div class="single-marketplace wow fadeInUp" data-wow-delay=".2s">
@@ -98,8 +98,10 @@ const About = () => {
                                 </div>
                                 <div class="marketplace-contents">
                                     <h5 class="common-title">User Data Secure </h5>
-                                    <p class="common-para">It is a long established fact that a reader will be distracted by the
-                                        readable. It is a long established fact that a reader.</p>
+                                    <p class="common-para">
+                                        We understand the importance of protecting our users' data. That's why we have implemented strict security measures to ensure that all information shared on our platform is kept safe and secure. Our platform is built on a secure infrastructure and uses industry-standard encryption to protect all data transmitted and stored on our servers.
+                                        We comply with all applicable laws and regulations regarding the collection, use, and storage of personal data
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -111,8 +113,8 @@ const About = () => {
                                 </div>
                                 <div class="marketplace-contents">
                                     <h5 class="common-title">Fast Service </h5>
-                                    <p class="common-para">It is a long established fact that a reader will be distracted by the
-                                        readable. It is a long established fact that a reader.</p>
+                                    <p class="common-para">We strive to provide our users with the fastest and most efficient service possible. Our customer service team is dedicated to always ensure that all your enquiries are answered whether you are a professional or looking for a professional with fast responses ensuring a smooth experience for all users on the platform.
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -124,8 +126,9 @@ const About = () => {
                                 </div>
                                 <div class="marketplace-contents">
                                     <h5 class="common-title">Secure Payment </h5>
-                                    <p class="common-para">It is a long established fact that a reader will be distracted by the
-                                        readable. It is a long established fact that a reader.</p>
+                                    <p class="common-para">
+                                    We strive to instil confidence in users on the platform with our secure and reliable payment methods, at SIRA ALLE your privacy is in safe hands.
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -137,8 +140,7 @@ const About = () => {
                                 </div>
                                 <div class="marketplace-contents">
                                     <h5 class="common-title">Dedicated Support </h5>
-                                    <p class="common-para">It is a long established fact that a reader will be distracted by the
-                                        readable. It is a long established fact that a reader.</p>
+                                    <p class="common-para">Our customer service team is available to assist with any questions or concerns. We value your feedback and are constantly working to improve our platform.</p>
                                 </div>
                             </div>
                         </div>
@@ -146,7 +148,7 @@ const About = () => {
                     </div>
                 </div>
             </section>
-            <section class="category-area section-bg-1" data-padding-top="100" data-padding-bottom="100"
+            {/* <section class="category-area section-bg-1" data-padding-top="100" data-padding-bottom="100"
                 style={{ backgroundColor: `rgb(255, 255, 255)` }}>
                 <div class="container">
                     <div class="row justify-content-center">
@@ -238,9 +240,9 @@ const About = () => {
                         </div>
                     </div>
                 </div>
-            </section>
+            </section> */}
 
-            <section class="seller-area" data-padding-top="70" data-padding-bottom="105"
+            {/* <section class="seller-area" data-padding-top="70" data-padding-bottom="105"
                 style={{ backgroundColor: `rgb(242, 247, 255)` }}>
                 <div class="container">
                     <div class="row flex-column-reverse flex-lg-row align-items-center">
@@ -335,7 +337,7 @@ const About = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
         </>
     )
 }

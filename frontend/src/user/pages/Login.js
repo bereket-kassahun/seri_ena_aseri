@@ -67,7 +67,7 @@ export const Login = () => {
                         setErrorMsg("Incorrect email or password!!")
                 } else {
                     setErrorMsg("")
-                    navigate("/seller")
+                    navigate("/seller/services")
                 }
             })
         }
@@ -152,7 +152,6 @@ export const Login = () => {
                     </div>
                 </div>
             </div>
-            <Footer />
         </>
     )
 }

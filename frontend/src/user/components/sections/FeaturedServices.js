@@ -1,11 +1,14 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useContext } from "react"
 import { get_featured_services } from "../../api"
 import { SearchBody } from "../search/SearchBody"
 
 
+import { ThemeContext } from "../../context/theme-context"
+
 
 export const FeaturedServices = () => {
 
+    const { currentTheme, updateLanguage } = useContext(ThemeContext);
     const [featuredServices, setFeaturedServices] = useState([])
 
     useEffect(() => {
@@ -23,7 +26,7 @@ export const FeaturedServices = () => {
                 <div  data-aos="fade-up">
 
                     <div class="section-title">
-                        <h2>Featured Services</h2>
+                        <h2>{currentTheme.text.home.text4}</h2>
                     </div>
 
                     <div style={{paddingLeft: "20px", paddingRight: "20px"}} class="row">

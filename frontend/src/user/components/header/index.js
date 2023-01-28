@@ -134,17 +134,17 @@ export const Header = () => {
                                     </Link>)
                                 )
                             )
-                                :
-                                (
-                                    itemsData.english.map((item, index) => (
-                                        <Link to={item.href}>
-                                            <li key={index} class="nav-item">
-                                                <Item name={item.name}></Item>
-                                            </li>
-                                        </Link>
-                                    )
-                                    )
+                            :
+                            (
+                                itemsData.english.map((item, index) => (
+                                    <Link to={item.href}>
+                                        <li key={index} class="nav-item">
+                                            <Item name={item.name}></Item>
+                                        </li>
+                                    </Link>
                                 )
+                                )
+                            )
 
                         }
 

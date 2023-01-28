@@ -15,6 +15,7 @@ import { MediumService } from "./pages/service/MediumService";
 import { PremiumService } from "./pages/service/PremiumService";
 import { EditService } from "./pages/EditService";
 import { Payment } from "./pages/Payment";
+import { AddAndEditService } from "./pages/service/AddAndEditService";
 
 export default function Dashboard() {
 
@@ -36,6 +37,7 @@ export default function Dashboard() {
                     <Route exact path='/services/entry_service' element={<EntryService />}></Route>
                     <Route exact path='/services/medium_service' element={<MediumService />}></Route>
                     <Route exact path='/services/premium_service' element={<PremiumService />}></Route>
+                    <Route exact path='/services/add_edit_service' element={<AddAndEditService />}></Route>
                     <Route exact path='/notifications' ></Route>
                     <Route exact path='/settings' ></Route>
                     <Route exact path='/logout' element={<Logout/>} ></Route>

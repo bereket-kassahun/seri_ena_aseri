@@ -89,7 +89,7 @@ export const BasicServiceCard = ({ data, setRatingId , cardCount = 6 }) => {
     let cardClass = ""
     switch(cardCount){
         case 2:
-            cardClass = "col-xl-6 col-lg-6 col-sm-12 col-12 fadeInUp wow"
+            cardClass = "col-xl-12 col-lg-12 col-sm-12 col-12 fadeInUp wow"
             break;
         default:
             cardClass = "col-xl-4 col-lg-6 col-sm-12 col-12  fadeInUp wow"

@@ -9,13 +9,17 @@ import { ProfessionalServices } from '../components/sections/ProfessionalService
 import { TradersServices } from '../components/sections/TradersServices';
 import { FeaturedServices } from '../components/sections/FeaturedServices';
 import SearchBar from '../components/banner/SearchBar';
+import Presentation from '../components/presentation';
+import { Carousel } from '../components/carousel';
 export const Home = () => {
   return (
     <div className="">
-      <SearchBar />
+      {/* <SearchBar /> */}
+      <Presentation/>
+      <Carousel/>
       <FeaturedServices />
       <ProfessionalServices />
-      <TradersServices />
+      {/* <TradersServices /> */}
       <JoinUs />
     </div>
   );

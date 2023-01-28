@@ -36,7 +36,6 @@ const Search = () => {
 
   function getData(page = 1, word = searchWord) {
     search({rating: rating, price: price, type: type, word: word, page: page, limit: PAGE_LIMIT }, (results) => {
-      console.log(results.docs)
       const tmp = results.docs
       const pageNo = results.total / PAGE_LIMIT
       setData([...tmp])

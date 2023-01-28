@@ -10,14 +10,10 @@ export const SearchBody = ({ data, cardCount = 6, ratingEnabled = true }) => {
 
     const { currentClient, addServiceIdToRatings, updateClient } = useContext(ClientContext);
 
-
-
     const [currentServiceId, setCurrentServiceId] = useState("")
     const [clientRatedService, setClientRatedService] = useState(false)
-    const [ratingValue, setRatingValue] = useState(0)
-
-
-
+    // const [ratingValue, setRatingValue] = useState(0)
+    let ratingValue = undefined
 
     const setRatingId = (_id, clientAlreadyRated) => {
         setClientRatedService(clientAlreadyRated)
@@ -88,14 +84,14 @@ export const SearchBody = ({ data, cardCount = 6, ratingEnabled = true }) => {
                             <h5 class="modal-title" id="exampleModalToggleLabel2">Rate</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="modal-body">
+                        <div class="modal-body" style={{textAlign: "center"}}>
                             {
                                 clientRatedService ? (<h3>You have already rated this service</h3>)
                                     :
                                     (<Rating
-                                        emptySymbol={<span class="fa fa-star"></span>}
-                                        fullSymbol={<span class="fa fa-star checked"></span>}
-                                        onChange={(rate) => { setRatingValue(rate) }}
+                                        emptySymbol={<span class="fa fa-2x  fa-star"></span>}
+                                        fullSymbol={<span class="fa fa-2x  fa-star checked"> </span>}
+                                        onClick={(rate) => { ratingValue = rate}}
                                     />)
                             }
                         </div>
@@ -108,11 +104,7 @@ export const SearchBody = ({ data, cardCount = 6, ratingEnabled = true }) => {
                                 }
                             }}>
                                 {
-                                    clientRatedService ? (
-                                        <p>Close</p>
-                                    ) : (
-                                        <p>Save</p>
-                                    )
+                                    <p style={{ color: "white" }}>{clientRatedService ? "Close" : "Rate"} </p>
                                 }
                             </button>
                         </div>

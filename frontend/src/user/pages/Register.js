@@ -137,7 +137,7 @@ const Register = () => {
 
             </div>
 
-            <section class="banner-area home-three-banner  padding-top-100 padding-bottom-100">
+            <section class="banner-area home-three-banner  padding-top-100 padding-bottom-100" style={{padding: "30px 0px 120px 0px"}}>
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-12">
@@ -357,7 +357,7 @@ const Register = () => {
                 </div>
             </section>
 
-            <Footer />
+            {/* <Footer /> */}
         </>
     )
 }

@@ -13,6 +13,7 @@ import Container from "./pages/Container"
 import {Login  as AdminLogin} from '../admin/pages/Login'
 import ProfessionalCategories from "./pages/ProfessionalCategories"
 import TradersCategories from "./pages/TradersCategories"
+import { PrivacyPolicy } from "./pages/PrivacyPolicy"
 export const User = () => {
     return (
         <>
@@ -30,6 +31,7 @@ export const User = () => {
                     <Route exact path='login' element={<Login />}></Route>
                     <Route exact path='register' element={<Register />}></Route>
                     <Route exact path='admin' element={<AdminLogin />}></Route>
+                    <Route exact path='privacy' element={<PrivacyPolicy />}></Route>
                 </Routes>
             </Container>
         </>

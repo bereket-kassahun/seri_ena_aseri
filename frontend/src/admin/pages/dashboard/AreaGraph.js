@@ -10,8 +10,8 @@ export const AreaGraph = ({data}) => {
                 data={data}
                 style={{ data: { fill: 'lightblue', stroke: 'teal' } }}
                 animate={{
-                    duration: 2000,
-                    onLoad: { duration: 2000 }
+                    duration: 1000,
+                    onLoad: { duration: 1000 }
                 }}
             />
         </VictoryChart>

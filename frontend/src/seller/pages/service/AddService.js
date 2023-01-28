@@ -28,7 +28,7 @@ export const AddService = () => {
                              &quot;min&quot;: 29,
                              &quot;max&quot;: 19
                            }">39</span>
-                                <span>/mo</span>
+                                {/* <span>/mo</span> */}
                             </div>
 
                             <h3 class="card-title">Basic Service</h3>
@@ -48,7 +48,7 @@ export const AddService = () => {
 
                         <div class="card-footer text-center" style={{ borderTop: "none" }}>
                             <div class="d-grid mb-2">
-                                <Link to="entry_service" style={{ margin: "auto" }}>
+                                <Link to="add_edit_service" state={{type: 0}} style={{ margin: "auto" }}>
                                     <button type="button" class="btn btn-ghost-primary">Create Service</button>
                                 </Link>
                             </div>
@@ -64,7 +64,7 @@ export const AddService = () => {
                              &quot;min&quot;: 29,
                              &quot;max&quot;: 19
                            }" >59</span>
-                                <span>/mo</span>
+                                {/* <span>/mo</span> */}
                             </div>
 
                             <h3 class="card-title text-white">Standard Service</h3>
@@ -87,7 +87,7 @@ export const AddService = () => {
 
                         <div class="card-footer text-center" style={{ borderTop: "none" }}>
                             <div class="d-grid mb-2">
-                                <Link to="medium_service" style={{ margin: "auto" }}>
+                                <Link to="add_edit_service" state={{type: 1}} style={{ margin: "auto" }}>
                                     <button type="button" class="btn btn-ghost-primary text-white">Create Service</button>
                                 </Link>
 
@@ -104,7 +104,7 @@ export const AddService = () => {
                              &quot;min&quot;: 29,
                              &quot;max&quot;: 19
                            }">79</span>
-                                <span>/mo</span>
+                                {/* <span>/mo</span> */}
                             </div>
 
                             <h3 class="card-title">Premium Service</h3>
@@ -128,7 +128,7 @@ export const AddService = () => {
 
                         <div class="card-footer text-center" style={{ borderTop: "none" }}>
                             <div class="d-grid mb-2">
-                                <Link to="premium_service" style={{ margin: "auto" }}>
+                                <Link to="add_edit_service" state={{type: 2}} style={{ margin: "auto" }}>
                                     <button type="button" class="btn btn-ghost-primary">Create Service</button>
                                 </Link>
                             </div>

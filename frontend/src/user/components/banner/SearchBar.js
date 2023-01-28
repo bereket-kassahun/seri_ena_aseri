@@ -1,19 +1,24 @@
 
-import { useState, useEffect } from 'react'
-import RecommendationContainer from './RecommendationContainer'
+import { useEffect, useState, useContext } from 'react'
 
-import { search } from '../../api/search'
 import { recommend } from '../../api/recommend'
 import { Link } from 'react-router-dom'
+
+// import "react-responsive-carousel/lib/styles/carousel.min.css";
+// import { Carousel } from 'react-responsive-carousel';
+import { ThemeContext } from "../../context/theme-context"
+
+
 const SearchBar = () => {
+
+    const { currentTheme, updateLanguage } = useContext(ThemeContext);
 
     const [searchResult, setSearchResult] = useState([])
     const [searchWord, setSearchWord] = useState("")
     const [inFocus, setInFocus] = useState(false)
     const [dropdownInFocus, setDropdownInFocus] = useState(false)
 
-
-
+    
     const recommendation = async (evn) => {
         let search_word = evn.target.value
         setSearchWord(search_word)
@@ -36,68 +41,60 @@ const SearchBar = () => {
 
     return (
         <>
-            <section id="hero" class="d-flex align-items-center " style={{ overflow: "visible" }} >
-                <div class="container " >
-                    <div class="row" >
-                        <div class="col-lg-6  order-1 order-lg-1  hero-img" data-aos="zoom-in" data-aos-delay="200">
-                            <img src="imgs/new_category/investment_data_service.png" class="img-fluid animated" alt="" />
+            <div style={{ position: "relative", }} >
+                <div>
+                    <img src='imgs/main_backround.jpeg'></img>
+                            {/* <img src="imgs/slider_1.jpg" alt="..." /> */}
+                            {/* <img src="imgs/slider_2.jpg" alt="..." /> */}
+                            {/* <img src="imgs/slider_3.jpg" alt="..." /> */}
+                    {/* <Carousel style={{}} showArrows={true} autoPlay={true} interval={2500} showThumbs={false} showStatus={false} infiniteLoop={true} swipeable={true}>
+                        <div >
+                            <img src="https://mdbcdn.b-cdn.net/img/new/slides/041.webp" alt="..." />
                         </div>
-                        <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-2" style={{ position: "relative" }} data-aos="fade-up" data-aos-delay="200">
-                            <h1>One-stop Solution for your Services</h1>
-                            <h2 >Order any service, anytime from anywhere</h2>
-                            <div class="input-group rounded">
-                                <input type="search" class="form-control" aria-label="Search" aria-describedby="search-addon" placeholder="What are you looking for" autoComplete="off"
-                                    onKeyUp={recommendation}
-                                    onFocus={(evnt) => { setInFocus(true); setDropdownInFocus(true) }}
-                                    onBlur={(evnt) => { setInFocus(false) }}
-                                />
-                                <span class="input-group-text border-0" style={{ cursor: "pointer" }} id="search-addon">
-                                    <Link to="/search" state={searchWord} >
-                                        <i class="fas fa-search" ></i>
-                                    </Link>
-                                </span>
+                        <div>
+                            <img src="https://mdbcdn.b-cdn.net/img/new/slides/042.webp" alt="..." />
+                        </div>
+                        <div >
+                            <img src="https://mdbcdn.b-cdn.net/img/new/slides/043.webp" alt="..." />
+                        </div>
+                    </Carousel> */}
+                </div>
 
-                            </div>
-                            <div class="dropdown">
-                                <ul onMouseEnter={(evnt) => {setDropdownInFocus(true)}} onMouseLeave={(evnt) => {setDropdownInFocus(false)}} className={"dropdown-menu " + ((searchResult.length != 0 && inFocus) ||(searchResult.length != 0 && dropdownInFocus)? 'show' : '')} aria-labelledby="dropdownMenuButton1" style={{ overflow: "scroll", overflowX: "hidden", maxHeight: "150px", zIndex: "2000", width: "100%" }}>
-                                    {
-                                        searchResult.map((value, index) => {
-                                            return (
-                                                <li key={index}>
-                                                    <Link class="dropdown-item" to="/search" state={value} style={{cursor: "pointer"}}>
-                                                        {value}
-                                                    </Link>
-                                                </li>
-                                            )
-                                        })
-                                    }
-                                </ul>
-                            </div>
+                <div class="d-flex flex-column justify-content-center " style={{ alignContent: "center", textAlign: "center", position: "absolute", top: "5%", padding: "10% 0px 0px 0px", width: "100%" }}>
+                    <div class="col-lg-8  col-sm-10 pt-4 pt-lg-0 order-2 order-lg-2" style={{ alignSelf: "center" }} data-aos="fade-up" data-aos-delay="200">
+                        <h1 className='d-none d-lg-block' style={{ fontSize: "54px", fontWeight: "700", lineHeight: "56px", color: "#fff" }}>{currentTheme.text.home.text1}</h1>
+                        <h2 className='d-none d-sm-block' style={{ color: "rgba(255, 255, 255, 0.7)", marginBottom: "50px", fontSize: "24px" }}>{currentTheme.text.home.text2}</h2>
+                        <div class="input-group rounded">
+                            <input type="search" class="form-control" aria-label="Search" aria-describedby="search-addon" placeholder={currentTheme.text.home.text3} autoComplete="off"
+                                onKeyUp={recommendation}
+                                onFocus={(evnt) => { setInFocus(true); setDropdownInFocus(true) }}
+                                onBlur={(evnt) => { setInFocus(false) }}
+                            />
+                            <span class="input-group-text border-0" style={{ cursor: "pointer" }} id="search-addon">
+                                <Link to="/search" state={searchWord} >
+                                    <i class="fas fa-search" ></i>
+                                </Link>
+                            </span>
+
+                        </div>
+                        <div class="dropdown">
+                            <ul onMouseEnter={(evnt) => { setDropdownInFocus(true) }} onMouseLeave={(evnt) => { setDropdownInFocus(false) }} className={"dropdown-menu " + ((searchResult.length != 0 && inFocus) || (searchResult.length != 0 && dropdownInFocus) ? 'show' : '')} aria-labelledby="dropdownMenuButton1" style={{ overflow: "scroll", overflowX: "hidden", maxHeight: "150px", zIndex: "2000", width: "100%" }}>
+                                {
+                                    searchResult.map((value, index) => {
+                                        return (
+                                            <li key={index}>
+                                                <Link class="dropdown-item" to="/search" state={value} style={{ cursor: "pointer" }}>
+                                                    {value}
+                                                </Link>
+                                            </li>
+                                        )
+                                    })
+                                }
+                            </ul>
                         </div>
                     </div>
                 </div>
-            </section>
-            {/* <div className="banner-bottom-content">
-                <form
-                    className="banner-search-form">
-                    <div className="single-input">
-                        <input className="form--control" name="home_search" id="home_search" type="text"
-                            placeholder="What are you looking for" autoComplete="off"
-                            onKeyUp={recommendation} />
-                        <div className="icon-search">
-                            <i className="las la-search"></i>
-                        </div>
-
-                        <Link to="/search" state={searchWord} ><button type="submit"> <i className="las la-search"></i> </button></Link>
-                    </div>
-                </form>
-
-                <span id="all_search_result">
-                    <RecommendationContainer searchResult={searchResult} />
-                </span>
-
-
-            </div> */}
+            </div>
         </>
     )
 }

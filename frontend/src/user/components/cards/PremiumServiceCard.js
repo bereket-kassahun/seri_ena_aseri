@@ -63,7 +63,7 @@ export const PremiumServiceCard = ({ data, setRatingId, cardCount = 6, ratingEna
     }, [])
 
 
-    
+
     const [isHover, setIsHover] = useState(false)
 
 
@@ -91,16 +91,16 @@ export const PremiumServiceCard = ({ data, setRatingId, cardCount = 6, ratingEna
 
 
     let cardClass = ""
-    switch(cardCount){
+    switch (cardCount) {
         case 4:
-            cardClass = "col-xl-3 col-lg-4 col-sm-6 col-12 fadeInUp wow"
+            cardClass = "col-xl-4 col-lg-6 col-sm-6 col-12 fadeInUp wow"
             break;
         default:
             cardClass = "col-xl-2 col-lg-3 col-sm-4 col-12 fadeInUp wow"
     }
     return (
         <>
-            <div style={{ paddingRight: "2px", paddingLeft: "2px", paddingBottom: "5px", paddingTop: "5px" }}  className={cardClass} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+            <div style={{ paddingRight: "2px", paddingLeft: "2px", paddingBottom: "5px", paddingTop: "5px" }} className={cardClass} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
                 <div style={cardStyle.container} class=" card single-service service-two style-03 " >
                     <Link to="/service" state={{ professionalId: data.professionalId, currentServiceId: data._id }} >
                         <a
@@ -120,7 +120,7 @@ export const PremiumServiceCard = ({ data, setRatingId, cardCount = 6, ratingEna
                                 <a >
                                     <div class="authors">
                                         <div class="thumb">
-                                            <img src={data.professionalImage != "" ? data.professionalImage :  "imgs/user_profile.png"} alt="" />
+                                            <img src={data.professionalImage != "" ? data.professionalImage : "imgs/user_profile.png"} alt="" />
                                         </div>
                                         <p class="font-weight-bold" style={{ color: "black" }}>{data.professionalFirstName} {data.professionalLastName}</p>
                                     </div>
@@ -134,7 +134,7 @@ export const PremiumServiceCard = ({ data, setRatingId, cardCount = 6, ratingEna
                         {/* <a href="#" class="btn btn-primary">Go somewhere</a> */}
                         <div class="service-price-wrapper" style={{ textAlign: "center" }}>
                             <div >
-                                <div  style={{ display: "flex", flexGrow: "2",flexDirection: "row", justifyContent: "center" }}>
+                                <div style={{ display: "flex", flexGrow: "2", flexDirection: "row", justifyContent: "center" }}>
                                     {
                                         (currentClient._id && ratingEnabled) != "" ? (
                                             <div class="rating" style={{ display: "inline", cursor: "pointer" }} data-bs-target="#exampleModalCenter" data-bs-toggle="modal" onClick={(evnt) => { setRatingId(data._id, checkIfClientRated()) }}>
@@ -152,11 +152,24 @@ export const PremiumServiceCard = ({ data, setRatingId, cardCount = 6, ratingEna
                                     </div>
                                 </div>
                                 <div >
-                                    <h6 class="card-title"> {data.price} Birr</h6>
+
+                                    {
+                                        data.paymentType == 3 ?
+                                            (
+                                                <h6 class="card-title">
+                                                    Negotiable Price
+                                                </h6>
+                                            ) :
+                                            (
+                                                <h6 class="card-title">
+                                                    {data.paymentType == 2 && "Starting From"} {data.price} Birr{data.paymentType == 1 && "/Hr"}
+                                                </h6>
+                                            )
+                                    }
                                 </div>
                             </div>
                             <div class="btn-wrapper">
-                                <a href={"tel:+"+ data.professionalPhoneNumber} class="cmn-btn btn-bg-3" style={{ background: ``, padding: "5px 10px 5px 10px" }}
+                                <a href={"tel:+" + data.professionalPhoneNumber} class="cmn-btn btn-bg-3" style={{ background: ``, padding: "5px 10px 5px 10px" }}
                                     onClick={(evnt) => {
                                         updateCallNumber({ id: data.professionalId }, (res) => {
                                             if (res.success) {

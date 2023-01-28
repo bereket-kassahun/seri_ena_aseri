@@ -98,7 +98,7 @@ export const SideBar = ({ children }) => {
                     <footer class="sticky-footer bg-white">
                         <div class="container my-auto">
                             <div class="copyright text-center my-auto">
-                                <span>Copyright &copy; Sira-Alle Website 2020</span>
+                                <span>Copyright &copy; Sira-Alle Website {new Date().getFullYear()}</span>
                             </div>
                         </div>
                     </footer>

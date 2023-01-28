@@ -41,7 +41,7 @@ export const Dashboard = () => {
                 let count1 = 1
                 for (var propt in temp1) {
                     // console.log(propt + ': ' + obj[propt]);
-                    temp2.push({ x: new Date((new Date).getFullYear(), (new Date).getMonth(), count2), y: temp1[propt] })
+                    temp2.push({ x: new Date((new Date).getFullYear(), (new Date).getMonth(), count1), y: temp1[propt] })
                     count1++
                 }
                 setServiceData([...temp2])
@@ -57,6 +57,8 @@ export const Dashboard = () => {
                 setSellerData([...temp4])
                 
                 console.log(temp4)
+            }else{
+                console.log(res)
             }
         })
     }, [])

@@ -1,5 +1,5 @@
 import { useState } from "react"
-import {useNavigate} from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 export const Login = () => {
 
 
@@ -8,13 +8,16 @@ export const Login = () => {
     const [password, setPassword] = useState("")
 
     const login = () => {
-        if(email == "b@gmail.com" && password == "12345"){
+        if (email == "b@gmail.com" && password == "12345") {
             navigator("dashboard")
         }
     }
 
     return (
         <>
+            <div style={{ height: "13vh", background: " #37517e" }}>
+
+            </div>
             <section class="vh-100" >
                 <div class="container py-5 h-100">
                     <div class="row d-flex justify-content-center align-items-center h-100">
@@ -28,13 +31,13 @@ export const Login = () => {
                                     <div class="form-outline mb-4">
                                         <input type="email" id="form2Example17" class="form-control form-control-lg" placeholder="Email" value={email} onChange={(evnt) => {
                                             setEmail(evnt.target.value)
-                                        }}/>
+                                        }} />
                                     </div>
 
                                     <div class="form-outline mb-4">
                                         <input type="password" id="form2Example27" class="form-control form-control-lg" placeholder="Password" value={password} onChange={(evnt) => {
                                             setPassword(evnt.target.value)
-                                        }}/>
+                                        }} />
                                     </div>
 
                                     <button class="btn btn-primary btn-lg btn-block" type="submit" onClick={(evnt) => {

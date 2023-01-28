@@ -36,18 +36,22 @@ export default function SideBar({ children }) {
                             <a > <i class="las la-th"></i><span> Dashboard</span>  </a>
                         </Link>
                     </li>
-                    <li class="nav-item">
+                    {/* <li class="nav-item">
                         <Link to='service_approval' className={"nav-link " + (activePage == 2 ? 'active' : '')} onClick={() => { setActivePage(2); setTitle("Pending Services") }}>
                             <a > <i class="las la-gifts"></i><span> Approvals</span></a>
                         </Link>
-                    </li>
+                    </li> */}
 
                     <li class="nav-item">
-                        <Link to='seller_list' className={"nav-link " + (activePage == 3 ? 'active' : '')} onClick={() => { setActivePage(3); setTitle("Sellers") }}>
-                            <a > <i class="las la-gifts"></i><span>Sellers</span> </a>
+                        <Link to='professionals_list' className={"nav-link " + (activePage == 3 ? 'active' : '')} onClick={() => { setActivePage(3); setTitle("Professionals") }}>
+                            <a > <i class="las la-gifts"></i><span>Professionals</span> </a>
                         </Link>
                     </li>
-
+                    <li class="nav-item">
+                        <Link to='services_list' className={"nav-link " + (activePage == 4 ? 'active' : '')} onClick={() => { setActivePage(4); setTitle("Services") }}>
+                            <a > <i class="las la-gifts"></i><span>Services</span> </a>
+                        </Link>
+                    </li>
                     <li class="nav-item">
                         <Link to='/' className={"nav-link " + (activePage == 8 ? 'active' : '')} onClick={() => { logout() }}>
                             <a> <i class="fas fa-sign-out-alt"></i><span>Log Out</span>  </a>
@@ -80,7 +84,7 @@ export default function SideBar({ children }) {
                     <footer class="sticky-footer bg-white">
                         <div class="container my-auto">
                             <div class="copyright text-center my-auto">
-                                <span>Copyright &copy; Sira-Alle Website 2020</span>
+                                <span>Copyright &copy; Sira-Alle Website 2022</span>
                             </div>
                         </div>
                     </footer>

@@ -2,7 +2,6 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import { Footer } from './user/components/footer/Footer';
 import { Header } from './user/components/header';
 import Dashboard from './seller';
-import { PrivateRoutes } from './seller/pages/PrivateRoutes';
 import About from './user/pages/About';
 import Catergory from './user/pages/Category';
 import CategoryList from './user/pages/CategoryList';
@@ -17,11 +16,15 @@ import { client, ClientContext } from './user/context/client-context'
 import { theme, ThemeContext } from './user/context/theme-context'
 import { useEffect } from 'react';
 import { getCurrentClient } from './user/api';
-import {AdminDashboard} from './admin/pages/index'
-import {Login  as AdminLogin} from './admin/pages/Login'
+import { AdminDashboard } from './admin/pages/index'
+import { Login as AdminLogin } from './admin/pages/Login'
 
-import {User} from './user'
+import { User } from './user'
 import { Test } from './test';
+import { PrivateRoutes } from './utils/PrivateRoutes';
+
+import { isLoggedIn } from './user/api';
+import { Navigate } from 'react-router-dom';
 function App() {
 
   const [currentClient, setCurrentClient] = useState(client)
@@ -41,9 +44,11 @@ function App() {
     getClientInfo()
   }
 
-  const updateLanguage = (lang) => {
-    setCurrentTheme({ language: lang })
+  const updateLanguage = (lang, text) => {
+    setCurrentTheme({ language: lang, text: text})
   }
+
+
 
   const getClientInfo = () => {
     getCurrentClient((data) => {
@@ -55,20 +60,28 @@ function App() {
           username: data.username
         })
         console.log("intro", data)
-      }else{
+      } else {
         setCurrentClient(client)
       }
     })
   }
+
+  const [sellerLoggedIn, setSellerLoggedIn] = useState(false)
+  useEffect(() => {
+    isLoggedIn((data) => {
+      setSellerLoggedIn(data.success)
+    })
+  }, [])
+
   return (
-    <ThemeContext.Provider value={{currentTheme, updateLanguage}}>
+    <ThemeContext.Provider value={{ currentTheme, updateLanguage }}>
       <ClientContext.Provider value={{ currentClient, addServiceIdToRatings, updateClient }}>
         <Router>
           <Routes>
             <Route exact path='/*' element={<User />}></Route>
             {/* <Route exact path='/admin' element={<AdminLogin />}></Route> */}
             {/* <Route exact path='/about' element={<PrivateRoutes/>}> */}
-            <Route exact path='/seller/*' element={<Dashboard />}></Route>
+            <Route exact path='/seller/*' element={<PrivateRoutes><Dashboard /></PrivateRoutes>}></Route>
             <Route exact path='/admin/dashboard/*' element={<AdminDashboard />}></Route>
             <Route exact path='/test/*' element={<Test />}></Route>
             {/* </Route> */}

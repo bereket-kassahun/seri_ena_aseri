@@ -27,7 +27,7 @@ export const PremiumServiceCardPreview = ({ data }) => {
         title = data.title.substring(0, 15) + '...'
     }
 
- 
+
 
     useEffect(() => {
         let rating = data.rating ? data.rating : 0
@@ -87,7 +87,7 @@ export const PremiumServiceCardPreview = ({ data }) => {
                                 <span aria-hidden="true">&times;</span>
                             </button> */}
                         </div>
-                        <div class="modal-body" style={{display: "flex", justifyContent: "center"}}>
+                        <div class="modal-body" style={{ display: "flex", justifyContent: "center" }}>
                             <div style={{ paddingRight: "2px", paddingLeft: "2px" }} className="col-6 " onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
                                 <div style={cardStyle.container} class=" card single-service service-two style-03 " >
                                     <a
@@ -106,7 +106,7 @@ export const PremiumServiceCardPreview = ({ data }) => {
                                                 <a >
                                                     <div class="authors">
                                                         <div class="thumb">
-                                                            <img src={data.professionalImage != "" ? data.professionalImage :  "imgs/seller-s21644057790.jpg"} alt="" />
+                                                            <img src={data.professionalImage != "" ? data.professionalImage : "imgs/seller-s21644057790.jpg"} alt="" />
                                                         </div>
                                                         <p class="font-weight-bold" style={{ color: "black" }}>{data.professionalFirstName} {data.professionalLastName}</p>
                                                     </div>
@@ -133,7 +133,19 @@ export const PremiumServiceCardPreview = ({ data }) => {
                                                     </div>
                                                 </div>
                                                 <div style={{ flexGrow: "1" }}>
-                                                    <h6 class="card-title"> {data.price} Birr</h6>
+                                                    {
+                                                        data.paymentType == 3 ?
+                                                            (
+                                                                <h6 class="card-title">
+                                                                    Negotiable Price
+                                                                </h6>
+                                                            ) :
+                                                            (
+                                                                <h6 class="card-title">
+                                                                    {data.paymentType == 2 && "Starting From"} {data.price} Birr{data.paymentType == 1 && "/Hr"}
+                                                                </h6>
+                                                            )
+                                                    }
                                                 </div>
                                             </div>
                                             <div class="btn-wrapper">
