@@ -6,6 +6,7 @@ import { saveRating } from "../../api"
 import { PremiumServiceCard } from "../cards/PremiumServiceCard"
 import { StandardServiceCard } from "../cards/StandardServiceCard"
 import { BasicServiceCard } from "../cards/BasicServiceCard"
+import { PaidCard } from '../cards/PaidCard'
 export const SearchBody = ({ data, cardCount = 6, ratingEnabled = true }) => {
 
     const { currentClient, addServiceIdToRatings, updateClient } = useContext(ClientContext);
@@ -54,9 +55,9 @@ export const SearchBody = ({ data, cardCount = 6, ratingEnabled = true }) => {
                 {
                     data.map((value, index) => {
                         if (value.serviceType == 2)
-                            return <PremiumServiceCard data={value} setRatingId={setRatingId} cardCount={cardCount} ratingEnabled={ratingEnabled} />
+                            return <PaidCard data={value} setRatingId={setRatingId} cardCount={cardCount} ratingEnabled={ratingEnabled} premium={true}/>
                         else if (value.serviceType == 1)
-                            return <StandardServiceCard data={value} setRatingId={setRatingId} cardCount={cardCount} ratingEnabled={ratingEnabled} />
+                            return <PaidCard data={value} setRatingId={setRatingId} cardCount={cardCount} ratingEnabled={ratingEnabled} premium={false}/>
                     })
                 }
             </div>

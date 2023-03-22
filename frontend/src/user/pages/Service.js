@@ -7,6 +7,7 @@ import { professional_services } from "../api/professional_services"
 import { SearchBody } from "../components/search/SearchBody"
 
 import '../../style/dark-paragraph.css'
+import { Chat } from "../components/chat"
 
 const Service = () => {
 
@@ -56,6 +57,9 @@ const Service = () => {
         return (<SearchBody data={ret} cardCount={4}/>)
     }
 
+    useEffect(() => {
+        window.scrollTo(0, 0)
+      }, [])
     return (
         <>
             <ServiceHeader title={currentService.title} />
@@ -238,6 +242,7 @@ const Service = () => {
 
                         </div>
                         <div class="col-lg-4 margin-top-30  order-1 order-lg-2">
+                            <Chat data={currentService.reviews ? currentService.reviews : []}/>
                             <div class="service-details-package">
                                 <div class="single-packages">
                                     <ul class="package-price">

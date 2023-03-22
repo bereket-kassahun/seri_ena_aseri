@@ -20,11 +20,11 @@ import { AdminDashboard } from './admin/pages/index'
 import { Login as AdminLogin } from './admin/pages/Login'
 
 import { User } from './user'
-import { Test } from './test';
 import { PrivateRoutes } from './utils/PrivateRoutes';
 
 import { isLoggedIn } from './user/api';
 import { Navigate } from 'react-router-dom';
+// import { Test2 } from './Test2';
 function App() {
 
   const [currentClient, setCurrentClient] = useState(client)
@@ -83,7 +83,8 @@ function App() {
             {/* <Route exact path='/about' element={<PrivateRoutes/>}> */}
             <Route exact path='/seller/*' element={<PrivateRoutes><Dashboard /></PrivateRoutes>}></Route>
             <Route exact path='/admin/dashboard/*' element={<AdminDashboard />}></Route>
-            <Route exact path='/test/*' element={<Test />}></Route>
+            {/* <Route exact path='/test/*' element={<Test />}></Route> */}
+            {/* <Route exact path='/test/card' element={<Test2 />}></Route> */}
             {/* </Route> */}
           </Routes>
         </Router>

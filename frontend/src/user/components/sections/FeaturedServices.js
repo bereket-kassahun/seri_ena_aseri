@@ -22,7 +22,7 @@ export const FeaturedServices = () => {
     }, [])
     return (
         <>
-            <section id="contact" class="contact" style={{ overflow: "visible" }}>
+            <section id="contact" class="contact" style={{ overflow: "visible" , padding: '0px 0px'}}>
                 <div  data-aos="fade-up">
 
                     <div class="section-title">

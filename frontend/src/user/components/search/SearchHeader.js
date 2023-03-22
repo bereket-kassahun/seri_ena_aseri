@@ -41,7 +41,7 @@ export const SearchHeader = ({ hint, callback }) => {
     return (
 
 
-        <div class="banner-inner-area section-bg-2 padding-top-80 padding-bottom-40" style={{background: " #37517e"}}>
+        <div class="banner-inner-area section-bg-2 padding-top-80 padding-bottom-40" style={{background: " #2f3831"}}>
             <div class="container">
                 <div class="row">
                     <div class="col-lg-6">

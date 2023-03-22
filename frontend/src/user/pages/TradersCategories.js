@@ -209,7 +209,7 @@ export default function TradersCategories() {
     ]
     return (
         <>
-            <div style={{ height: "13vh", background: " #37517e" }}>
+            <div style={{ height: "13vh", background: " #2f3831" }}>
 
             </div>
             <section class="banner-area  margin-top-30 category-area ">

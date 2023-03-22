@@ -21,12 +21,12 @@ export default function SideBar({ children }) {
         <>
             <div id="wrapper">
                 <ul className={"navbar-nav bg-gradient-primary sidebar sidebar-dark accordion " + (toggled ? 'toggled' : '')} id="accordionSidebar">
-                    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+                    <Link class="sidebar-brand d-flex align-items-center justify-content-center" to="/">
                         <div class="sidebar-brand-icon rotate-n-15">
                             <i class="fas fa-laugh-wink"></i>
                         </div>
                         <div class="sidebar-brand-text mx-3"> Admin</div>
-                    </a>
+                    </Link>
 
 
                     <hr class="sidebar-divider my-0" />
@@ -39,7 +39,7 @@ export default function SideBar({ children }) {
                     {/* <li class="nav-item">
                         <Link to='service_approval' className={"nav-link " + (activePage == 2 ? 'active' : '')} onClick={() => { setActivePage(2); setTitle("Pending Services") }}>
                             <a > <i class="las la-gifts"></i><span> Approvals</span></a>
-                        </Link>
+                        </Link>register_professional
                     </li> */}
 
                     <li class="nav-item">
@@ -53,10 +53,25 @@ export default function SideBar({ children }) {
                         </Link>
                     </li>
                     <li class="nav-item">
+                        <Link to='register_professional' className={"nav-link " + (activePage == 5 ? 'active' : '')} onClick={() => { setActivePage(5); setTitle("Register Professional") }}>
+                            <a > <i class="las la-gifts"></i><span>Register Professional</span> </a>
+                        </Link>
+                    </li>
+                    <li class="nav-item">
+                        <Link to='create_service' className={"nav-link " + (activePage == 6 ? 'active' : '')} onClick={() => { setActivePage(6); setTitle("Create Service") }}>
+                            <a > <i class="las la-gifts"></i><span>Create Service</span> </a>
+                        </Link>
+                    </li>
+                    {/* <li class="nav-item">
+                        <Link to='add_service' className={"nav-link " + (activePage == 7 ? 'active' : '')} onClick={() => { setActivePage(7); setTitle("Add Service") }}>
+                            <a > <i class="las la-gifts"></i><span>Add Service</span> </a>
+                        </Link>
+                    </li> */}
+                    <li class="nav-item">
                         <Link to='/' className={"nav-link " + (activePage == 8 ? 'active' : '')} onClick={() => { logout() }}>
                             <a> <i class="fas fa-sign-out-alt"></i><span>Log Out</span>  </a>
                         </Link>
-                    </li>
+                    </li> 
 
                     <hr class="sidebar-divider d-none d-md-block" />
                     <div class="text-center d-none d-md-inline">

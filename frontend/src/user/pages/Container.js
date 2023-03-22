@@ -89,14 +89,14 @@ export default function Container({ children }) {
 
                     {/* <h1 class="logo me-auto"><a href="/">Sira-Alle</a></h1> */}
 
-                    <div className="logo me-auto">
-                        <a href="/" >
-                            <img src='imgs/new_logo_3.png' alt="Logo DevLoad"  />
-                        </a>
+                    <div className="logo-new me-auto">
+                        <Link to="/" >
+                            <img src='imgs/white_logo.png' alt="Logo DevLoad" />
+                        </Link>
                     </div>
 
                     <nav id="navbar" className={"navbar " + (toggleNavigation ? 'navbar-mobile' : '')} >
-                        <ul>
+                        <ul className='custom-ul' style={{ backgroundColor: (toggleNavigation ? '#201e1e' : '') }}>
 
                             {/* {
                                 currentTheme.language == "amharic" ? (
@@ -132,25 +132,43 @@ export default function Container({ children }) {
                                     +2519543476
                                 </button>
                             </a> */}
-                            <li className={"dropdown "}  >
-                                <a href="" onClick={(evnt) => {
-                                    evnt.preventDefault()
-                                    setToggleDropDown(!toggleDropDown)
-                                }}>
-                                    <span>{currentTheme.language == "english" ? "Eng" : "Amh"}</span>
-                                    <i class="bi bi-chevron-down"></i>
+
+
+
+
+
+                            <li>
+                                <Link className="btn-header" to="/howto">
+                                    How To
+                                </Link>
+                            </li>
+                            <li>
+                                <Link className="btn-header" to="/review">
+                                    Leave A Review
+                                </Link>
+                            </li>
+                            <li>
+                                <a href={"tel:+2519543476"} className="btn-header">
+                                    <i class="bi bi-telephone-outbound"></i>
+                                    +2519543476
                                 </a>
-                                <ul className={((toggleDropDown && toggleNavigation) ? 'dropdown-active' : '')} style={{ width: "100px" }}>
-                                    <li onClick={(evnt) => { updateLanguage("english", english_text); setToggleNavigation(false) }}><a style={{ cursor: "pointer" }}>Eng</a></li>
-                                    <li onClick={(evnt) => { updateLanguage("amharic", amhairc_text); setToggleNavigation(false) }}><a style={{ cursor: "pointer" }}>Amh</a></li>
-                                </ul>
+                            </li>
+                            <li>
+                                <Link className="btn-header" to="/login">
+                                    Sign In
+                                </Link>
+                            </li>
+                            <li>
+                                <Link className="btn-blog" to="/register">
+                                    Join Us
+                                </Link>
                             </li>
 
                             {
                                 isSellerLoggedIn &&
                                 (
                                     <li onClick={(evnt) => { setToggleNavigation(false) }}>
-                                        <Link to="/seller" class="getstarted scrollto" >
+                                        <Link to="/seller" class="btn-blog" >
                                             Dashboard
                                         </Link>
                                     </li>
@@ -161,33 +179,28 @@ export default function Container({ children }) {
                                 isClientLoggedInNow &&
                                 (
                                     <li onClick={(evnt) => { logout(); setToggleNavigation(false) }}>
-                                        <a class="getstarted scrollto" href="#about">
+                                        {/* <a class="getstarted scrollto" href="#about">
                                             Logout
-                                        </a>
+                                        </a> */}
+                                        <Link className="btn-blog" to="#">
+                                            Logout
+                                        </Link>
                                     </li>
                                 )
                             }
 
-
-                            <li>
-                                <Link className="btn-header" to="/">
-                                    Home
-                                </Link>
-                            </li>
-                            <li>
-                                <Link className="btn-header" to="/course">
-                                    Cursos
-                                </Link>
-                            </li>
-                            <li>
-                                <Link className="btn-header" to="/contact">
-                                    Contato
-                                </Link>
-                            </li>
-                            <li>
-                                <Link className="btn-blog" to="/blog">
-                                    Blog
-                                </Link>
+                            <li className={"dropdown "}  >
+                                <a href="" onClick={(evnt) => {
+                                    evnt.preventDefault()
+                                    setToggleDropDown(!toggleDropDown)
+                                }}>
+                                    <span style={{ color: "white" }}>{currentTheme.language == "english" ? "Eng" : "Amh"}</span>
+                                    <i class="bi bi-chevron-down" style={{ color: "white" }}></i>
+                                </a>
+                                <ul className={((toggleDropDown && toggleNavigation) ? 'dropdown-active' : '')} style={{ width: "100px" }}>
+                                    <li onClick={(evnt) => { updateLanguage("english", english_text); setToggleNavigation(false) }}><a style={{ cursor: "pointer" }}>Eng</a></li>
+                                    <li onClick={(evnt) => { updateLanguage("amharic", amhairc_text); setToggleNavigation(false) }}><a style={{ cursor: "pointer" }}>Amh</a></li>
+                                </ul>
                             </li>
                         </ul>
                         <i className={"bi bi-list mobile-nav-toggle " + (toggleNavigation ? 'bi-list bi-x' : '')} onClick={(evnt) => {
@@ -207,12 +220,16 @@ export default function Container({ children }) {
             <footer id="footer">
 
 
-                <div class="footer-top">
+                <div class="footer-top" style={{padding: '0px'}}>
                     <div class="container">
                         <div class="row">
 
                             <div class="col-lg-3 col-md-6 footer-contact">
-                                <h3>Sira-Alle</h3>
+                                <img style={{
+                                    marginLeft: '-40px',
+                                    marginTop: '-30px'
+                                }} src='imgs/blue_logo.png' alt="Logo DevLoad" />
+                                {/* <h3>Sirralle</h3> */}
                                 <p>
                                     A108 Djibouti Street <br />
                                     Addis Ababa, AA 535022<br />
@@ -226,7 +243,7 @@ export default function Container({ children }) {
                                 <h4>Useful Links</h4>
                                 <ul>
                                     <li><i class="bx bx-chevron-right"></i> <Link to="/">Home</Link></li>
-                                    <li><i class="bx bx-chevron-right"></i> <Link to="/about/#">About Us</Link></li>
+                                    <li><i class="bx bx-chevron-right"></i> <Link to="/about">About Us</Link></li>
                                     <li><i class="bx bx-chevron-right"></i> <Link to="/category_list">Categories</Link> </li>
                                     <li><i class="bx bx-chevron-right"></i> <Link to="/contact_us">Contact Us</Link> </li>
                                     {/* <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li> */}
@@ -264,10 +281,10 @@ export default function Container({ children }) {
 
                 <div class="container footer-bottom clearfix">
                     <div class="copyright">
-                        &copy; Copyright <strong><span>Sira-Alle {new Date().getFullYear()}</span></strong>. All Rights Reserved
+                       &copy; Copyright <strong><span>SERRALE {new Date().getFullYear()}</span></strong>. All Rights Reserved
                     </div>
                     <div class="credits">
-                        Designed by <a href="/">Sira-Alle Team</a>
+                        Designed by <a href="/">SERRALE Team</a>  <img style={{height: '60px', width: '60px'}} src='imgs/white_logo.png' alt="Logo DevLoad" /> 
                     </div>
                 </div>
             </footer>

@@ -5,19 +5,20 @@
     text-decoration: none;
 }
 
-.logo {
-    width: 140px;
+.logo-new {
+    width: 90px;
+    height: 90px;
     padding: 5px 10px;
 }
 
 
-ul {
+.custom-ul {
     margin: 0;
     padding: 0;
     display: flex;
 }
 
-ul li {
+.custom-ul li {
     display: flex;
     align-items: center;
     height: 30px;
@@ -25,36 +26,41 @@ ul li {
     margin: 0;
 }
 
-ul li .btn-header {
+.custom-ul li .btn-header {
     text-decoration: none;
     cursor: pointer;
-    font-weight: 500;
-    color: var(--gray-dark);
+    font-weight: 900;
+    color: #fff;
     padding: 5px 0;
     transition: 0.5s;
-    font-size: 0.9em;
+    font-size: 1em;
     transition: 0.1s ease-in;
     border-bottom: none;
+    
 }
 
-ul li .btn-header:hover {
-    border-bottom: 2px solid var(--toastify-color-dark);
+.custom-ul li .btn-header:hover {
+    border-bottom: 2px solid #fff;
 }
 
-ul li .btn-blog {
-    background: -webkit-linear-gradient(#1cffb3, #5996f0);
-    color: var(--toastify-color-dark);
-    border-radius: 0.4rem;
+.custom-ul li .btn-blog {
+    background: transparent;
+    color: #fff;
+    /* border-radius: 0.4rem; */
     padding: 0.5rem 1rem;
     transition: 0.5s;
     font-size: 0.9em;
     font-weight: 500;
     cursor: pointer;
     transition: 0.3s ease-in;
+    border-color: black;
+    border-width: 2px;
+    border-style: solid;
+  border-width: thin;
 }
 
-ul li .btn-blog:hover {
-    background: transparent;
+.custom-ul li .btn-blog:hover {
+    background: #34a500;
 }
 
 .spacer {

@@ -81,19 +81,19 @@ export default function Contact() {
     })
 
 
+    useEffect(() => {
+        window.scrollTo(0, 0)
+      }, [])
     const customerLogo = useRef(null);
 
     return (
         <>
-            <div style={{ height: "13vh", background: " #37517e" }}>
+
+            
+            <div style={{ height: "13vh", background: " #2f3831" }}>
 
             </div>
-            {/* <div class="text-center">
-                <div class="error mx-auto" data-text="404">404</div>
-                <p class="lead text-gray-800 mb-5">Page Not Found</p>
-                <p class="text-gray-500 mb-0">It looks like you found a glitch in the matrix...</p>
-                <a href="">&larr; Back to Home</a>
-            </div> */}
+          
 
             <div class="bg-info contact4 overflow-hiddedn position-relative" >
                 <div class="row no-gutters">
@@ -132,119 +132,8 @@ export default function Contact() {
                             width="100%" height="522" frameborder="0" style={{ border: "0" }} allowfullscreen data-aos="fade-left" data-aos-duration="3000"></iframe>
                     </div>
 
-                    {/* <div class="mapouter"><div class="gmap_canvas"><iframe width="600" height="451" id="gmap_canvas" src="https://maps.google.com/maps?q=Ghana%20St,%20Addis%20Ababa&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://123movies-to.org">123movies</a><br><style>.mapouter{position:relative;text-align:right;height:451px;width:600px;}</style><a href="https://www.embedgooglemap.net">google maps create map</a><style>.gmap_canvas {overflow:hidden;background:none!important;height:451px;width:600px;}
-                    </style></div></div> */}
                 </div>
             </div>
-
-
-            <Carousel />
-
-
-            <section id="carousel" class="d-none d-md-block">
-                <div class="slider">
-                    <div class="d-flex slide-track" style={{width: '1680px'}}>
-                        <div class="d-flex flex-row image-carousel">
-                            <span data-caid="74" class="carousel-link cursor-pointer">
-                                <div class="d-flex carousel-slide-item">
-                                    <div class="image-wrapper align-self-end d-flex is-remotable use-data-attr" data-remotable="Available online">
-                                        <img class="mw-100 img-fluid loaded" alt="Personal Trainers" width="400" height="260" title="Personal Trainers" src="https://d18jakcjgoan9.cloudfront.net/s/img/home/personal-training.jpg!d=v1NTZ1" srcset="https://d18jakcjgoan9.cloudfront.net/s/img/home/personal-training.jpg!d=v1NTZ1 1x, https://d18jakcjgoan9.cloudfront.net/s/img/home/personal-training.jpg!d=D7Luyd 2x" data-was-processed="true"/>
-                                            <p class="text-white overflow-category-name mb-0">Personal Trainers</p>
-                                    </div>
-                                </div>
-                            </span>
-                            <span data-caid="1212" class="carousel-link cursor-pointer">
-                                <div class="d-flex carousel-slide-item">
-                                    <div class="image-wrapper  d-flex " data-remotable="Available online">
-                                        <img class="mw-100 img-fluid loaded" alt="House Cleaning" width="400" height="260" title="House Cleaning" src="https://d18jakcjgoan9.cloudfront.net/s/img/home/house-cleaning.jpg!d=v1NTZ1" srcset="https://d18jakcjgoan9.cloudfront.net/s/img/home/house-cleaning.jpg!d=v1NTZ1 1x, https://d18jakcjgoan9.cloudfront.net/s/img/home/house-cleaning.jpg!d=D7Luyd 2x" data-was-processed="true"/>
-                                            <p class="text-white overflow-category-name mb-0">House Cleaning</p>
-                                    </div>
-                                </div>
-                            </span>
-                            <span data-caid="1505" class="carousel-link cursor-pointer">
-                                <div class="d-flex carousel-slide-item">
-                                    <div class="image-wrapper align-self-end d-flex " data-remotable="Available online">
-                                        <img class="mw-100 img-fluid loaded" alt="Web Design" width="400" height="260" title="Web Design" src="https://d18jakcjgoan9.cloudfront.net/s/img/home/web-design.jpg!d=v1NTZ1" srcset="https://d18jakcjgoan9.cloudfront.net/s/img/home/web-design.jpg!d=v1NTZ1 1x, https://d18jakcjgoan9.cloudfront.net/s/img/home/web-design.jpg!d=D7Luyd 2x" data-was-processed="true"/>
-                                            <p class="text-white overflow-category-name mb-0">Web Design</p>
-                                    </div>
-                                </div>
-                            </span>
-                            <span data-caid="179" class="carousel-link cursor-pointer">
-                                <div class="d-flex carousel-slide-item">
-                                    <div class="image-wrapper  d-flex " data-remotable="Available online">
-                                        <img class="mw-100 img-fluid loaded" alt="Gardening" width="400" height="260" title="Gardening" src="https://d18jakcjgoan9.cloudfront.net/s/img/home/gardening.jpg!d=v1NTZ1" srcset="https://d18jakcjgoan9.cloudfront.net/s/img/home/gardening.jpg!d=v1NTZ1 1x, https://d18jakcjgoan9.cloudfront.net/s/img/home/gardening.jpg!d=D7Luyd 2x" data-was-processed="true"/>
-                                            <p class="text-white overflow-category-name mb-0">Gardening</p>
-                                    </div>
-                                </div>
-                            </span>
-                            <span data-caid="89" class="carousel-link cursor-pointer">
-                                <div class="d-flex carousel-slide-item">
-                                    <div class="image-wrapper align-self-end d-flex is-remotable use-data-attr" data-remotable="Available online">
-                                        <img class="mw-100 img-fluid loading" alt="Accounting" width="400" height="260" title="Accounting" src="https://d18jakcjgoan9.cloudfront.net/s/img/home/accounting.jpg!d=v1NTZ1" srcset="https://d18jakcjgoan9.cloudfront.net/s/img/home/accounting.jpg!d=v1NTZ1 1x, https://d18jakcjgoan9.cloudfront.net/s/img/home/accounting.jpg!d=D7Luyd 2x" data-was-processed="true"/>
-                                            <p class="text-white overflow-category-name mb-0">Accounting</p>
-                                    </div>
-                                </div>
-                            </span>
-                            <span data-caid="1539" class="carousel-link cursor-pointer">
-                                <div class="d-flex carousel-slide-item">
-                                    <div class="image-wrapper  d-flex is-remotable use-data-attr" data-remotable="Available online">
-                                        <img class="mw-100 img-fluid loading" alt="Counselling" width="400" height="260" title="Counselling" src="https://d18jakcjgoan9.cloudfront.net/s/img/home/counselling.jpg!d=v1NTZ1" srcset="https://d18jakcjgoan9.cloudfront.net/s/img/home/counselling.jpg!d=v1NTZ1 1x, https://d18jakcjgoan9.cloudfront.net/s/img/home/counselling.jpg!d=D7Luyd 2x" data-was-processed="true"/>
-                                            <p class="text-white overflow-category-name mb-0">Counselling</p>
-                                    </div>
-                                </div>
-                            </span>
-                            <span data-caid="74" class="carousel-link cursor-pointer">
-                                <div class="d-flex carousel-slide-item">
-                                    <div class="image-wrapper align-self-end d-flex is-remotable use-data-attr" data-remotable="Available online">
-                                        <img class="mw-100 img-fluid loading" alt="Personal Trainers" width="400" height="260" title="Personal Trainers" src="https://d18jakcjgoan9.cloudfront.net/s/img/home/personal-training.jpg!d=v1NTZ1" srcset="https://d18jakcjgoan9.cloudfront.net/s/img/home/personal-training.jpg!d=v1NTZ1 1x, https://d18jakcjgoan9.cloudfront.net/s/img/home/personal-training.jpg!d=D7Luyd 2x" data-was-processed="true"/>
-                                            <p class="text-white overflow-category-name mb-0">Personal Trainers</p>
-                                    </div>
-                                </div>
-                            </span>
-                            <span data-caid="1212" class="carousel-link cursor-pointer">
-                                <div class="d-flex carousel-slide-item">
-                                    <div class="image-wrapper  d-flex " data-remotable="Available online">
-                                        <img class="mw-100 img-fluid loading" alt="House Cleaning" width="400" height="260" title="House Cleaning" src="https://d18jakcjgoan9.cloudfront.net/s/img/home/house-cleaning.jpg!d=v1NTZ1" srcset="https://d18jakcjgoan9.cloudfront.net/s/img/home/house-cleaning.jpg!d=v1NTZ1 1x, https://d18jakcjgoan9.cloudfront.net/s/img/home/house-cleaning.jpg!d=D7Luyd 2x" data-was-processed="true"/>
-                                            <p class="text-white overflow-category-name mb-0">House Cleaning</p>
-                                    </div>
-                                </div>
-                            </span>
-                            <span data-caid="1505" class="carousel-link cursor-pointer">
-                                <div class="d-flex carousel-slide-item">
-                                    <div class="image-wrapper align-self-end d-flex " data-remotable="Available online">
-                                        <img class="mw-100 img-fluid loading" alt="Web Design" width="400" height="260" title="Web Design" src="https://d18jakcjgoan9.cloudfront.net/s/img/home/web-design.jpg!d=v1NTZ1" srcset="https://d18jakcjgoan9.cloudfront.net/s/img/home/web-design.jpg!d=v1NTZ1 1x, https://d18jakcjgoan9.cloudfront.net/s/img/home/web-design.jpg!d=D7Luyd 2x" data-was-processed="true"/>
-                                            <p class="text-white overflow-category-name mb-0">Web Design</p>
-                                    </div>
-                                </div>
-                            </span>
-                            <span data-caid="179" class="carousel-link cursor-pointer">
-                                <div class="d-flex carousel-slide-item">
-                                    <div class="image-wrapper  d-flex " data-remotable="Available online">
-                                        <img class="mw-100 img-fluid loading" alt="Gardening" width="400" height="260" title="Gardening" src="https://d18jakcjgoan9.cloudfront.net/s/img/home/gardening.jpg!d=v1NTZ1" srcset="https://d18jakcjgoan9.cloudfront.net/s/img/home/gardening.jpg!d=v1NTZ1 1x, https://d18jakcjgoan9.cloudfront.net/s/img/home/gardening.jpg!d=D7Luyd 2x" data-was-processed="true"/>
-                                            <p class="text-white overflow-category-name mb-0">Gardening</p>
-                                    </div>
-                                </div>
-                            </span>
-                            <span data-caid="89" class="carousel-link cursor-pointer">
-                                <div class="d-flex carousel-slide-item">
-                                    <div class="image-wrapper align-self-end d-flex is-remotable use-data-attr" data-remotable="Available online">
-                                        <img class="mw-100 img-fluid" alt="Accounting" width="400" height="260" title="Accounting" src="https://d18jakcjgoan9.cloudfront.net/s/img/home/accounting.jpg!d=v1NTZ1" srcset="https://d18jakcjgoan9.cloudfront.net/s/img/home/accounting.jpg!d=v1NTZ1 1x, https://d18jakcjgoan9.cloudfront.net/s/img/home/accounting.jpg!d=D7Luyd 2x"/>
-                                            <p class="text-white overflow-category-name mb-0">Accounting</p>
-                                    </div>
-                                </div>
-                            </span>
-                            <span data-caid="1539" class="carousel-link cursor-pointer">
-                                <div class="d-flex carousel-slide-item">
-                                    <div class="image-wrapper  d-flex is-remotable use-data-attr" data-remotable="Available online">
-                                        <img class="mw-100 img-fluid" alt="Counselling" width="400" height="260" title="Counselling" src="https://d18jakcjgoan9.cloudfront.net/s/img/home/counselling.jpg!d=v1NTZ1" srcset="https://d18jakcjgoan9.cloudfront.net/s/img/home/counselling.jpg!d=v1NTZ1 1x, https://d18jakcjgoan9.cloudfront.net/s/img/home/counselling.jpg!d=D7Luyd 2x"/>
-                                            <p class="text-white overflow-category-name mb-0">Counselling</p>
-                                    </div>
-                                </div>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </section>
 
         </>
 

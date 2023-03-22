@@ -1,10 +1,19 @@
 import { Footer } from "../components/footer/Footer"
 import { Header } from "../components/header"
+import { useEffect } from "react"
+import { useContext } from "react"
+import { ClientContext } from "../context/client-context"
+import { ThemeContext, english_text, amhairc_text } from "../context/theme-context"
 
 const About = () => {
+    const { currentTheme, updateLanguage } = useContext(ThemeContext);
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
     return (
         <>
-            <div style={{ height: "13vh", background: " #37517e" }}>
+            
+            <div style={{ height: "13vh", background: " #2f3831" }}>
 
             </div>
 
@@ -17,7 +26,7 @@ const About = () => {
                                     {/* <img src="imgs/sd1643688644.jpg" alt="" /> */}
                                 </div>
                                 <div class="about-thumb">
-                                    <img src="imgs/sd1643688644.jpg" alt="" />
+                                    <img src="imgs/charity.jpg" alt="" />
                                     <div class="about-experience">
                                         <h2 class="years-tiitle">8 Years </h2>
                                         <h4 class="experience-tiitle"> Experience </h4>
@@ -27,20 +36,15 @@ const About = () => {
                         </div>
                         <div class="col-lg-6 margin-top-30">
                             <div class="single-about">
-                                <h2 class="about-title">Know About Us</h2>
+                                <h2 class="about-title">{currentTheme.text.about.text1}</h2>
                                 <div class="about-contents">
-                                    <p class="about-para">Welcome to SERA, a platform connecting professionals and qualified individuals
-                                        with local and international users. We pride ourselves on providing a secure and user-friendly
-                                        experience for both clients and professionals.</p>
+                                    <p class="about-para">{currentTheme.text.about.text2}</p>
 
                                     <div class="overview-single style-03">
                                         <ul class="overview-benefits margin-top-30">
-                                            <li class="list"> Our team of experts work tirelessly to ensure that our platform is always up to date and running smoothly. </li>
-                                            <li class="list"> We carefully vet all of our professionals to ensure that they have the qualifications and experience needed to provide top-quality service. </li>
-                                            <li class="list"> Our goal is to make it easy for clients to find the professional they need, and for professionals to find the clients and projects they want.</li>
-                                            <li class="list"> Our platform is accessible from anywhere, and it is mobile-friendly, making it easy for users to access it from any device </li>
-
-
+                                            <li class="list"> {currentTheme.text.about.text3}</li>
+                                            <li class="list"> {currentTheme.text.about.text4}</li>
+                                            <li class="list"> {currentTheme.text.about.text5}</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -55,9 +59,9 @@ const About = () => {
                     <div class="row justify-content-center">
                         <div class="col-xl-9 col-lg-10 col-md-12">
                             <div class="section-title">
-                                <h2 class="title"> Why Our <span >Marketplace? </span> </h2>
+                                <h2 class="title">{currentTheme.text.about.text6}</h2>
                                 <span class="section-para">
-                                    We are dedicated to providing a seamless experience for our users to find the right professional for their needs, and for professionals to showcase their skills and services. We understand that connecting with the right professional can be a daunting task, which is why we've made it our mission to make the process as simple and straightforward as possible, and experience the power of connecting with the right professional for your project.
+                                    {currentTheme.text.about.text7}
                                 </span>
                             </div>
                         </div>
@@ -70,9 +74,9 @@ const About = () => {
                                     <i class="las la-tools"></i>
                                 </div>
                                 <div class="marketplace-contents">
-                                    <h5 class="common-title">Service Commitment </h5>
+                                    <h5 class="common-title">{currentTheme.text.about.text8}</h5>
                                     <p class="common-para">
-                                        Our dedicated customer service team is always available to assist you in finding the right professional for the service you require and ensuring a smooth experience. We also take great pride in the quality of our professionals and strive to maintain a high standard of excellence 0ur platform. Join us today and experience the power of connecting with the right professionals.
+                                        {currentTheme.text.about.text9}
                                     </p>
                                 </div>
                             </div>
@@ -97,10 +101,9 @@ const About = () => {
                                     <i class="las la-shield-alt"></i>
                                 </div>
                                 <div class="marketplace-contents">
-                                    <h5 class="common-title">User Data Secure </h5>
+                                    <h5 class="common-title">{currentTheme.text.about.text10} </h5>
                                     <p class="common-para">
-                                        We understand the importance of protecting our users' data. That's why we have implemented strict security measures to ensure that all information shared on our platform is kept safe and secure. Our platform is built on a secure infrastructure and uses industry-standard encryption to protect all data transmitted and stored on our servers.
-                                        We comply with all applicable laws and regulations regarding the collection, use, and storage of personal data
+                                    {currentTheme.text.about.text11}
                                     </p>
                                 </div>
                             </div>
@@ -112,9 +115,8 @@ const About = () => {
                                     <i class="las la-stopwatch"></i>
                                 </div>
                                 <div class="marketplace-contents">
-                                    <h5 class="common-title">Fast Service </h5>
-                                    <p class="common-para">We strive to provide our users with the fastest and most efficient service possible. Our customer service team is dedicated to always ensure that all your enquiries are answered whether you are a professional or looking for a professional with fast responses ensuring a smooth experience for all users on the platform.
-                                    </p>
+                                    <h5 class="common-title">{currentTheme.text.about.text12} </h5>
+                                    <p class="common-para">{currentTheme.text.about.text13}</p>
                                 </div>
                             </div>
                         </div>
@@ -125,10 +127,8 @@ const About = () => {
                                     <i class="las la-file-invoice-dollar"></i>
                                 </div>
                                 <div class="marketplace-contents">
-                                    <h5 class="common-title">Secure Payment </h5>
-                                    <p class="common-para">
-                                    We strive to instil confidence in users on the platform with our secure and reliable payment methods, at SIRA ALLE your privacy is in safe hands.
-                                    </p>
+                                    <h5 class="common-title">{currentTheme.text.about.text14} </h5>
+                                    <p class="common-para">{currentTheme.text.about.text15}</p>
                                 </div>
                             </div>
                         </div>
@@ -139,8 +139,8 @@ const About = () => {
                                     <i class="las la-headset"></i>
                                 </div>
                                 <div class="marketplace-contents">
-                                    <h5 class="common-title">Dedicated Support </h5>
-                                    <p class="common-para">Our customer service team is available to assist with any questions or concerns. We value your feedback and are constantly working to improve our platform.</p>
+                                    <h5 class="common-title">{currentTheme.text.about.text16} </h5>
+                                    <p class="common-para">{currentTheme.text.about.text17}</p>
                                 </div>
                             </div>
                         </div>

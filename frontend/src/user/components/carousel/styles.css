@@ -24,7 +24,10 @@
     position: relative;
     width: 100%;
 }
-
+.root-container {
+    padding-left: 1%;
+    padding-right: 1%;
+}
 /* .slider::before,
 .slider::after {
     background: linear-gradient(to right, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);

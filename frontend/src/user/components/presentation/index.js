@@ -40,17 +40,17 @@ const Presentation = () => {
 
   return (
     <>
-      <div style={{ height: "13vh" }}>
+      {/* <div style={{ height: "13vh" }}>
 
-      </div>
+      </div> */}
 
 
-      <div id="presentation">
+      <div id="presentation" style={{backgroundColor: '#2f3831'}}>
 
-        <section className="presentation-container">
-          <h1 className="typing-animation">Sira Alle!</h1>
-          <h2>{currentTheme.text.home.text1}</h2>
-          <p>{currentTheme.text.home.text2}</p>
+        <section className="presentation-container left-container col-lg-6 col-sm-12 col-12" style={{paddingBottom: '150px'}}>
+          <h1 className="typing-animation bg-3">Serrale!</h1>
+          <h2 className="d-none d-md-none d-sm-none d-lg-block " >{currentTheme.text.home.text1}</h2>
+          <p style={{color: '#fff'}}>{currentTheme.text.home.text2}</p>
           {/* <div className="presentation-button">
             <Link to="/course">Iniciar!</Link>
           </div> */}
@@ -60,11 +60,12 @@ const Presentation = () => {
               onFocus={(evnt) => { setInFocus(true); setDropdownInFocus(true) }}
               onBlur={(evnt) => { setInFocus(false) }}
             />
-            <span class="input-group-text border-0" style={{ cursor: "pointer" }} id="search-addon">
+            {/* <span class="input-group-text border-0" style={{ cursor: "pointer" }} id="search-addon"> */}
               <Link to="/search" state={searchWord} >
-                <i class="fas fa-search" ></i>
+                {/* <i class="fas fa-search" ></i> */}
+                <button className="search-button" style={{height: '100%', borderTopRightRadius: '4px', borderBottomRightRadius: '4px', paddingLeft: '10px', paddingRight: '10px'}}>Search</button>
               </Link>
-            </span>
+            {/* </span> */}
 
           </div>
           <div class="dropdown">
@@ -83,7 +84,7 @@ const Presentation = () => {
             </ul>
           </div>
         </section>
-        <section>
+        <section className="col-lg-6 col-sm-12 col-12 d-none d-md-none d-sm-none d-lg-block">
           <img src='imgs/worker.png' alt="PresentationImage" />
         </section>
       </div>

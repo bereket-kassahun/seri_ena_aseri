@@ -11,16 +11,24 @@ import { FeaturedServices } from '../components/sections/FeaturedServices';
 import SearchBar from '../components/banner/SearchBar';
 import Presentation from '../components/presentation';
 import { Carousel } from '../components/carousel';
+import { useEffect } from 'react';
+import { WorkWithUs } from '../components/sections/WorkWithUs';
+import { Marketing } from '../components/sections/Marketing';
 export const Home = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
   return (
     <div className="">
       {/* <SearchBar /> */}
       <Presentation/>
+      <JoinUs />
       <Carousel/>
       <FeaturedServices />
-      <ProfessionalServices />
+      {/* <ProfessionalServices /> */}
       {/* <TradersServices /> */}
-      <JoinUs />
+      <WorkWithUs/>
+      <Marketing/>
     </div>
   );
 }

@@ -1,13 +1,16 @@
 import { Link } from "react-router-dom"
 import { Footer } from "../components/footer/Footer"
 import { Header } from "../components/header"
-import { useState, useContext } from "react"
+import { useState, useContext , useEffect } from "react"
 import { sellerLogin } from "../api/sellerLogin"
 import { useNavigate } from "react-router-dom";
 import { loginClient } from "../api"
 import { ClientContext } from "../context/client-context"
 export const Login = () => {
 
+    useEffect(() => {
+        window.scrollTo(0, 0)
+      }, [])
 
     const { currentClient, addServiceIdToRatings, updateClient } = useContext(ClientContext);
     const navigate = useNavigate();
@@ -75,30 +78,29 @@ export const Login = () => {
     }
     return (
         <>
-            <div style={{ height: "13vh", background: " #37517e" }}>
+            <div style={{ height: "13vh", background: " #2f3831" }}>
 
             </div>
-            <div class="banner-area  signup-area margin-top-50 margin-bottom-100">
+            <div class="banner-area  margin-bottom-100">
                 <div class="container">
-                    <div class="signup-wrapper">
+                    <div class="signup-wrapper" style={{padding: '20px 100px',}}>
                         <div class="signup-contents">
 
                             <h3 class="signup-title"> Sign In</h3>
 
                             <div class="registration-seller-btn">
-                                <ul class="registration-tabs tabs">
-                                    <li data-tab="tab_one" className={"is_user_seller " + (isClient ? 'active' : '')} onClick={() => { setIsClient(true) }}>
-
+                                <ul class="registration-tabs tabs" style={{gap: '10px'}}>
+                                    <li data-tab="tab_one" style={{padding: '3px 10px'}} className={"is_user_seller " + (isClient ? 'active' : '')} onClick={() => { setIsClient(true) }}>
                                         <div class="single-tabs-registration">
                                             <div class="icon">
                                                 <i class="las la-user-alt"></i>
                                             </div>
                                             <div class="contents">
-                                                <h4 class="title" id="buyer"> User </h4>
+                                                <h4 class="title" id="buyer"> Customer </h4>
                                             </div>
                                         </div>
                                     </li>
-                                    <li data-tab="tab_two" className={"is_user_seller " + (!isClient ? 'active' : '')} onClick={() => { setIsClient(false) }}>
+                                    <li data-tab="tab_two" style={{padding: '3px 10px'}} className={"is_user_seller " + (!isClient ? 'active' : '')} onClick={() => { setIsClient(false) }}>
                                         <div class="single-tabs-registration">
                                             <div class="icon">
                                                 <i class="las la-briefcase"></i>
@@ -123,15 +125,15 @@ export const Login = () => {
 
                             <form class="signup-forms" >
                                 <input type="hidden" name="_token" value="HrrZZYoJgavx2tJ8qSIGw7IY3KfEotYF0mWRrgJo" />
-                                <div class="single-signup margin-top-30">
+                                <div class="single-signup margin-top-10">
                                     <label class="signup-label"> Username or Email * </label>
                                     <input class="form--control" type="text" name="username" id="username" placeholder="Username or Email" onChange={(evnt) => { setEmail(evnt.target.value) }} />
                                 </div>
-                                <div class="single-signup margin-top-30">
+                                <div class="single-signup margin-top-10">
                                     <label class="signup-label"> Password* </label>
                                     <input class="form--control" type="password" name="password" id="password" placeholder="Password" onChange={(evnt) => { setPassword(evnt.target.value) }} />
                                 </div>
-                                <div class="signup-checkbox">
+                                {/* <div class="signup-checkbox"> */}
                                     {/* <div class="checkbox-inlines">
                                         <input class="check-input" name="remember" id="remember" type="checkbox" />
                                         <label class="checkbox-label" for="remember"> Remember me</label>
@@ -139,7 +141,7 @@ export const Login = () => {
                                     {/* <div class="forgot-btn">
                                             <a href="user/forget-password.html" class="forgot-pass"> Forgot Password</a>
                                         </div> */}
-                                </div>
+                                {/* </div> */}
                                 <button id="signin_form" type="button" onClick={() => {
                                     if (validateData()) {
                                         login()

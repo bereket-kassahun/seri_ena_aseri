@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect  } from "react"
 import { Footer } from "../components/footer/Footer"
 import { Header } from "../components/header"
 import { sendEmail } from "../api/send_email"
@@ -131,30 +131,33 @@ const Register = () => {
     const toggleButton = (isClient) => {
         setIsClient(isClient)
     }
+    useEffect(() => {
+      window.scrollTo(0, 0)
+    }, [])
     return (
         <>
-            <div style={{ height: "13vh", background: " #37517e" }}>
+            <div style={{ height: "13vh", background: " #2f3831" }}>
 
             </div>
 
-            <section class="banner-area home-three-banner  padding-top-100 padding-bottom-100" style={{padding: "30px 0px 120px 0px"}}>
+            <section class="banner-area home-three-banner padding-bottom-100" style={{ padding: "30px 0px 120px 0px" }}>
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="registration-seller-btn">
-                                <ul class="registration-tabs tabs">
-                                    <li data-tab="tab_one" className={"is_user_seller " + (isClient ? 'active' : '')} onClick={() => { setIsClient(true) }}>
+                                <ul class="registration-tabs tabs" style={{gap: '10px'}}>
+                                    <li  style={{padding: '3px 10px'}} data-tab="tab_one" className={"is_user_seller " + (isClient ? 'active' : '')} onClick={() => { setIsClient(true) }}>
 
-                                        <div class="single-tabs-registration">
+                                        <div class="single-tabs-registration" >
                                             <div class="icon">
                                                 <i class="las la-user-alt"></i>
                                             </div>
                                             <div class="contents">
-                                                <h4 class="title" id="buyer"> User </h4>
+                                                <h4 class="title" id="buyer"> Customer </h4>
                                             </div>
                                         </div>
                                     </li>
-                                    <li data-tab="tab_two" className={"is_user_seller " + (!isClient ? 'active' : '')} onClick={() => { setIsClient(false) }}>
+                                    <li  style={{padding: '3px 10px'}} data-tab="tab_two" className={"is_user_seller " + (!isClient ? 'active' : '')} onClick={() => { setIsClient(false) }}>
                                         <div class="single-tabs-registration">
                                             <div class="icon">
                                                 <i class="las la-briefcase"></i>
@@ -169,7 +172,7 @@ const Register = () => {
                             <div class={"tabs"}>
                                 <div className={"tab-content " + (isClient ? 'active' : '')} id="tab_one">
                                     <form id="msform-one" class="msform user-register-form" >
-                                        <div class="registration-step-form margin-top-55 ">
+                                        <div class="registration-step-form margin-top-10 ">
                                             <div className={"fieldset-info user-information another-tab-content "}  >
 
                                                 {

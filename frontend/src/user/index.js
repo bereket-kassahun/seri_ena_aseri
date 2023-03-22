@@ -14,6 +14,10 @@ import {Login  as AdminLogin} from '../admin/pages/Login'
 import ProfessionalCategories from "./pages/ProfessionalCategories"
 import TradersCategories from "./pages/TradersCategories"
 import { PrivacyPolicy } from "./pages/PrivacyPolicy"
+import { HowTo } from "./pages/HowTo"
+import { LeaveReview } from "./pages/LeaveReview"
+import { NotFoundPage } from "../utils/404"
+// import { Test } from "../Test2"
 export const User = () => {
     return (
         <>
@@ -32,6 +36,9 @@ export const User = () => {
                     <Route exact path='register' element={<Register />}></Route>
                     <Route exact path='admin' element={<AdminLogin />}></Route>
                     <Route exact path='privacy' element={<PrivacyPolicy />}></Route>
+                    <Route exact path='howto' element={<HowTo />}></Route>
+                    <Route exact path='review' element={<LeaveReview />}></Route>
+                    <Route exact path='*' element={<NotFoundPage />}></Route>
                 </Routes>
             </Container>
         </>

@@ -204,94 +204,97 @@ export const AddAndEditService = ({ editing = false }) => {
                             <div class="col-lg-12 margin-top-10">
                                 <section class="content" style={{ width: "100%", paddingTop: "30px" }}>
                                     <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="card card-primary">
-                                                <div class="card-header">
-                                                    <h3 class="card-title"><b> Basic Info </b></h3>
-                                                </div>
-                                                <div class="card-body">
-                                                    <div class="form-group input-group">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text"> <b> Title </b> </span>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="card card-primary">
+                                                    <div class="card-header">
+                                                        <h3 class="card-title"><b> Basic Info </b></h3>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <div class="form-group input-group">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text"> <b> Title </b> </span>
+                                                            </div>
+                                                            <input class="form-control" name="title" id="title" type="text" placeholder="Add title" onChange={(evnt) => { setTitle(evnt.target.value) }} />
                                                         </div>
-                                                        <input class="form-control" name="title" id="title" type="text" placeholder="Add title" onChange={(evnt) => { setTitle(evnt.target.value) }} />
-                                                    </div>
-                                                    <div class="form-group input-group">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text"> <b> Category </b> </span>
+                                                        <div class="form-group input-group">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text"> <b> Category </b> </span>
+                                                            </div>
+                                                            <input class="form-control" list="browsers" name="browser" placeholder="Add category" id="browser" onChange={(evnt) => { setCategory(evnt.target.value) }} />
+                                                            <datalist id="browsers">
+                                                                {
+                                                                    categories.map((value, index) => (
+                                                                        <option value={value.title} />
+                                                                    ))
+                                                                }
+                                                            </datalist>
                                                         </div>
-                                                        <input class="form-control" list="browsers" name="browser" placeholder="Add category" id="browser" onChange={(evnt) => { setCategory(evnt.target.value) }} />
-                                                        <datalist id="browsers">
-                                                            {
-                                                                categories.map((value, index) => (
-                                                                    <option value={value.title} />
-                                                                ))
-                                                            }
-                                                        </datalist>
-                                                    </div>
-                                                    <div class="form-group input-group">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text"> <b> Delivery Days </b> </span>
+                                                        <div class="form-group input-group">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text"> <b> Delivery Days </b> </span>
+                                                            </div>
+                                                            <input class="form-control" name="deliveryDay" id="deliveryDay" type="number" placeholder="Delivery Days" onChange={(evnt) => { setDeliveryDay(evnt.target.value) }} />
                                                         </div>
-                                                        <input class="form-control" name="deliveryDay" id="deliveryDay" type="number" placeholder="Delivery Days" onChange={(evnt) => { setDeliveryDay(evnt.target.value) }} />
-                                                    </div>
-                                                    <div class="form-group input-group">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text"> <b> Price </b> </span>
+                                                        <div class="form-group input-group">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text"> <b> Price </b> </span>
+                                                            </div>
+                                                            <select class="custom-select" style={{ maxwidth: "60px" }} onChange={(evnt) => { setPaymentType(evnt.target.value) }}>
+                                                                <option value={0} selected="">Fixed Price</option>
+                                                                <option value={1} >Per Hour</option>
+                                                                <option value={2} >Starting From</option>
+                                                                <option value={3} >Please Call</option>
+                                                            </select>
+                                                            <input class="form-control" name="title" id="title" type="number" placeholder="Add price" onChange={(evnt) => { setPrice(evnt.target.value) }} />
                                                         </div>
-                                                        <select class="custom-select" style={{ maxwidth: "60px" }} onChange={(evnt) => { setPaymentType(evnt.target.value) }}>
-                                                            <option value={0} selected="">Fixed Price</option>
-                                                            <option value={1} >Per Hour</option>
-                                                            <option value={2} >Starting From</option>
-                                                            <option value={3} >Please Call</option>
-                                                        </select>
-                                                        <input class="form-control" name="title" id="title" type="number" placeholder="Add price" onChange={(evnt) => { setPrice(evnt.target.value) }} />
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="title" class="info-title"> <b>Overview</b> </label>
-                                                        <textarea class="form-control" name="title" id="title" rows="3" type="text" placeholder="Add overview" onChange={(evnt) => { setOverview(evnt.target.value) }} />
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="title" class="info-title"> <b> Service Image </b>  </label>
-                                                        <div class="media-upload-btn-wrapper" style={{ position: 'relative', float: "right" }} >
-                                                            <input type='file' id='single' onChange={(evnt) => { onFileChange(evnt) }} />
+                                                        <div class="form-group">
+                                                            <label for="title" class="info-title"> <b>Overview</b> </label>
+                                                            <textarea class="form-control" name="title" id="title" rows="3" type="text" placeholder="Add overview" onChange={(evnt) => { setOverview(evnt.target.value) }} />
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="title" class="info-title"> <b> Service Image </b>  </label>
+                                                            <div class="media-upload-btn-wrapper" style={{ position: 'relative', float: "right" }} >
+                                                                <input type='file' id='single' onChange={(evnt) => { onFileChange(evnt) }} />
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="card card-secondary">
-                                                <div class="card-header">
-                                                    <h3 class="card-title"> <b> About You </b></h3>
-                                                </div>
-                                                <div class="card-body">
-                                                    <div class="form-group input-group">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text"> <b> City </b> </span>
-                                                        </div>
-                                                        <input class="form-control" name="title" id="title" type="text" placeholder="Add city" onChange={(evnt) => { setCity(evnt.target.value) }} />
+                                            <div class="col-md-6">
+                                                <div class="card card-secondary" style={{ height: '100%' }}>
+                                                    <div class="card-header">
+                                                        <h3 class="card-title"> <b> About You </b></h3>
                                                     </div>
-                                                    <div class="form-group input-group">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text"> <b> Location </b> </span>
+                                                    <div class="card-body">
+                                                        <div class="form-group input-group">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text"> <b> City </b> </span>
+                                                            </div>
+                                                            <input class="form-control" name="title" id="title" type="text" placeholder="Add city" onChange={(evnt) => { setCity(evnt.target.value) }} />
                                                         </div>
-                                                        <input class="form-control" name="latitude" id="title" type="number" value={latitude} />
-                                                        <input class="form-control" name="longitued" id="title" type="number" value={longitude} />
-                                                    </div>
-                                                    {/* <div class="form-group input-group">
+                                                        <div class="form-group input-group">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text"> <b> Location </b> </span>
+                                                            </div>
+                                                            <input class="form-control" name="latitude" id="title" type="number" value={latitude} />
+                                                            <input class="form-control" name="longitued" id="title" type="number" value={longitude} />
+                                                        </div>
+                                                        {/* <div class="form-group input-group">
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text"> <b> Specific Address </b> </span>
                                                         </div>
                                                         <input class="form-control" name="title" id="title" type="text" placeholder="Add Specific Address" onChange={(evnt) => { setSpecificAdress(evnt.target.value) }} />
                                                     </div> */}
-                                                    <div class="form-group">
-                                                        <label for="title" class="info-title"> <b>Bio</b>  </label>
-                                                        <textarea class="form-control" name="title" id="title" rows="3" type="text" placeholder="write your personal info that clients can see" onChange={(evnt) => { setBio(evnt.target.value) }} />
+                                                        <div class="form-group">
+                                                            <label for="title" class="info-title"> <b>Bio</b>  </label>
+                                                            <textarea class="form-control" name="title" id="title" rows="6" type="text" placeholder="write your personal info that clients can see" onChange={(evnt) => { setBio(evnt.target.value) }} />
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-
+                                        </div>
+                                        <div class="col-md-8">
                                             <div class="card card-secondary margin-top-30">
                                                 <div class="card-header">
                                                     <h3 class="card-title"> <b> Service Detail </b></h3>
@@ -300,6 +303,37 @@ export const AddAndEditService = ({ editing = false }) => {
                                                     <div class="single-dashboard-input">
                                                         <div class="single-info-input margin-top-30" >
                                                             <RichTextEditor value={editorState} onChange={setEditorState} className="custom-editor" style={{ minHeight: "300px" }} />;
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class='col-md-4'>
+                                            <div class="card card-secondary margin-top-30">
+                                                <div class="card-header">
+                                                    <h3 class="card-title"> <b> Notes! </b></h3>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="single-dashboard-input">
+                                                        <div class="single-info-input margin-top-30" >
+                                                            <div class="list-group">
+                                                                <a class="list-group-item list-group-item-action">
+                                                                    <p class="mb-1">Add content:</p>
+                                                                    <p style={{fontSize: '11px'}}>To add content, simply click inside the editor and start typing. You can also paste text from another source, like a Word document or email.</p>
+                                                                </a>
+                                                                <a class="list-group-item list-group-item-action">
+                                                                    
+                                                                    <p class="mb-1">Formatting:</p>
+                                                                    <p style={{fontSize: '11px'}}>To format your text, use the toolbar at the top of the editor. You can change the font, size, and color of your text, as well as add bold, italic, and underline formatting. You can also create bulleted or numbered lists and align your text to the left, center, or right.</p>
+
+                                                                </a>
+                                                                <a class="list-group-item list-group-item-action">
+                                                                    
+                                                                    <p class="mb-1">Add links:</p>
+                                                                    <p style={{fontSize: '11px'}}>To add links to your content, select the text you want to link and click on the "Insert Link" button in the toolbar. You can link to another page on our website or to an external website.</p>
+
+                                                                </a>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>

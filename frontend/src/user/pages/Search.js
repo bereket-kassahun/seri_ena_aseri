@@ -49,6 +49,9 @@ const Search = () => {
     setSearchWord(word)
   }
 
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
   return (
     <>
       <SearchHeader hint={word} callback={callback} />
