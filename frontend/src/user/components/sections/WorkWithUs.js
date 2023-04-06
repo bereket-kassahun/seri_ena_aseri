@@ -3,7 +3,7 @@ export const WorkWithUs = () => {
     return (
         <>
             <div className="row" style={{
-                backgroundImage: 'url(imgs/join_us_new.jpg)',
+                backgroundImage: 'url(imgs/banner.jpg)',
                 height: '300px',
                 color: 'white',
             }}>

@@ -26,7 +26,7 @@ const About = () => {
                                     {/* <img src="imgs/sd1643688644.jpg" alt="" /> */}
                                 </div>
                                 <div class="about-thumb">
-                                    <img src="imgs/charity.jpg" alt="" />
+                                    <img src="imgs/categories/2.png" alt="" />
                                     <div class="about-experience">
                                         <h2 class="years-tiitle">8 Years </h2>
                                         <h4 class="experience-tiitle"> Experience </h4>

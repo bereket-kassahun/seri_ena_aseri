@@ -31,7 +31,7 @@ export default function CategoryList() {
                                     <div class="col-8 col-md-3 card">
                                         <div class="disc-item d-flex flex-column" data-category-id="179">
                                             <div class="img-fluid discover-image-wrapper hover-zoom" data-remotable="Available online">
-                                                <img class="br-top img-fluid object-fit-cover lazy loaded" alt="Gardening" width="400" height="260" title="Gardening" data-src={value.img} data-srcset={value.img} srcset={value.img} src={value.img} data-was-processed="true" />
+                                                <img class="br-top img-fluid object-fit-cover lazy loaded" alt={value.category} width="400" height="260" title={value.category} data-src={value.img} data-srcset={value.img} srcset={value.img} src={value.img} data-was-processed="true" />
                                             </div>
                                         </div>
                                     </div>

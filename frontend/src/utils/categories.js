@@ -1,7 +1,7 @@
 export const categories = [
     {
         category: 'Accountancy, banking and finance',
-        img: 'imgs/categories/1.jpg',
+        img: 'imgs/categories/1.png',
         subcategories: [
             'Book keeping',
             'Auditing',
@@ -10,7 +10,7 @@ export const categories = [
     },
     {
         category: 'Business',
-        img: 'imgs/categories/2.jpg',
+        img: 'imgs/categories/2.png',
         subcategories: [
             'Administration',
             'Management',
@@ -27,7 +27,7 @@ export const categories = [
     },
     {
         category: 'Charity and voluntary work',
-        img: 'imgs/categories/3.jpg',
+        img: 'imgs/categories/3.png',
         subcategories: [
             'Exhibition, fair and conference organisers',
             'Fundraising'
@@ -35,7 +35,7 @@ export const categories = [
     },
     {
         category: 'Creative arts and design',
-        img: 'imgs/categories/4.jpg',
+        img: 'imgs/categories/4.png',
         subcategories: [
             'Writers',
             'Artists',
@@ -46,7 +46,7 @@ export const categories = [
     },
     {
         category: 'Manufacturing and construction',
-        img: 'imgs/categories/5.jpg',
+        img: 'imgs/categories/5.png',
         subcategories: [
             'Machine operators',
             'Engineering',
@@ -71,20 +71,156 @@ export const categories = [
             'Motor vehicle mechanics',
         ]
     },
-    // {
-    //     category: '',
-    //     img: '',
-    //     subcategories: [
-    //         '',
-    //         '',
-    //         '',
-    //         '',
-    //         '',
-    //         '',
-    //         '',
-    //         '',
-    //         '',
-    //     ]
-    // },
+    {
+        category: 'Environment and agriculture',
+        img: 'imgs/categories/6.png',
+        subcategories: [
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+        ]
+    },
+    {
+        category: 'Healthcare',
+        img: 'imgs/categories/7.png',
+        subcategories: [
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+        ]
+    },
+    {
+        category: '',
+        img: 'imgs/categories/8.png',
+        subcategories: [
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+        ]
+    },
+    {
+        category: '',
+        img: 'imgs/categories/9.png',
+        subcategories: [
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+        ]
+    },
+    {
+        category: '',
+        img: 'imgs/categories/10.png',
+        subcategories: [
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+        ]
+    },
+    {
+        category: '',
+        img: 'imgs/categories/11.png',
+        subcategories: [
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+        ]
+    },
+    {
+        category: '',
+        img: 'imgs/categories/12.png',
+        subcategories: [
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+        ]
+    },
+    {
+        category: '',
+        img: 'imgs/categories/13.png',
+        subcategories: [
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+        ]
+    },
+    {
+        category: '',
+        img: 'imgs/categories/14.png',
+        subcategories: [
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+        ]
+    },
+    {
+        category: '',
+        img: 'imgs/categories/15.png',
+        subcategories: [
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+        ]
+    },
+
     
 ]

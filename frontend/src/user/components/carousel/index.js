@@ -5,76 +5,80 @@ export const Carousel = () => {
 
     const subCategories = [
         {
-            imgUrl: 'imgs/categories/1.jpg',
-            title: 'Administration'
+            imgUrl: 'imgs/categories/1.png',
+            title: 'Accounting' 
         },
         {
-            imgUrl: 'imgs/categories/2.jpg',
-            title: 'Management'
+            imgUrl: 'imgs/categories/2.png',
+            title: 'Business'
         },
         {
-            imgUrl: 'imgs/categories/3.jpg',
-            title: 'Writers'
+            imgUrl: 'imgs/categories/3.png',
+            title: 'Charity'
         },
         {
-            imgUrl: 'imgs/categories/4.jpg',
-            title: 'Actors'
+            imgUrl: 'imgs/categories/4.png',
+            title: 'Art'
         },
         {
-            imgUrl: 'imgs/categories/5.jpg',
-            title: 'Machine operators'
+            imgUrl: 'imgs/categories/5.png',
+            title: 'Manufacturing and Construction'
         },
         {
-            imgUrl: 'imgs/categories/6.jpg',
-            title: 'Engineering'
+            imgUrl: 'imgs/categories/6.png',
+            title: 'Environment and agriculture'
         },
         {
-            imgUrl: 'imgs/categories/7.jpg',
-            title: 'Carpenters'
+            imgUrl: 'imgs/categories/7.png',
+            title: 'Healthcare'
         },
         {
-            imgUrl: 'imgs/categories/8.jpg',
-            title: 'Kitchen installation'
+            imgUrl: 'imgs/categories/8.png',
+            title: 'Hospitality'
         },
         {
-            imgUrl: 'imgs/categories/9.jpg',
-            title: 'Painters and decorators'
+            imgUrl: 'imgs/categories/9.png',
+            title: 'Information technology'
         },
         {
-            imgUrl: 'imgs/categories/10.jpg',
-            title: 'Farmers'
+            imgUrl: 'imgs/categories/10.png',
+            title: 'Law'
         },
         {
-            imgUrl: 'imgs/categories/11.jpg',
-            title: 'Nurse'
+            imgUrl: 'imgs/categories/11.png',
+            title: 'Marketing'
         },
         {
-            imgUrl: 'imgs/categories/12.jpg',
-            title: 'Event organiser'
+            imgUrl: 'imgs/categories/12.png',
+            title: 'Property Management'
         },
         {
-            imgUrl: 'imgs/categories/13.jpg',
-            title: 'Administration'
+            imgUrl: 'imgs/categories/13.png',
+            title: 'Social care'
         },
         {
-            imgUrl: 'imgs/categories/14.jpg',
-            title: 'Management'
+            imgUrl: 'imgs/categories/14.png',
+            title: 'Education'
         },
         {
-            imgUrl: 'imgs/categories/15.jpg',
-            title: 'Writers'
+            imgUrl: 'imgs/categories/15.png',
+            title: 'Transport'
         },
         {
-            imgUrl: 'imgs/categories/16.jpg',
-            title: 'Actors'
+            imgUrl: 'imgs/categories/16.png',
+            title: 'Car and Driving'
         },
         {
-            imgUrl: 'imgs/categories/17.jpg',
-            title: 'Machine operators'
+            imgUrl: 'imgs/categories/17.png',
+            title: 'Law enforcement'
         },
         {
-            imgUrl: 'imgs/categories/18.jpg',
-            title: 'Engineering'
+            imgUrl: 'imgs/categories/18.png',
+            title: 'House Cleaning'
+        },
+        {
+            imgUrl: 'imgs/categories/3.png',
+            title: 'Tourism'
         },
     ]
     return (
