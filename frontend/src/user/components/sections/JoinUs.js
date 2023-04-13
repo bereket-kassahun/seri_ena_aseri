@@ -5,7 +5,7 @@ import { useContext } from "react"
 export const JoinUs = () => {
     const { currentTheme, updateLanguage } = useContext(ThemeContext);
     return (
-        <section class="join-area gradient-bg-2"  style={{ backgroundColor: "" }}>
+        <section class="join-area gradient-bg-2 margin-bottom-30  margin-top-30" style={{ backgroundColor: "" }}>
             <div class="join-shapes">
                 <img src="imgs/circle11643799195.png" alt="" />
                 <img src="imgs/circle21643799195.png" alt="" />

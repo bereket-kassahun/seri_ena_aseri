@@ -48,7 +48,7 @@ const Presentation = () => {
       <div id="presentation" style={{backgroundColor: '#2f3831'}}>
 
         <section className="presentation-container left-container col-lg-6 col-sm-12 col-12" style={{paddingBottom: '150px'}}>
-          <h1 className="typing-animation bg-3">Serrale!</h1>
+          <h1 className="typing-animation bg-3" style={{width: "100px"}}>{currentTheme.text.home.text22}</h1>
           <h2 className="d-none d-md-none d-sm-none d-lg-block " >{currentTheme.text.home.text1}</h2>
           <p style={{color: '#fff'}}>{currentTheme.text.home.text2}</p>
           {/* <div className="presentation-button">

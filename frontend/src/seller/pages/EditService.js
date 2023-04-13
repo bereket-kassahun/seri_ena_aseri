@@ -9,6 +9,10 @@ import { useLocation } from 'react-router-dom'
 
 import { RichTextEditor } from '@mantine/rte';
 import { update_services } from '../api';
+
+import { ToastContainer, toast } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.css";
 export const EditService = () => {
 
     const location = useLocation()
@@ -25,17 +29,20 @@ export const EditService = () => {
     const [successMsg, setSuccessMsg] = useState("")
 
 
-    // const [img, setImg] = useState("")
+    // const [img, setImg] = useState("") service.detail
     const [title, setTitle] = useState(service.title)
     const [overview, setOverview] = useState(service.overview)
     const [category, setCategory] = useState(service.category)
     const [price, setPrice] = useState(service.price)
     const [bio, setBio] = useState(service.bio)
+    const [latitude, setLatitued] = useState(service.latitude)
+    const [longitude, setLongitude] = useState(service.longitude)
     const [img, setImg] = useState(service.img)
     const [city, setCity] = useState(service.city)
     const [specificAdress, setSpecificAdress] = useState(service.specificAdress)
     const [deliveryDay, setDeliveryDay] = useState(service.deliveryDay)
     const [professionalStatus, setProfessionalStatus] = useState(2)
+    const [detail, setDetail] = useState(service.detail)
 
 
     useEffect(() => {
@@ -69,6 +76,26 @@ export const EditService = () => {
 
     }
 
+    const notifySuccess = (msg) =>
+        toast.success(msg, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+        });
+
+    const notifyError = (msg) =>
+        toast.error(msg, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+        });
+
 
     const validateData = () => {
         // if (title == "" || overview == "" || category == "" || price == "" || city == "" || specificAdress == "" || editorState.isEmpty) {
@@ -77,7 +104,7 @@ export const EditService = () => {
         //     return false
         // }
         if (seller == null || seller._id == null) {
-            setErrorMsg("Please Login first!")
+            notifyError("Please Login first!")
             setSuccessMsg("")
             return false
         }
@@ -87,30 +114,29 @@ export const EditService = () => {
 
     const register = (img) => {
 
-        const detail = editorState
         const professionalId = seller._id
         const professionalFirstName = seller.firstName
         const professionalLastName = seller.lastName
         const professionalImage = seller.img
         const professionalPhoneNumber = seller.phoneNumber
-        if(service.serviceType == 0){
-            update_services({ _id: service._id, title, price, overview, category, professionalPhoneNumber}, (data) => {
+        if (service.serviceType == 0) {
+            update_services({ _id: service._id, title, price, overview, category, professionalPhoneNumber }, (data) => {
                 console.log(data)
-                setSuccessMsg("Service Updated!")
+                notifySuccess("Service Updated!")
             })
-        }else if(service.serviceType == 1){
+        } else if (service.serviceType == 1) {
             update_services({ _id: service._id, title, price, overview, category, bio, city, specificAdress, img, deliveryDay, professionalId, professionalFirstName, professionalLastName, professionalImage, professionalStatus, professionalPhoneNumber }, (data) => {
                 console.log(data)
-                setSuccessMsg("Service Updated!")
+                notifySuccess("Service Updated!")
             })
-        }else{
-    
+        } else {
+
             update_services({ _id: service._id, title, price, overview, category, bio, city, specificAdress, detail, img, deliveryDay, professionalId, professionalFirstName, professionalLastName, professionalImage, professionalStatus, professionalPhoneNumber }, (data) => {
                 console.log(data)
-                setSuccessMsg("Service Updated!")
+                notifySuccess("Service Updated!")
             })
         }
-       
+
     }
 
 
@@ -131,7 +157,7 @@ export const EditService = () => {
                     </div>
                 </div>
             </div> */}
-
+            <ToastContainer />
             <div>
                 {
                     errorMsg.length > 0 && (
@@ -216,20 +242,31 @@ export const EditService = () => {
                                     <div class="col-md-6">
                                         <div class="card card-secondary">
                                             <div class="card-header">
-                                                <h3 class="card-title">About You</h3>
+                                                <h3 class="card-title"> <b> About You </b></h3>
                                             </div>
                                             <div class="card-body">
-                                                <div class="form-group">
-                                                    <label for="title" class="info-title"> City* </label>
-                                                    <input class="form-control" name="title" id="title" type="text" placeholder="Add city" onChange={(evnt) => { setCity(evnt.target.value) }} value={overview} />
+                                                <div class="form-group input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text"> <b> City </b> </span>
+                                                    </div>
+                                                    <input class="form-control" name="title" id="title" type="text" placeholder="Add city" onChange={(evnt) => { setCity(evnt.target.value) }} value={city} />
                                                 </div>
-                                                <div class="form-group">
-                                                    <label for="title" class="info-title"> Specific Address* </label>
-                                                    <input class="form-control" name="title" id="title" type="text" placeholder="Add Specific Address" onChange={(evnt) => { setSpecificAdress(evnt.target.value) }} value={overview} />
+                                                <div class="form-group input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text"> <b> Location </b> </span>
+                                                    </div>
+                                                    <input class="form-control" name="latitude" id="title" type="number" value={latitude} />
+                                                    <input class="form-control" name="longitued" id="title" type="number" value={longitude} />
                                                 </div>
+                                                {/* <div class="form-group input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"> <b> Specific Address </b> </span>
+                                                        </div>
+                                                        <input class="form-control" name="title" id="title" type="text" placeholder="Add Specific Address" onChange={(evnt) => { setSpecificAdress(evnt.target.value) }} />
+                                                    </div> */}
                                                 <div class="form-group">
-                                                    <label for="title" class="info-title"> Bio </label>
-                                                    <textarea class="form-control" name="title" id="title" rows="3" type="text" placeholder="write your personal info that clients can see" onChange={(evnt) => { setBio(evnt.target.value) }} value={overview} />
+                                                    <label for="title" class="info-title"> <b>Bio</b>  </label>
+                                                    <textarea class="form-control" name="title" id="title" rows="6" type="text" value={bio} onChange={(evnt) => { setBio(evnt.target.value) }} />
                                                 </div>
                                             </div>
                                         </div>
@@ -241,7 +278,7 @@ export const EditService = () => {
                                             <div class="card-body">
                                                 <div class="single-dashboard-input">
                                                     <div class="single-info-input margin-top-30" >
-                                                        <RichTextEditor value={editorState} onChange={setEditorState} className="custom-editor" style={{ minHeight: "300px" }} placeholder={service.detail} />;
+                                                        <RichTextEditor value={detail} onChange={setDetail} className="custom-editor" style={{ minHeight: "300px" }} />;
                                                     </div>
                                                 </div>
                                             </div>
@@ -321,20 +358,31 @@ export const EditService = () => {
                                     <div class="col-md-6">
                                         <div class="card card-secondary">
                                             <div class="card-header">
-                                                <h3 class="card-title">About You</h3>
+                                                <h3 class="card-title"> <b> About You </b></h3>
                                             </div>
                                             <div class="card-body">
-                                                <div class="form-group">
-                                                    <label for="title" class="info-title"> City* </label>
+                                                <div class="form-group input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text"> <b> City </b> </span>
+                                                    </div>
                                                     <input class="form-control" name="title" id="title" type="text" placeholder="Add city" onChange={(evnt) => { setCity(evnt.target.value) }} value={city} />
                                                 </div>
-                                                <div class="form-group">
-                                                    <label for="title" class="info-title"> Specific Address* </label>
-                                                    <input class="form-control" name="title" id="title" type="text" placeholder="Add Specific Address" onChange={(evnt) => { setSpecificAdress(evnt.target.value) }} value={specificAdress} />
+                                                <div class="form-group input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text"> <b> Location </b> </span>
+                                                    </div>
+                                                    <input class="form-control" name="latitude" id="title" type="number" value={latitude} />
+                                                    <input class="form-control" name="longitued" id="title" type="number" value={longitude} />
                                                 </div>
+                                                {/* <div class="form-group input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"> <b> Specific Address </b> </span>
+                                                        </div>
+                                                        <input class="form-control" name="title" id="title" type="text" placeholder="Add Specific Address" onChange={(evnt) => { setSpecificAdress(evnt.target.value) }} />
+                                                    </div> */}
                                                 <div class="form-group">
-                                                    <label for="title" class="info-title"> Bio </label>
-                                                    <textarea class="form-control" name="title" id="title" rows="3" type="text" placeholder="write your personal info that clients can see" onChange={(evnt) => { setBio(evnt.target.value) }} value={bio} />
+                                                    <label for="title" class="info-title"> <b>Bio</b>  </label>
+                                                    <textarea class="form-control" name="title" id="title" rows="6" type="text" value={bio} onChange={(evnt) => { setBio(evnt.target.value) }} />
                                                 </div>
                                             </div>
                                         </div>
