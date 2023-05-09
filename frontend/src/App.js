@@ -3,7 +3,6 @@ import { Footer } from './user/components/footer/Footer';
 import { Header } from './user/components/header';
 import Dashboard from './seller';
 import About from './user/pages/About';
-import Catergory from './user/pages/Category';
 import CategoryList from './user/pages/CategoryList';
 import Contact from './user/pages/Contact';
 import Home from './user/pages/Home';

@@ -7,22 +7,29 @@ import { useContext, useEffect, useState } from "react"
 import { useLocation } from 'react-router-dom'
 // import "./editor.css"
 
+// import { subcategories } from '../../utils/subcategories'
+import { mainCategories } from '../../utils/maincategories'
 import { RichTextEditor } from '@mantine/rte';
 import { update_services } from '../api';
 
 import { ToastContainer, toast } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
+import { DetailPreview } from './service/DetailPreview';
+import { PremiumServiceCardPreview } from './service/PremiumServiceCardPreview';
+import { categories } from '../../utils/categories';
+import { BasicServiceCard } from './service/BasicServiceCardPreview';
 export const EditService = () => {
 
     const location = useLocation()
 
     let row = location.state ? location.state : ""
     let service = row.row
-    const seller = useContext(SellerContext);
+    const { seller, updateCurrentSeller } = useContext(SellerContext);
 
     const [editorState, setEditorState] = useState(() => EditorState.createEmpty(),);
 
+    const [subcategories, setSubcategories] = useState([])
 
 
     const [errorMsg, setErrorMsg] = useState("")
@@ -43,6 +50,12 @@ export const EditService = () => {
     const [deliveryDay, setDeliveryDay] = useState(service.deliveryDay)
     const [professionalStatus, setProfessionalStatus] = useState(2)
     const [detail, setDetail] = useState(service.detail)
+    const [subcategory, setSubcategory] = useState(service.subcategory)
+    const [paymentType, setPaymentType] = useState(service.paymentType)
+    const [serviceRegistered, setServiceRegistered] = useState(false)
+    const [imageUploadStarted, setImageUploadStarted] = useState(false)
+    const [imageUploadEnded, setImageUploadEnded] = useState(false)
+
 
 
     useEffect(() => {
@@ -148,6 +161,116 @@ export const EditService = () => {
         ]
     }
 
+
+    const currentService = {
+        title, overview, category, subcategory, price, bio, city, specificAdress, deliveryDay, professionalStatus, img, detail: editorState,
+        professionalFirstName: seller.firstName, professionalLastName: seller.lastName, professionalImage: seller.img, latitude, longitude
+    }
+
+
+    const updateSubCategory = (currentCategory) => {
+        categories.forEach(element => {
+            if (element.category == currentCategory) {
+                setSubcategories(element.subcategories)
+            }
+        });
+    }
+
+    useEffect(() => {
+        updateSubCategory(category)
+    }, [category])
+
+    const basicServiceForm = (
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title"><b> Basic Info </b></h3>
+            </div>
+            <div class="card-body">
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <b> Title </b> </span>
+                    </div>
+                    <input class="form-control" name="title" id="title" type="text" placeholder="Add title" onChange={(evnt) => { setTitle(evnt.target.value) }} value={title} />
+                </div>
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <b> Category </b> </span>
+                    </div>
+                    <select class="custom-select" onChange={(evnt) => { setCategory(evnt.target.value) }} value={category}>
+                        {
+                            mainCategories.map((value, index) => (
+                                <option value={value}>{value}</option>
+                            ))
+                        }
+                    </select>
+                </div>
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <b> SubCategory </b> </span>
+                    </div>
+                    <select class="custom-select" onChange={(evnt) => { setSubcategory(evnt.target.value) }} value={subcategory}>
+                        {
+                            subcategories.map((value, index) => (
+                                <option value={value}>{value}</option>
+                            ))
+                        }
+                    </select>
+                </div>
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <b> Price </b> </span>
+                    </div>
+                    <select class="custom-select" style={{ maxwidth: "60px" }} onChange={(evnt) => { setPaymentType(evnt.target.value) }} value={paymentType}>
+                        <option value={0} selected="">Fixed Price</option>
+                        <option value={1} >Per Hour</option>
+                        <option value={2} >Starting From</option>
+                        <option value={3} >Please Call</option>
+                    </select>
+                    <input class="form-control" name="title" id="title" type="number" placeholder="Add price" onChange={(evnt) => { setPrice(evnt.target.value) }} value={price} />
+                </div>
+                <div class="form-group">
+                    <label for="title" class="info-title"> <b>Overview</b> </label>
+                    <textarea class="form-control" name="title" id="title" rows="3" type="text" placeholder="Add overview" onChange={(evnt) => { setOverview(evnt.target.value) }} value={overview} />
+                </div>
+                <div class="form-group">
+                    <label for="title" class="info-title"> <b> Service Image </b>  </label>
+                    <div class="media-upload-btn-wrapper" style={{ position: 'relative', float: "right" }} >
+                        <input type='file' id='single' onChange={(evnt) => { onFileChange(evnt) }} />
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+
+
+
+    const aboutYou = (
+        <div class="card card-secondary" style={{ height: '100%' }}>
+            <div class="card-header">
+                <h3 class="card-title"> <b> About You </b></h3>
+            </div>
+            <div class="card-body">
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <b> City </b> </span>
+                    </div>
+                    <input class="form-control" name="title" id="title" type="text" placeholder="Add city" onChange={(evnt) => { setCity(evnt.target.value) }} value={city} />
+                </div>
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <b> Location </b> </span>
+                    </div>
+                    <input class="form-control" name="latitude" id="title" type="number" value={latitude} />
+                    <input class="form-control" name="longitued" id="title" type="number" value={longitude} />
+                </div>
+                <div class="form-group">
+                    <label for="title" class="info-title"> <b>Bio</b>  </label>
+                    <textarea class="form-control" name="title" id="title" rows="6" type="text" placeholder="write your personal info that clients can see" onChange={(evnt) => { setBio(evnt.target.value) }} value={bio} />
+                </div>
+            </div>
+        </div>
+    )
+
     return (
         <>
             {/* <div class="row">
@@ -178,280 +301,155 @@ export const EditService = () => {
 
             {
                 service.serviceType == 2 && (
-                    <div class="row">
-                        <div class="col-lg-12 margin-top-30">
-                            <section class="content" style={{ width: "100%", paddingTop: "30px" }}>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="card card-primary">
-                                            <div class="card-header">
-                                                <h3 class="card-title">Basic Info</h3>
-                                            </div>
-                                            <div class="card-body">
-                                                <div class="form-group">
-                                                    <label for="title" class="info-title"> Title* </label>
-                                                    <input class="form-control" name="title" id="title" type="text" placeholder="Add title" onChange={(evnt) => { setTitle(evnt.target.value) }} value={title} />
+                    <>
+                        <div class="row">
+                            <div class="col-lg-12 margin-top-30">
+                                <section class="content" style={{ width: "100%", paddingTop: "30px" }}>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            {basicServiceForm}
+                                        </div>
+                                        <div class="col-md-6">
+                                            {aboutYou}
 
+                                            <div class="card card-secondary margin-top-30">
+                                                <div class="card-header">
+                                                    <h3 class="card-title">Service Detail</h3>
                                                 </div>
-                                                <div class="form-group">
-                                                    <label for="title" class="info-title"> Category* </label>
-                                                    <input class="form-control" list="browsers" name="browser" placeholder="Add category" id="browser" onChange={(evnt) => { setCategory(evnt.target.value) }} value={category} />
-                                                    <datalist id="browsers">
-                                                        <option value="Plumbing" />
-                                                        <option value="Cleaning " />
-                                                        <option value="Electronics Installations and Repairs" />
-                                                        <option value="TV Dish Installation and Repair" />
-                                                        <option value="Painting" />
-                                                        <option value="Disinfection" />
-                                                        <option value="Laundry" />
-                                                        <option value="Hairdresser" />
-                                                        <option value="Gardening" />
-                                                        <option value="Tutoring" />
-                                                        <option value="Accounting" />
-                                                        <option value="Web Development" />
-                                                        <option value="App Development" />
-                                                        <option value="Graphics Designer" />
-                                                        <option value="IT support technician" />
-                                                        <option value="Veterinary nurse" />
-                                                        <option value="Mechanic" />
-                                                        <option value="Nurse" />
-                                                    </datalist>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="title" class="info-title"> Delivery Days* </label>
-                                                    <input class="form-control" name="title" id="title" type="number" placeholder="Add overview" onChange={(evnt) => { setDeliveryDay(evnt.target.value) }} value={deliveryDay} />
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="title" class="info-title"> Price* </label>
-                                                    <input class="form-control" name="title" id="title" type="number" placeholder="Add price" onChange={(evnt) => { setPrice(evnt.target.value) }} value={price} />
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="title" class="info-title"> Overview* </label>
-                                                    <textarea class="form-control" name="title" id="title" rows="3" type="text" placeholder="Add overview" onChange={(evnt) => { setOverview(evnt.target.value) }} value={overview} />
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="title" class="info-title"> Service Image* </label>
-                                                    <div class="media-upload-btn-wrapper" style={{ position: 'relative', float: "right" }} >
-                                                        <input type='file' id='single' onChange={(evnt) => { onFileChange(evnt) }} />
+                                                <div class="card-body">
+                                                    <div class="single-dashboard-input">
+                                                        <div class="single-info-input margin-top-30" >
+                                                            <RichTextEditor value={detail} onChange={setDetail} className="custom-editor" style={{ minHeight: "300px" }} />;
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="card card-secondary">
-                                            <div class="card-header">
-                                                <h3 class="card-title"> <b> About You </b></h3>
-                                            </div>
-                                            <div class="card-body">
-                                                <div class="form-group input-group">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text"> <b> City </b> </span>
-                                                    </div>
-                                                    <input class="form-control" name="title" id="title" type="text" placeholder="Add city" onChange={(evnt) => { setCity(evnt.target.value) }} value={city} />
-                                                </div>
-                                                <div class="form-group input-group">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text"> <b> Location </b> </span>
-                                                    </div>
-                                                    <input class="form-control" name="latitude" id="title" type="number" value={latitude} />
-                                                    <input class="form-control" name="longitued" id="title" type="number" value={longitude} />
-                                                </div>
-                                                {/* <div class="form-group input-group">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text"> <b> Specific Address </b> </span>
-                                                        </div>
-                                                        <input class="form-control" name="title" id="title" type="text" placeholder="Add Specific Address" onChange={(evnt) => { setSpecificAdress(evnt.target.value) }} />
-                                                    </div> */}
-                                                <div class="form-group">
-                                                    <label for="title" class="info-title"> <b>Bio</b>  </label>
-                                                    <textarea class="form-control" name="title" id="title" rows="6" type="text" value={bio} onChange={(evnt) => { setBio(evnt.target.value) }} />
-                                                </div>
-                                            </div>
-                                        </div>
+                                </section>
+                            </div>
+                        </div>
 
-                                        <div class="card card-secondary margin-top-30">
-                                            <div class="card-header">
-                                                <h3 class="card-title">Service Detail</h3>
-                                            </div>
-                                            <div class="card-body">
-                                                <div class="single-dashboard-input">
-                                                    <div class="single-info-input margin-top-30" >
-                                                        <RichTextEditor value={detail} onChange={setDetail} className="custom-editor" style={{ minHeight: "300px" }} />;
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                        <div class="" >
+                            <div class="margin-top-30" >
+                                <div class="media-upload-btn-wrapper" style={{
+                                    display: "flex",
+                                    flexDirection: "row",
+                                    justifyContent: "space-evenly",
+                                    alignItems: "center",
+                                    flexWrap: "nowrap",
+                                    alignContent: "space-between",
+                                }} >
+                                    <div>
+                                        <button type="button" class="btn btn-primary btn-lg btn-open-modal" data-bs-toggle="modal" data-bs-target="#modal-preview-service" onClick={() => { }}>
+                                            Preview Service
+                                        </button>
+                                    </div>
+                                    <div>
+                                        <button type="button" class="btn btn-primary btn-lg btn-open-modal" data-bs-toggle="modal" data-bs-target="#modal-fullscreen-xl" onClick={() => { }}>
+                                            Preview Detail Page
+                                        </button>
+                                    </div>
+                                    <div>
+                                        <button type="button" class="btn btn-primary btn-lg btn-open-modal" onClick={() => {
+                                            if (validateData()) {
+                                                register()
+                                            }
+                                        }}>
+                                            Save
+                                        </button>
                                     </div>
                                 </div>
-                            </section>
+                            </div>
                         </div>
-                    </div>
+
+                        <DetailPreview currentService={currentService} professional={seller} />
+                        <PremiumServiceCardPreview data={currentService} setRatingId={() => { }} />
+                    </>
+
+
+
                 )
             }
 
             {
                 service.serviceType == 1 && (
-                    <div class="row">
-                        <div class="col-lg-12 margin-top-30">
-                            <section class="content" style={{ width: "100%", paddingTop: "30px" }}>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="card card-primary">
-                                            <div class="card-header">
-                                                <h3 class="card-title">Basic Info</h3>
-                                            </div>
-                                            <div class="card-body">
-                                                <div class="form-group">
-                                                    <label for="title" class="info-title"> Title* </label>
-                                                    <input class="form-control" name="title" id="title" type="text" placeholder="Add title" onChange={(evnt) => { setTitle(evnt.target.value) }} value={title} />
+                    <>
 
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="title" class="info-title"> Category* </label>
-                                                    <input class="form-control" list="browsers" name="browser" placeholder="Add category" id="browser" onChange={(evnt) => { setCategory(evnt.target.value) }} value={category} />
-                                                    <datalist id="browsers">
-                                                        <option value="Plumbing" />
-                                                        <option value="Cleaning " />
-                                                        <option value="Electronics Installations and Repairs" />
-                                                        <option value="TV Dish Installation and Repair" />
-                                                        <option value="Painting" />
-                                                        <option value="Disinfection" />
-                                                        <option value="Laundry" />
-                                                        <option value="Hairdresser" />
-                                                        <option value="Gardening" />
-                                                        <option value="Tutoring" />
-                                                        <option value="Accounting" />
-                                                        <option value="Web Development" />
-                                                        <option value="App Development" />
-                                                        <option value="Graphics Designer" />
-                                                        <option value="IT support technician" />
-                                                        <option value="Veterinary nurse" />
-                                                        <option value="Mechanic" />
-                                                        <option value="Nurse" />
-                                                    </datalist>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="title" class="info-title"> Delivery Days* </label>
-                                                    <input class="form-control" name="title" id="title" type="number" placeholder="Add overview" onChange={(evnt) => { setDeliveryDay(evnt.target.value) }} value={category} />
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="title" class="info-title"> Price* </label>
-                                                    <input class="form-control" name="title" id="title" type="number" placeholder="Add price" onChange={(evnt) => { setPrice(evnt.target.value) }} value={price} />
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="title" class="info-title"> Overview* </label>
-                                                    <textarea class="form-control" name="title" id="title" rows="3" type="text" placeholder="Add overview" onChange={(evnt) => { setOverview(evnt.target.value) }} value={overview} />
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="title" class="info-title"> Service Image* </label>
-                                                    <div class="media-upload-btn-wrapper" style={{ position: 'relative', float: "right" }} >
-                                                        <input type='file' id='single' onChange={(evnt) => { onFileChange(evnt) }} />
-                                                    </div>
-                                                </div>
-                                            </div>
+                        <div class="row">
+                            <div class="col-lg-12 margin-top-30">
+                                <section class="content" style={{ width: "100%", paddingTop: "30px" }}>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            {basicServiceForm}
 
                                         </div>
-
+                                        <div class="col-md-6">
+                                            {aboutYou}
+                                        </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="card card-secondary">
-                                            <div class="card-header">
-                                                <h3 class="card-title"> <b> About You </b></h3>
-                                            </div>
-                                            <div class="card-body">
-                                                <div class="form-group input-group">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text"> <b> City </b> </span>
-                                                    </div>
-                                                    <input class="form-control" name="title" id="title" type="text" placeholder="Add city" onChange={(evnt) => { setCity(evnt.target.value) }} value={city} />
-                                                </div>
-                                                <div class="form-group input-group">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text"> <b> Location </b> </span>
-                                                    </div>
-                                                    <input class="form-control" name="latitude" id="title" type="number" value={latitude} />
-                                                    <input class="form-control" name="longitued" id="title" type="number" value={longitude} />
-                                                </div>
-                                                {/* <div class="form-group input-group">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text"> <b> Specific Address </b> </span>
-                                                        </div>
-                                                        <input class="form-control" name="title" id="title" type="text" placeholder="Add Specific Address" onChange={(evnt) => { setSpecificAdress(evnt.target.value) }} />
-                                                    </div> */}
-                                                <div class="form-group">
-                                                    <label for="title" class="info-title"> <b>Bio</b>  </label>
-                                                    <textarea class="form-control" name="title" id="title" rows="6" type="text" value={bio} onChange={(evnt) => { setBio(evnt.target.value) }} />
-                                                </div>
-                                            </div>
-                                        </div>
+                                </section>
+                            </div>
+                        </div>
+
+                        <div class="" >
+                            <div class="margin-top-30" >
+                                <div class="media-upload-btn-wrapper" style={{
+                                    display: "flex",
+                                    flexDirection: "row",
+                                    justifyContent: "space-evenly",
+                                    alignItems: "center",
+                                    flexWrap: "nowrap",
+                                    alignContent: "space-between",
+                                }} >
+                                    <div>
+                                        <button type="button" class="btn btn-primary btn-lg btn-open-modal" data-bs-toggle="modal" data-bs-target="#modal-preview-service" onClick={() => { }}>
+                                            Preview Service
+                                        </button>
                                     </div>
                                 </div>
-                            </section>
+                            </div>
                         </div>
-                    </div>
+                        <PremiumServiceCardPreview data={currentService} setRatingId={() => { }} /></>
+
                 )
             }
 
             {
                 service.serviceType == 0 && (
-                    <div class="row" style={{ paddingTop: "30px" }}>
-                        <section class="content margin-top-30" style={{ width: "100%" }} >
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="card card-primary">
-                                        <div class="card-header">
-                                            <h3 class="card-title">Basic Info</h3>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="form-group">
-                                                {/* <label for="inputName">Project Name</label>
-                                        <input type="text" id="inputName" class="form-control"/> */}
-                                                <label for="title" > Title* </label>
-                                                <input class="form-control" name="title" id="title" type="text" placeholder="Add title" onChange={(evnt) => { setTitle(evnt.target.value) }} value={title} />
-
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="inputDescription">Overview*</label>
-                                                <textarea id="inputDescription" class="form-control" rows="4" maxLength="50" placeholder="Add overview" onChange={(evnt) => { setOverview(evnt.target.value) }} value={overview}></textarea>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="title" class="info-title"> Category* </label>
-                                                <input class="form-control" list="browsers" name="browser" placeholder="Add category" id="browser" onChange={(evnt) => { setCategory(evnt.target.value) }} value={category} />
-                                                <datalist id="browsers">
-                                                    <option value="Plumbing" />
-                                                    <option value="Cleaning " />
-                                                    <option value="Electronics Installations and Repairs" />
-                                                    <option value="TV Dish Installation and Repair" />
-                                                    <option value="Painting" />
-                                                    <option value="Disinfection" />
-                                                    <option value="Laundry" />
-                                                    <option value="Hairdresser" />
-                                                    <option value="Gardening" />
-                                                    <option value="Tutoring" />
-                                                    <option value="Accounting" />
-                                                    <option value="Web Development" />
-                                                    <option value="App Development" />
-                                                    <option value="Graphics Designer" />
-                                                    <option value="IT support technician" />
-                                                    <option value="Veterinary nurse" />
-                                                    <option value="Mechanic" />
-                                                    <option value="Nurse" />
-                                                </datalist>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="title" class="info-title"> Price* </label>
-                                                <input class="form-control" name="title" id="title" type="number" placeholder="Add price" onChange={(evnt) => { setPrice(evnt.target.value) }} value={price} />
-                                            </div>
-
-                                        </div>
+                    <>
+                        <div class="row" style={{ paddingTop: "30px" }}>
+                            <section class="content margin-top-30" style={{ width: "100%" }} >
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        {basicServiceForm}
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                        <div class="" >
+                            <div class="margin-top-30" >
+                                <div class="media-upload-btn-wrapper" style={{
+                                    display: "flex",
+                                    flexDirection: "row",
+                                    justifyContent: "space-evenly",
+                                    alignItems: "center",
+                                    flexWrap: "nowrap",
+                                    alignContent: "space-between",
+                                }} >
+                                    <div>
+                                        <button type="button" class="btn btn-primary btn-lg btn-open-modal" data-bs-toggle="modal" data-bs-target="#modal-preview-service">
+                                            Preview Service
+                                        </button>
                                     </div>
                                 </div>
                             </div>
+                        </div>
 
-                        </section>
-                    </div>
+                        <BasicServiceCard data={currentService} />
+                    </>
+
+
                 )
             }
 

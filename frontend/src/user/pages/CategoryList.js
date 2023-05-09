@@ -1,14 +1,16 @@
 
 
+import { useNavigate } from 'react-router-dom'
 import '../../style/hover-zoom.css'
 import { categories } from '../../utils/categories'
 import { useEffect } from 'react'
 export default function CategoryList() {
 
-    
-  useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
     return (
         <>
 
@@ -31,7 +33,8 @@ export default function CategoryList() {
                                     <div class="col-8 col-md-3 card">
                                         <div class="disc-item d-flex flex-column" data-category-id="179">
                                             <div class="img-fluid discover-image-wrapper hover-zoom" data-remotable="Available online">
-                                                <img class="br-top img-fluid object-fit-cover lazy loaded" alt={value.category} width="400" height="260" title={value.category} data-src={value.img} data-srcset={value.img} srcset={value.img} src={value.img} data-was-processed="true" />
+                                                <img class="br-top img-fluid object-fit-cover lazy loaded" alt={value.category} width="400" height="260" title={value.category} data-src={value.img} data-srcset={value.img} srcset={value.img} src={value.img} data-was-processed="true" 
+                                                onClick={() => {navigate( '/paginated_category_services', {state: {useSubcategory: false, category: value.category}})}}/>
                                             </div>
                                         </div>
                                     </div>
@@ -39,7 +42,12 @@ export default function CategoryList() {
                                         {
                                             // console.log(value.subcategories.length);
                                             value.subcategories.map((value, index) => {
-                                                return <button type="button" class="btn btn-outline-dark" style={{ margin: "5px" }}>{value}</button>
+                                                return (
+                                                    <button type="button" class="btn btn-outline-dark" style={{ margin: "5px" }}
+                                                    onClick={() => {navigate('/paginated_category_services', {state: {useSubcategory: true, subcategory: value}})}}>
+                                                        {value}
+                                                    </button>
+                                                )
                                             })
                                         }
                                     </div>

@@ -9,6 +9,7 @@ export const DetailPreview = ({ professional, currentService }) => {
     // const [currentService, setCurrentService] = useState({})
 
 
+    console.log("this is current seller", professional)
     const [activeElement, setActiveElement] = useState(1)
 
     // useEffect(() => {
@@ -92,15 +93,13 @@ export const DetailPreview = ({ professional, currentService }) => {
 
                                                     <ul class="author-tag style-02 mt-4">
                                                         <li class="tag-list">
-                                                            <a href="../test_seller.html">
-                                                                <div class="authors">
-                                                                    <div class="thumb">
-                                                                        <img src={currentService.professionalImage != "" ? currentService.professionalImage : "imgs/seller-s21644057790.jpg"} alt="" />
-                                                                        <span class="notification-dot"></span>
-                                                                    </div>
-                                                                    <span class="author-title"> {professional.firstName} {professional.lastName} </span>
+                                                            <div class="authors">
+                                                                <div class="thumb">
+                                                                    <img src={currentService.professionalImage != "" ? currentService.professionalImage : "imgs/user_profile.png"} alt="" />
+                                                                    <span class="notification-dot"></span>
                                                                 </div>
-                                                            </a>
+                                                                <span class="author-title"> {professional.firstName} {professional.lastName} </span>
+                                                            </div>
                                                         </li>
                                                     </ul>
 
@@ -126,10 +125,10 @@ export const DetailPreview = ({ professional, currentService }) => {
                                                             <div class="about-seller-tab margin-top-30">
                                                                 <div class="about-seller-flex-content">
                                                                     <div class="about-seller-thumb">
-                                                                        <img src={currentService.professionalImage != "" ? currentService.professionalImage : "imgs/seller-s21644057790.jpg"} alt="" />
+                                                                        <img src={professional.img != "" ? professional.img : "imgs/user_profile.png"} alt="" />
                                                                     </div>
                                                                     <div class="about-seller-content">
-                                                                        <h5 class="title"> <a href="../test_seller.html"> {professional.firstName} {professional.lastName}</a> </h5>
+                                                                        <h5 class="title">  {professional.firstName} {professional.lastName} </h5>
                                                                     </div>
                                                                 </div>
                                                                 <div class="seller-details-box margin-top-40">

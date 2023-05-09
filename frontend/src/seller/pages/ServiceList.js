@@ -38,7 +38,7 @@ export const ServiceList = () => {
         });
 
 
-    const seller = useContext(SellerContext);
+    const {seller, updateCurrentSeller} = useContext(SellerContext);
     const columns = [
         {
             name: "Title",

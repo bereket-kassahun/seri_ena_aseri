@@ -15,7 +15,7 @@ export const Payment = () => {
 
     let service = location.state ? location.state : {}
 
-    const seller = useContext(SellerContext);
+    const {seller, updateCurrentSeller} = useContext(SellerContext);
 
     let temp = ""
     switch (service.serviceType) {
@@ -40,7 +40,7 @@ export const Payment = () => {
         lastName: seller.lastName,
         title: "Sira Alle",
         description: "This is a payment originated from Sira Alle",
-        callBackUrl: "http://localhost:3000/seller/verify_payment"
+        callBackUrl: "http://serrale.com/seller/verify_payment"
     }
 
 

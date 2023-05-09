@@ -1,18 +1,18 @@
 
 import { useEffect, useState } from "react"
-import { Footer } from "../components/footer/Footer"
-import { Header } from "../components/header"
 import { CategoryHeader } from "../components/category/CategoryHeader"
-import { CategoryBody } from "../components/category/CategoryBody"
-import {category} from "../api/category"
-import { useLocation } from "react-router-dom"
 import { SearchBody } from "../components/search/SearchBody"
+import { categoryPaginatedList, subCategoryPaginatedList } from "../api"
+import { useLocation } from "react-router-dom"
 const PAGE_LIMIT = 20
-const Category = () => {
+const PaginatedCategoryServices = () => {
 
     const location = useLocation()
 
-    let cat = location.state ? location.state : ""
+    let state = location.state ? location.state : ""
+    const category = state.category
+    const subcategory = state.subcategory
+    const useSubcategory = state.useSubcategory ? state.useSubcategory : false
 
     const [currentPage, setCurrentPage] = useState(1)
     const [startPage, setStartPage] = useState(1)
@@ -25,13 +25,29 @@ const Category = () => {
     }, [])
 
     function getData(page){
-        category({category: cat, page: page, limit: PAGE_LIMIT},(results) => {
-          const tmp = results.docs
-          const pageNo = results.total / PAGE_LIMIT
-          setData([...tmp])
-          setNumOfPages(pageNo)
-          setCurrentPage(page)
-        })
+        if(useSubcategory){
+            subCategoryPaginatedList({subcategory: subcategory, page: page, limit: PAGE_LIMIT},(res) => {
+                if(res.success){
+                    console.log("subactegory paginated", res )
+                    const tmp = res.docs.docs
+                    const pageNo = res.docs.total / PAGE_LIMIT
+                    setData([...tmp])
+                    setNumOfPages(pageNo)
+                    setCurrentPage(page)
+                }
+              })
+        }else{
+            categoryPaginatedList({category: category, page: page, limit: PAGE_LIMIT},(res) => {
+                if(res.success){
+                    const tmp = res.docs.docs
+                    const pageNo = res.docs.total / PAGE_LIMIT
+                    setData([...tmp])
+                    setNumOfPages(pageNo)
+                    setCurrentPage(page)
+                }
+              })
+        }
+        
       }
 
       useEffect(() => {
@@ -42,7 +58,7 @@ const Category = () => {
         <div style={{ height: "13vh", background: " #2f3831" }}>
             
             </div>
-            <CategoryHeader title={cat}/>
+            <CategoryHeader title={useSubcategory ? subcategory : category}/>
             <SearchBody data={data} />
             <div class="col-lg-12">
                 <div class="blog-pagination margin-top-55">
@@ -79,7 +95,7 @@ const Category = () => {
     )
 }
 
-export default Category
+export default PaginatedCategoryServices
 
  // const changePage = (page) => {
         

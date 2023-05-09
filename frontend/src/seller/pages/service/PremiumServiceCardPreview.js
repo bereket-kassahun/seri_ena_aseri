@@ -3,6 +3,7 @@ import '../../../style/detail-preview-modal.css'
 
 import '../../../style/rating.css'
 import { useEffect, useState } from "react"
+import { PremiumAndStandardCard } from '../../../user/components/cards/PremiumAndStandardCard'
 
 export const PremiumServiceCardPreview = ({ data }) => {
 
@@ -87,76 +88,8 @@ export const PremiumServiceCardPreview = ({ data }) => {
                                 <span aria-hidden="true">&times;</span>
                             </button> */}
                         </div>
-                        <div class="modal-body" style={{ display: "flex", justifyContent: "center" }}>
-                            <div style={{ paddingRight: "2px", paddingLeft: "2px" }} className="col-6 " onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-                                <div style={cardStyle.container} class=" card single-service service-two style-03 " >
-                                    <a
-                                        class="service-thumb service-bg-thumb-format"
-                                        style={{ backgroundImage: 'url(' + data.img + ')', height: "150px" }}>
-                                        <div class="award-icons style-02">
-                                            <i class="las  la-check"></i>
-                                        </div>
-                                        <div class="country_city_location color-three">
-                                            <span class="single_location"> <i class="las la-map-marker-alt"></i>{data.city} {data.specificAdress}</span>
-                                        </div>
-                                    </a>
-                                    <div class="card-body" style={{ padding: "3px" }}>
-                                        <ul class="author-tag" style={{ margin: "3px" }}>
-                                            <li class="tag-list">
-                                                <a >
-                                                    <div class="authors">
-                                                        <div class="thumb">
-                                                            <img src={data.professionalImage != "" ? data.professionalImage : "imgs/seller-s21644057790.jpg"} alt="" />
-                                                        </div>
-                                                        <p class="font-weight-bold" style={{ color: "black" }}>{data.professionalFirstName} {data.professionalLastName}</p>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                        <h5 class="font-weight-bold" style={{ color: "black" }}>{title}</h5>
-                                        <div style={{ height: "70px" }}>
-                                            <p class="font-weight-normal" style={{ color: "black" }}>{body}</p>
-                                        </div>
-                                        {/* <a href="#" class="btn btn-primary">Go somewhere</a> */}
-                                        <div class="service-price-wrapper" style={{ textAlign: "center" }}>
-                                            <div class="d-flex" >
-                                                <div class="rating" style={{ display: "inline", flexGrow: "2" }}>
-                                                    {
-                                                        (
-                                                            <div class="rating" style={{ display: "inline" }}>
-                                                                {ratingView}
-                                                            </div>
-                                                        )
-                                                    }
-                                                    <div>
-                                                        <p>{data.numberOfRating}</p>
-                                                    </div>
-                                                </div>
-                                                <div style={{ flexGrow: "1" }}>
-                                                    {
-                                                        data.paymentType == 3 ?
-                                                            (
-                                                                <h6 class="card-title">
-                                                                    Negotiable Price
-                                                                </h6>
-                                                            ) :
-                                                            (
-                                                                <h6 class="card-title">
-                                                                    {data.paymentType == 2 && "Starting From"} {data.price} Birr{data.paymentType == 1 && "/Hr"}
-                                                                </h6>
-                                                            )
-                                                    }
-                                                </div>
-                                            </div>
-                                            <div class="btn-wrapper">
-                                                <a href="tel:+6199942413" class="cmn-btn btn-bg-3" style={{ background: ``, padding: "5px 10px 5px 10px" }}>
-                                                    Call Now <i class="fas fa-phone ms-2"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="modal-body" style={{ display: "flex", justifyContent: "center" }} >
+                            <PremiumAndStandardCard data={data} setRatingId={()=>{}} cardCount={2} style={{width: '50%'}}/>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >Close</button>

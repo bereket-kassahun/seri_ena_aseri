@@ -7,7 +7,7 @@ import "../../../style/payment-card.css"
 
 export const AddService = () => {
 
-    const seller = useContext(SellerContext);
+    const {seller, updateCurrentSeller} = useContext(SellerContext);
 
     return (
         <>

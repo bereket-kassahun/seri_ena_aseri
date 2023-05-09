@@ -8,7 +8,7 @@ import { useContext, useState } from "react"
 import { SellerContext } from "../context/seller-context";
 export const EditProfile = () => {
 
-    const seller = useContext(SellerContext);
+    const {seller, updateCurrentSeller} = useContext(SellerContext);
 
     const [firstName, setFirstName] = useState(seller.firstName)
     const [lastName, setLastName] = useState(seller.lastName)

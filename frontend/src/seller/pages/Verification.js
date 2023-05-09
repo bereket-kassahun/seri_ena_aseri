@@ -5,7 +5,7 @@ import { useContext } from "react"
 import { SellerContext } from "../context/seller-context";
 export const Verification = () => {
 
-    const seller = useContext(SellerContext);
+    const {seller, updateCurrentSeller} = useContext(SellerContext);
 
     return (
         <>

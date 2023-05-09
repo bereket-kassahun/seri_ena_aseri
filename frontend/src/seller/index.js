@@ -2,7 +2,7 @@ import {SideBar} from "./common/SideBarNew";
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import { AddService } from "./pages/service/AddService";
 import { SellerDashboard } from "./pages/SellerDashboard";
-import { SellerContext, seller} from "./context/seller-context";
+import { SellerContext, _seller} from "./context/seller-context";
 import { getSeller } from "../user/api/getSeller";
 import { useEffect, useState } from "react";
 import { Logout } from "./pages/Logout";
@@ -19,17 +19,20 @@ import { AddAndEditService } from "./pages/service/AddAndEditService";
 
 export default function Dashboard() {
 
-    const [currentSeller, setCurrentSeller] = useState(seller)
+    const [seller, setSeller] = useState(_seller)
 
     useEffect(() => {
         getSeller((data) => {
-            setCurrentSeller(data)
-            console.log("this is data", data)
+            setSeller(data)
         })
     }, [])
 
+    const updateCurrentSeller = (data) => {
+        setSeller(data)
+    }
+
     return (
-        <SellerContext.Provider value={currentSeller}>
+        <SellerContext.Provider value={{seller, updateCurrentSeller}}>
             <SideBar>
                 <Routes>
                     <Route exact path='/' element={<SellerDashboard />}></Route>
@@ -43,7 +46,7 @@ export default function Dashboard() {
                     <Route exact path='/logout' element={<Logout/>} ></Route>
                     <Route exact path="/service_list" element={<ServiceList/>}></Route>
                     <Route exact path="/service_list/edit_service" element={<EditService/>}></Route>
-                    <Route exact path="/profile" element={<Profile/>}></Route>
+                    <Route exact path="/profile" element={<Profile/>} updateCurrentSeller={updateCurrentSeller}></Route>
                     <Route exact path="/profile/edit_profile" element={<EditProfile/>}></Route>
                     <Route exact path="/payment" element={<Payment/>}></Route>
                 </Routes>

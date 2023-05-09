@@ -3,13 +3,13 @@
 import '../../../style/rating.css'
 import { useEffect, useState, useContext } from "react"
 import { ClientContext } from "../../context/client-context"
-import { updateCallNumber } from "../../api/index"
+import { getProfessionalInfo, updateCallNumber } from "../../api/index"
 import { Link } from 'react-router-dom'
 import './card_style.css'
-export const PaidCard = ({ data, setRatingId, cardCount = 6, ratingEnabled = true, premium = false }) => {
+export const PremiumAndStandardCard = ({ data, setRatingId, cardCount = 6, ratingEnabled = true, premium = false }) => {
     const [ratingView, setRatingView] = useState([])
     const { currentClient, addServiceIdToRatings, updateClient } = useContext(ClientContext);
-
+    const [serviceProfessional, setServiceProfessional] = useState({});
     let body = ""
     if (data.overview.length < 60) {
         body = data.overview
@@ -60,6 +60,11 @@ export const PaidCard = ({ data, setRatingId, cardCount = 6, ratingEnabled = tru
         }
 
         setRatingView([...tmp])
+
+        getProfessionalInfo({ _id: data.professionalId }, (res) => {
+            setServiceProfessional(res)
+        })
+
     }, [])
 
 
@@ -79,7 +84,7 @@ export const PaidCard = ({ data, setRatingId, cardCount = 6, ratingEnabled = tru
         container: {
             boxShadow: isHover ? '0px 0px 20px 3px' : '0px 0px 0px 0px',
             // transform: isHover ? "scale(1.05)" : "scale(1.00)",
-           
+
             paddingRight: "4px",
             paddingLeft: "4px",
             paddingBottom: "5px",
@@ -92,17 +97,20 @@ export const PaidCard = ({ data, setRatingId, cardCount = 6, ratingEnabled = tru
         case 4:
             cardClass = "col-xl-4 col-lg-6 col-sm-6 col-12 fadeInUp wow"
             break;
+        case 2:
+            cardClass = "col-xl-6 col-lg-7 col-sm-8 col-10 fadeInUp wow"
+            break;
         default:
             cardClass = "col-xl-2-5 col-lg-3 col-sm-4 col-12 fadeInUp wow"
     }
     return (
-        <div  style={cardStyle.container} className={cardClass} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} >
+        <div style={cardStyle.container} className={cardClass} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} >
             <div class='card text-center'  >
                 {/* <img src="..." class="" alt="..."> */}
                 {
                     premium ? (
                         <Link to="/service" state={{ professionalId: data.professionalId, currentServiceId: data._id }} >
-                            <div class="card-header" style={{ backgroundImage: 'url(' + data.img + ')' , height: '140px', backgroundSize: 'cover'}}>
+                            <div class="card-header" style={{ backgroundImage: 'url(' + data.img + ')', height: '140px', backgroundSize: 'cover' }}>
                                 {/* <img class="card-img" alt="User image" src={data.professionalImage != "" ? data.professionalImage : "imgs/user_profile.png"} /> */}
                             </div>
                         </Link>
@@ -130,7 +138,7 @@ export const PaidCard = ({ data, setRatingId, cardCount = 6, ratingEnabled = tru
                             ) : (
                                 <div class="rating" style={{ flexGrow: "5" }}>
                                     {ratingView}
-                                    <p style={{ display: "inline" }} >{'(' + data.numberOfRating + ')'}</p>
+                                    <p style={{ display: "inline" }} >{'(' + data.numberOfRating ? data.numberOfRating : '' + ')'}</p>
                                 </div>
                             )
                         }
@@ -151,51 +159,19 @@ export const PaidCard = ({ data, setRatingId, cardCount = 6, ratingEnabled = tru
                 </div>
 
                 <div class="card-footer text-muted" style={{ padding: '0px' }}>
-                    <button class='btn-success' style={{ backgroundColor: '#538EB6', borderColor: '#3CB043', width: '100%', height: '100%', }}>
+                    <button class='btn-success' style={{ backgroundColor: '#538EB6', borderColor: '#3CB043', width: '100%', height: '100%', }}
+                        onClick={(evnt) => {
+                            updateCallNumber({ id: data.professionalId }, (res) => {
+                                if (res.success) {
+                                }
+                            })
+                            window.location.href = 'tel:' + serviceProfessional.phoneNumber
+                        }}>
                         Call Now
                     </button>
                 </div>
             </div>
-        </div>
-        // <div class=" card single-service service-two style-03  section-bg-2 wow fadeInUp" data-wow-delay=".2s" style={{marginTop: "10px"}}>
-        //     <Link to="/service" state={{ professionalId: data.professionalId, currentServiceId: data._id }} >
-        //         <a
-        //             class="service-thumb service-bg-thumb-format"
-        //             style={{ backgroundImage: 'url('+ data.img +')' }}>
-        //             <div class="award-icons style-02">
-        //                 <i class="las  la-check"></i>
-        //             </div>
-        //             <div class="country_city_location color-three">
-        //                 <span class="single_location"> <i class="las la-map-marker-alt"></i>{data.city} {data.specificAdress}
-        //                 </span>
-        //             </div>
-        //         </a>
-        //     </Link>
-        //     <div class="card-body">
-        //         <ul class="author-tag">
-        //             <li class="tag-list">
-        //                 <a >
-        //                     <div class="authors">
-        //                         <div class="thumb">
-        //                             <img src="imgs/seller-s21644057790.jpg" alt="" />
-        //                         </div>
-        //                         <span class="author-title">{data.professionalFirstName} {data.professionalLastName} </span>
-        //                     </div>
-        //                 </a>
-        //             </li>
-        //         </ul>
-        //         <h5 class="card-title">{data.title}</h5>
-        //         <p class="card-text"> {body} Birr</p>
-        //         {/* <a href="#" class="btn btn-primary">Go somewhere</a> */}
-        //         <div class="service-price-wrapper">
-        //             <div class="service-price style-02" style={{ textAlign: "right" }}>
-        //                 <h6 class="card-title"> {data.price} Birr</h6>
-        //             </div>
-        //             <div class="btn-wrapper">
-        //                 <a class="cmn-btn btn-bg-3" style={{ background: `` }}> Call Now </a>
-        //             </div>
-        //         </div>
-        //     </div>
-        // </div>
+        </div >
+
     )
 }

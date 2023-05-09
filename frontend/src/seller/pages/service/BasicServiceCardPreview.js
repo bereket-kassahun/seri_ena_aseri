@@ -4,6 +4,7 @@ import '../../../style/three-dot.css'
 
 import { useEffect, useState, useContext } from "react"
 import { ClientContext } from "../../../user/context/client-context"
+import { BasicCard } from '../../../user/components/cards/BasicCard'
 export const BasicServiceCard = ({ data }) => {
 
     const { currentClient, addServiceIdToRatings, updateClient } = useContext(ClientContext);
@@ -81,47 +82,7 @@ export const BasicServiceCard = ({ data }) => {
                             </button> */}
                         </div>
                         <div class="modal-body" style={{ display: "flex", justifyContent: "center" }}>
-                            <div style={{ paddingRight: "2px", paddingLeft: "2px", padding: "3px" }} className=" col-12 " onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-                                <div style={cardStyle.container} class=" card " >
-                                    <div class="card-body" style={{ padding: "10px" }}>
-                                        <div class="d-flex align-items-center">
-                                            <img
-                                                src={data.professionalImage != "" ? data.professionalImage :  "imgs/seller-s21644057790.jpg"}
-                                                alt=""
-                                                style={{ width: "45px", height: "45px", }}
-                                                class="rounded-circle"
-                                            />
-                                            <div class="" style={{ flexGrow: "4", paddingLeft: "10px" }}>
-                                                <p class="font-weight-bold" style={{ color: "black" }}> {data.professionalFirstName} {data.professionalLastName}</p>
-                                                <p class="font-weight-normal" style={{ color: "black" }}>{title}</p>
-                                            </div>
-                                            <div class="" style={{ flexGrow: "1", textAlign: "center" }}>
-                                                {
-
-                                                    <div class="rating" style={{ display: "inline" }}>
-                                                        {ratingView}
-                                                    </div>
-
-                                                }
-
-                                                <div>
-                                                    <p>{data.numberOfRating}</p>
-                                                </div>
-
-                                            </div>
-                                            <div class="btn-wrapper" style={{ flexGrow: "1" }}>
-                                                <a class="cmn-btn btn-bg-3" style={{ background: ``, padding: "5px 10px 5px 10px" }}>
-                                                    Call <i class="fas fa-phone ms-2"></i>
-                                                </a>
-                                                {/* <div class='three-dot' style={{marginLeft: "10px", display: "inline", cursor: "pointer"}}>
-                                    
-                                </div> */}
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <BasicCard data={data} cardCount={1}/>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

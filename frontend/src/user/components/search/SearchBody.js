@@ -6,8 +6,9 @@ import { saveRating } from "../../api"
 import { PremiumServiceCard } from "../cards/PremiumServiceCard"
 import { StandardServiceCard } from "../cards/StandardServiceCard"
 import { BasicServiceCard } from "../cards/BasicServiceCard"
-import { PaidCard } from '../cards/PaidCard'
-export const SearchBody = ({ data, cardCount = 6, ratingEnabled = true }) => {
+import { PremiumAndStandardCard } from '../cards/PremiumAndStandardCard'
+import { BasicCard } from '../cards/BasicCard'
+export const SearchBody = ({ data, cardCount = 6, ratingEnabled = false }) => {
 
     const { currentClient, addServiceIdToRatings, updateClient } = useContext(ClientContext);
 
@@ -55,9 +56,9 @@ export const SearchBody = ({ data, cardCount = 6, ratingEnabled = true }) => {
                 {
                     data.map((value, index) => {
                         if (value.serviceType == 2)
-                            return <PaidCard data={value} setRatingId={setRatingId} cardCount={cardCount} ratingEnabled={ratingEnabled} premium={true}/>
+                            return <PremiumAndStandardCard data={value} setRatingId={setRatingId} cardCount={cardCount} ratingEnabled={ratingEnabled} premium={true}/>
                         else if (value.serviceType == 1)
-                            return <PaidCard data={value} setRatingId={setRatingId} cardCount={cardCount} ratingEnabled={ratingEnabled} premium={false}/>
+                            return <PremiumAndStandardCard data={value} setRatingId={setRatingId} cardCount={cardCount} ratingEnabled={ratingEnabled} premium={false}/>
                     })
                 }
             </div>
@@ -71,7 +72,7 @@ export const SearchBody = ({ data, cardCount = 6, ratingEnabled = true }) => {
             <div class="row" style={{ padding: "10px" }}>
                 {
                     data.map((value, index) => (
-                        value.serviceType == 0 && <BasicServiceCard data={value} setRatingId={setRatingId} cardCount={cardCount / 2} />
+                        value.serviceType == 0 && <BasicCard data={value} setRatingId={setRatingId} cardCount={cardCount / 2} />
                     ))
                 }
             </div>

@@ -8,7 +8,7 @@ import { PremiumServiceCardPreview } from './PremiumServiceCardPreview';
 import { categories } from '../../../utils/category_list';
 export const MediumService = () => {
 
-    const seller = useContext(SellerContext);
+    const {seller, updateCurrentSeller} = useContext(SellerContext);
 
     const [errorMsg, setErrorMsg] = useState("")
     const [successMsg, setSuccessMsg] = useState("")

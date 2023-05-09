@@ -62,7 +62,7 @@ function ReviewHeader({ hint, callback }) {
                             onFocus={(evnt) => { setInFocus(true); setDropdownInFocus(true) }}
                             onBlur={(evnt) => { setInFocus(false) }}
                         />
-                        <span class="input-group-text border-0" style={{ cursor: "pointer" }} id="search-addon" onClick={() => search(searchWord)}>
+                        <span class="input-group-text border-0" style={{ cursor: "pointer" }} id="search-addon" onClick={() => search(searchWord)}n>
                             {/* <Link to="/search" state={searchWord} > */}
                             <i class="fas fa-search" ></i>
                             {/* </Link> */}
@@ -74,7 +74,7 @@ function ReviewHeader({ hint, callback }) {
                             {
                                 searchResult.map((value, index) => {
                                     return (
-                                        <li key={index}><a class="dropdown-item" style={{ cursor: "pointer" }}>{value}</a></li>
+                                        <li key={index}><a class="dropdown-item" style={{ cursor: "pointer" }} onClick={() => search(searchWord)}>{value}</a></li>
                                     )
                                 })
                             }

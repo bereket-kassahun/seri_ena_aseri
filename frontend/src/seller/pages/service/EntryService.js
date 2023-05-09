@@ -9,7 +9,7 @@ import { sellerLogin } from '../../../user/api';
 import { categories } from '../../../utils/category_list';
 export const EntryService = () => {
 
-    const seller = useContext(SellerContext);
+    const {seller, updateCurrentSeller} = useContext(SellerContext);
 
     const [editorState, setEditorState] = useState(() => EditorState.createEmpty(),);
 

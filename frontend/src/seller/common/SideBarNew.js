@@ -1,4 +1,4 @@
-import { useState, useContext } from "react"
+import { useState, useContext, useEffect } from "react"
 
 import { sellerLogout } from '../api/sellerLogout'
 import { SellerContext } from '../context/seller-context'
@@ -6,7 +6,8 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import { useNavigate, } from 'react-router-dom'
 export const SideBar = ({ children }) => {
     const [toggled, setToggled] = useState(false)
-    const seller = useContext(SellerContext);
+    const { seller, updateCurrentSeller } = useContext(SellerContext);
+
 
     const [title, setTitle] = useState("Dashboard")
     const [activePage, setActivePage] = useState(1)
@@ -24,6 +25,10 @@ export const SideBar = ({ children }) => {
             }
         })
     }
+
+    useEffect(() => {
+        console.log(seller)
+    }, [])
     return (
         <>
             <div id="wrapper">

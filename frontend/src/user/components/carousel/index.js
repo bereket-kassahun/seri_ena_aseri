@@ -1,6 +1,8 @@
 import './styles.css'
 import '../../../style/hover-zoom.css'
 import { Link } from 'react-router-dom'
+
+import {categories} from '../../../utils/categories'
 export const Carousel = () => {
 
     const subCategories = [
@@ -95,15 +97,15 @@ export const Carousel = () => {
                 <div class="slider">
                     <div class="slide-track"  >
                         {
-                            subCategories.map((value, index) => {
+                            categories.map((value, index) => {
                                 return (
                                     <div class="slide" >
-                                        <Link to="/category" state={value.title} >
+                                        <Link to="/paginated_category_services" state={{useSubcategory: false, category: value.category}} >
                                             <div className={'hover-zoom disc-item d-flex flex-column ' + ((index % 2 == 0) ? "upperImage" : "lowerImage")} data-category-id="179" style={{ textAlign: 'left' }}>
                                                 <div class="img-fluid discover-image-wrapper " data-remotable="Available online">
-                                                    <img class="br-top img-fluid object-fit-cover lazy loaded" alt={value.title} width="400" height="260" title="Gardening" data-src={value.imgUrl} src={value.imgUrl} />
+                                                    <img class="br-top img-fluid object-fit-cover lazy loaded" alt={value.category} width="400" height="260" title="Gardening" data-src={value.img} src={value.img} />
                                                     {/* <p class="disc-title p-3 br-bottom mb-0" style={{ marginTop: '-80px', color: "white", fontSize: "1.5em" }}>{value.title}</p> */}
-                                                    <button  style={{ textAlign: 'left',  marginTop: '-60px', color: "white", padding: '0px', paddingRight: '2px', paddingLeft: '2px', borderRadius:'0px', backgroundColor: '#2f3831', width: '100%' }} type="button" class="br-top img-fluid object-fit-cover lazy loaded btn btn-dark ">{value.title}</button>
+                                                    <button  style={{ textAlign: 'left',  marginTop: '-60px', color: "white", padding: '0px', paddingRight: '2px', paddingLeft: '2px', borderRadius:'0px', backgroundColor: '#2f3831', width: '100%' }} type="button" class="br-top img-fluid object-fit-cover lazy loaded btn btn-dark ">{value.category}</button>
                                                     
                                                 </div>
                                             </div>

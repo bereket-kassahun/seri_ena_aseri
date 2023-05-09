@@ -64,7 +64,7 @@ export const SearchHeader = ({ hint, callback }) => {
                                 {
                                     searchResult.map((value, index) => {
                                         return (
-                                            <li key={index}><a class="dropdown-item" style={{ cursor: "pointer" }}>{value}</a></li>
+                                            <li key={index}><a class="dropdown-item" style={{ cursor: "pointer" }} onClick={() => search(searchWord)}>{value}</a></li>
                                         )
                                     })
                                 }

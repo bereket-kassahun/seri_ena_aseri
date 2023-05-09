@@ -122,7 +122,7 @@ const Service = () => {
                                                         <img src={currentService.professionalImage != "" ? currentService.professionalImage : "imgs/user_profile.png"}  alt="" />
                                                     </div>
                                                     <div class="about-seller-content">
-                                                        <h5 class="title"> <a href="../test_seller.html"> {professional.firstName} {professional.lastName}</a> </h5>
+                                                        <h5 class="title">  {professional.firstName} {professional.lastName}</h5>
                                                     </div>
                                                 </div>
                                                 <div class="seller-details-box margin-top-40">
@@ -250,11 +250,11 @@ const Service = () => {
                                         <li> {currentService.price} Birr </li>
                                     </ul>
                                     <div class="details-available-price margin-top-20">
-                                        <span class="summery-title">
+                                        {/* <span class="summery-title">
                                             <ul class='onlilne-special-list'>
                                                 <li><i class="las la-clock"></i> Delivery Days: {currentService.deliveryDay}</li>
                                             </ul>
-                                        </span>
+                                        </span> */}
 
                                         <ul class="available-list">
                                             <li> Category: {currentService.category}</li>

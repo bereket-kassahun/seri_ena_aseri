@@ -12,7 +12,7 @@ import { PremiumServiceCardPreview } from './PremiumServiceCardPreview';
 import { categories } from '../../../utils/category_list';
 export const PremiumService = () => {
 
-    const seller = useContext(SellerContext);
+    const {seller, updateCurrentSeller} = useContext(SellerContext);
 
     const [editorState, setEditorState] = useState(() => EditorState.createEmpty(),);
 

@@ -35,10 +35,16 @@ function getSeller(callback){
     networkCall({}, callback, 'GET', 'professional/get_seller')
 }
 
-function category(query, callback){
-    networkCall({}, callback, 'GET', 'services/category?category=' + query.category+'&page='+query.page+'&limit='+query.limit)
+function getProfessionalInfo(data, callback){
+    networkCall(data, callback, 'POST', 'professional/get_professional_info')
 }
 
+function categoryPaginatedList(query, callback){
+    networkCall({}, callback, 'GET', 'services/category?category=' + query.category+'&page='+query.page+'&limit='+query.limit)
+}
+function subCategoryPaginatedList(query, callback){
+    networkCall({}, callback, 'GET', 'services/subcategory?subcategory=' + query.subcategory+'&page='+query.page+'&limit='+query.limit)
+}
 function logoutClient(callback){
     networkCall({}, callback, 'GET', 'client/logout')
 }
@@ -80,7 +86,8 @@ export {
     professional_services,
     isLoggedIn,
     getSeller,
-    category,
+    categoryPaginatedList,
+    subCategoryPaginatedList,
     isClientLoggedIn,
     logoutClient,
     registerClient,
@@ -88,5 +95,6 @@ export {
     getCurrentClient,
     saveRating,
     updateCallNumber,
-    get_featured_services
+    get_featured_services,
+    getProfessionalInfo
 }
