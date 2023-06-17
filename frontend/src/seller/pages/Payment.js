@@ -1,7 +1,7 @@
 
 import { SellerContext } from "../context/seller-context";
 import { useContext, useState } from "react"
-import { useLocation } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 // import "./editor.css"
 
 
@@ -10,6 +10,8 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { get_payment_link, verify_payment } from '../api';
 export const Payment = () => {
+
+    const navigate = useNavigate()
 
     const location = useLocation()
 
@@ -81,6 +83,7 @@ export const Payment = () => {
         verify_payment({_id: seller._id}, (res) => {
             if(res.success){
                 notifySuccess("Your Payment was Successfull!")
+                navigate('/seller/service_list')
             }else{
                 notifyError("Error: The payment is not done yet!")
             }

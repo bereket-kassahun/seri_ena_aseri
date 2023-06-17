@@ -1,18 +1,49 @@
-import { useEffect, useState } from "react"
-import { notify } from "../../utils/notify"
-import { ToastContainer } from "react-toastify";
-import networkCall from "../../utils/networkCall";
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import { search_professional } from "../api";
+
+
+import { ToastContainer, toast } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.css";
+
 export const CreateService = () => {
 
     const [word, setWord] = useState('')
     const [serviceType, setServiceType] = useState(0)
     const [searchResult, setSearchResult] = useState([])
     const searchProfessional = () => {
-        networkCall({ word: word }, (data) => {
-            setSearchResult(data)
-        }, 'POST', 'admin/search_professional')
+        search_professional({ word: word }, (res) => {
+            if (res.success) {
+                setSearchResult(res.payload)
+            } else {
+                notifyWarning("something went wrong, please try again!")
+            }
+        })
     }
+
+
+
+    const notifySuccess = (msg) =>
+        toast.success(msg, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+        });
+
+    const notifyWarning = (msg) =>
+        toast.warn(msg, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+        });
+
 
     // useEffect(() => {
     //     searchProfessional()
@@ -20,6 +51,7 @@ export const CreateService = () => {
 
     return (
         <>
+            <ToastContainer />
             <div class="row gx-3 mb-3">
                 <div class="col-md-6">
                     <label class="small mb-1" for="inputLastName">Select Type of Service</label>
@@ -39,10 +71,10 @@ export const CreateService = () => {
             </div>
             <ul >
                 {
-                    searchResult.map((value, index) => {
+                    searchResult && searchResult.map((value, index) => {
                         return (
                             <li>
-                                <Link class="dropdown-item" to="/admin/dashboard/add_service" state={{ serviceType: serviceType, value: value }} style={{ cursor: "pointer" }}>
+                                <Link class="dropdown-item" to="/aldf45233kjdfj0-3482034234-hidden-link-sdkfj-dfd/add_service" state={{ serviceType: serviceType, value: value }} style={{ cursor: "pointer" }}>
                                     {value.email}
                                 </Link>
                             </li>

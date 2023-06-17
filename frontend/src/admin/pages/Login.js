@@ -1,5 +1,12 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { is_logged_in, login } from "../api"
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { ADMIN_HIDDEN_URL } from "../../config";
+
+
 export const Login = () => {
 
 
@@ -7,17 +14,45 @@ export const Login = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
 
-    const login = () => {
-        if (email == "b@gmail.com" && password == "12345") {
-            navigator("dashboard")
+    const adminLogin = () => {
+        if (email != "" && password != "") {
+            login({ email, password }, (res) => {
+                if (res.success) {
+                    navigator('/'+ADMIN_HIDDEN_URL+'/dashboard')
+                } else {
+                    notifyError("Incorrect Email Or Password!")
+                }
+            })
+        } else {
+            notifyError("Empty Email Or Password!")
         }
     }
 
+    useEffect(() => {
+        is_logged_in({}, (res) => {
+            if (res.success) {
+                navigator('/'+ADMIN_HIDDEN_URL+'/dashboard')
+            } else {
+
+            }
+        })
+    }, [])
+
+    const notifyError = (msg) =>
+        toast.error(msg, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+        });
+
+
+
     return (
         <>
-            <div style={{ height: "13vh", background: " #37517e" }}>
-
-            </div>
+            <ToastContainer />
             <section class="vh-100" >
                 <div class="container py-5 h-100">
                     <div class="row d-flex justify-content-center align-items-center h-100">
@@ -41,7 +76,7 @@ export const Login = () => {
                                     </div>
 
                                     <button class="btn btn-primary btn-lg btn-block" type="submit" onClick={(evnt) => {
-                                        login()
+                                        adminLogin()
                                     }}>Login</button>
 
                                     <hr class="my-4" />

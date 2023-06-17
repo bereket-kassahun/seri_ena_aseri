@@ -148,7 +148,10 @@ export const Login = () => {
                                     }
                                 }}>Login Now</button>
                                 <span class="bottom-register"> Do not have Account?   <Link to="/register"><a class="resgister-link" > Register </a></Link> </span>
-
+                                {
+                                    !isClient && <span class="bottom-register"> Forgot Password?   <a href="/send_reset_password_link" > Reset Password</a> </span>
+                                }
+                            
                             </form>
                         </div>
                     </div>

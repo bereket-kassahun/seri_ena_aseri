@@ -1,10 +1,10 @@
 import { EditorState } from 'draft-js';
 
 import { uploadImage } from '../../api/uploadImage';
-import { serviceRegister } from '../../api/serviceRegister';
+import { serviceRegister } from '../../api';
 import { SellerContext } from "../../context/seller-context";
 import { useContext, useEffect, useState } from "react"
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import "./editor.css"
 
 import { RichTextEditor } from '@mantine/rte';
@@ -28,6 +28,12 @@ export const AddAndEditService = ({ editing = false }) => {
 
     const { seller, updateCurrentSeller } = useContext(SellerContext);
 
+    const navigate = useNavigate()
+
+    if (!seller) {
+        navigate('/seller')
+    }
+
     const [editorState, setEditorState] = useState(() => EditorState.createEmpty(),);
 
     const [subcategories, setSubcategories] = useState([])
@@ -38,7 +44,7 @@ export const AddAndEditService = ({ editing = false }) => {
 
     const [title, setTitle] = useState("")
     const [overview, setOverview] = useState("")
-    const [category,setCategory ] = useState(mainCategories[0])
+    const [category, setCategory] = useState(mainCategories[0])
     const [subcategory, setSubcategory] = useState(subcategories[0])
     const [price, setPrice] = useState("")
     const [bio, setBio] = useState("")
@@ -55,12 +61,20 @@ export const AddAndEditService = ({ editing = false }) => {
     const [latitude, setLatitued] = useState("")
     const [longitude, setLongitued] = useState("")
 
-    const currentService = {
-        title, overview, category, subcategory,price, paymentType,bio, city, specificAdress, deliveryDay, professionalStatus, img, detail: editorState,
-        professionalFirstName: seller.firstName, professionalLastName: seller.lastName, professionalImage: seller.img, latitude, longitude
+    const [incorrectImageTypeSelected, setIncorrectImageTypeSelected] = useState(false);
+
+    let currentService = {}
+
+    if (seller) {
+        currentService = {
+            title, overview, category, subcategory, price, paymentType, bio, city, specificAdress, deliveryDay, professionalStatus, img, detail: editorState,
+            professionalFirstName: seller.firstName, professionalLastName: seller.lastName, professionalImage: seller.img, latitude, longitude, status: 2
+        }
     }
 
 
+    const [letterCountOverview, setLetterCountOverview] = useState(0)
+    const [selectedImageName, setSelectedImageName] = useState("")
 
     useEffect(() => {
         if (type == 2 || type == 1) {
@@ -83,22 +97,37 @@ export const AddAndEditService = ({ editing = false }) => {
     }
 
     const onFileChange = (evnt) => {
-        setImageUploadStarted(true)
-        setImageUploadEnded(false)
         let files = Array.from(evnt.target.files)
 
+        if(files.length == 0){
+            return;
+        }
+
+        
+        setImageUploadStarted(true)
+        setImageUploadEnded(false)
+        
         const formData = new FormData()
 
         files.forEach((file, i) => {
+            setSelectedImageName(file.name)
             formData.append(i, file)
         })
 
         uploadImage(formData, (res) => {
-            res.forEach((data, i) => {
-                setImg(data.secure_url)
-                setImageUploadStarted(false)
-                setImageUploadEnded(true)
-            })
+            console.log(res)
+            if (res.success) {
+                res.payload.forEach((data, i) => {
+                    setImg(data.secure_url)
+                    setImageUploadStarted(false)
+                    setImageUploadEnded(true)
+                    setIncorrectImageTypeSelected(false);
+                })
+            } else {
+                if (res.error.message)
+                    notifyError(res.error.message)
+                setIncorrectImageTypeSelected(true);
+            }
         })
     }
 
@@ -125,54 +154,61 @@ export const AddAndEditService = ({ editing = false }) => {
 
 
     const validateData = () => {
+        if (incorrectImageTypeSelected) {
+            notifyError("Incorrect Image File Selected")
+            return false
+        }
         if (serviceRegistered) {
             notifyError("The Service is Already Registered")
             return false
         }
-        switch (type) {
-            case 2:
-                if (title == "" || overview == "" || category == "" || (price == "" && paymentType != 3) || city == "" || editorState.isEmpty) {
-                    notifyError("Please fill all fields")
-                    return false
-                }
-                if (imageUploadStarted && !imageUploadEnded) {
-                    notifyError("Image is being uploaded")
-                    return false
-                } else if (img == "") {
-                    notifyError("Please pick an image")
-                    return false
-                } else if (!checkLocationPermission()) {
-                    return false
-                }
-                break;
-            case 1:
-                if (title == "" || overview == "" || category == "" || (price == "" && paymentType != 3) || city == "") {
-                    notifyError("Please fill all fields")
-                    return false
-                }
-                if (imageUploadStarted && !imageUploadEnded) {
-                    notifyError("Image is being uploaded")
-                    return false
-                } else if (img == "") {
-                    notifyError("Please pick an image")
-                    return false
-                } else if (!checkLocationPermission()) {
-                    return false
-                }
-                break;
-            case 0:
-                if (title == "" || overview == "" || category == "" || (price == "" && paymentType != 3)) {
-                    notifyError("Please fill all fields")
-                    return false
-                }
-                break;
-            default:
+
+        if (type == '2') {
+            if (title == "" || overview == "" || category == "" || (price == "" && paymentType != 3) || city == "" || editorState.isEmpty) {
+                notifyError("Please fill all fields")
                 return false
+            }
+            if (imageUploadStarted && !imageUploadEnded) {
+                notifyError("Image is being uploaded")
+                return false
+            } else if (img == "") {
+                notifyError("Please pick an image")
+                return false
+            } else if (!checkLocationPermission()) {
+                notifyError("Please allow location Permission")
+                return false
+            }
         }
+
+        if (type == '1') {
+            if (title == "" || overview == "" || category == "" || (price == "" && paymentType != 3) || city == "") {
+                notifyError("Please fill all fields")
+                return false
+            }
+            if (imageUploadStarted && !imageUploadEnded) {
+                notifyError("Image is being uploaded")
+                return false
+            } else if (img == "") {
+                notifyError("Please pick an image")
+                return false
+            } else if (!checkLocationPermission()) {
+                return false
+            }
+        }
+
+        if (type == '0') {
+            if (title == "" || overview == "" || category == "" || (price == "" && paymentType != 3)) {
+                notifyError("Please fill all fields")
+                return false
+            }
+        }
+
         if (seller == null || seller._id == null) {
             notifyError("Please Login first")
             return false
         }
+
+
         return true
     }
 
@@ -186,7 +222,8 @@ export const AddAndEditService = ({ editing = false }) => {
         const serviceType = type
 
         console.log(typeof (detail), detail, editorState.isEmpty)
-        serviceRegister({ title, price, overview, category, subcategory, bio, city, specificAdress, detail, img, deliveryDay, professionalId, professionalFirstName, professionalLastName, professionalImage, professionalStatus, serviceType, professionalPhoneNumber, paymentType, latitude, longitude }, (res) => {
+
+        serviceRegister({ title, price, overview, category, subcategory, bio, city, specificAdress, detail, img, deliveryDay, professionalId, professionalFirstName, professionalLastName, professionalImage, professionalStatus, serviceType, professionalPhoneNumber, paymentType, latitude, longitude}, (res) => {
             if (res.success) {
                 notifySuccess("Service Registered")
                 setServiceRegistered(true)
@@ -199,10 +236,11 @@ export const AddAndEditService = ({ editing = false }) => {
 
 
 
-    const updateSubCategory = (currentCategory) =>{
+    const updateSubCategory = (currentCategory) => {
         categories.forEach(element => {
-            if(element.category == currentCategory){
+            if (element.category == currentCategory) {
                 setSubcategories(element.subcategories)
+                setSubcategory(element.subcategories[0])
             }
         });
     }
@@ -219,7 +257,7 @@ export const AddAndEditService = ({ editing = false }) => {
             <div class="card-body">
                 <div class="form-group input-group">
                     <div class="input-group-prepend">
-                        <span class="input-group-text"> <b> Title </b> </span>
+                        <span class="input-group-text"> <b> Service Title </b> </span>
                     </div>
                     <input class="form-control" name="title" id="title" type="text" placeholder="Add title" onChange={(evnt) => { setTitle(evnt.target.value) }} />
                 </div>
@@ -228,7 +266,7 @@ export const AddAndEditService = ({ editing = false }) => {
                         <span class="input-group-text"> <b> Category </b> </span>
                     </div>
                     <select class="custom-select" onChange={(evnt) => {
-                         setCategory(evnt.target.value) 
+                        setCategory(evnt.target.value)
 
                     }}>
                         {
@@ -263,13 +301,20 @@ export const AddAndEditService = ({ editing = false }) => {
                     <input class="form-control" name="title" id="title" type="number" placeholder="Add price" onChange={(evnt) => { setPrice(evnt.target.value) }} />
                 </div>
                 <div class="form-group">
-                    <label for="title" class="info-title"> <b>Overview</b> </label>
-                    <textarea class="form-control" name="title" id="title" rows="3" type="text" placeholder="Add overview" onChange={(evnt) => { setOverview(evnt.target.value) }} />
+                    <label for="message-text" class="col-form-label">Overivew: {letterCountOverview}/90</label>
+                    <textarea class="form-control" name="title" id="title" rows="3" type="text" placeholder="Add overview" maxlength="90"
+                        onChange={(evnt) => {
+                            setOverview(evnt.target.value)
+                            setLetterCountOverview(evnt.target.value.length)
+                        }}>
+                    </textarea>
                 </div>
                 <div class="form-group">
                     <label for="title" class="info-title"> <b> Service Image </b>  </label>
                     <div class="media-upload-btn-wrapper" style={{ position: 'relative', float: "right" }} >
-                        <input type='file' id='single' onChange={(evnt) => { onFileChange(evnt) }} />
+                        <label for="image" class="btn btn-secondary">Select Image</label>
+                        <input type='file' id='image' style={{visibility:"hidden"}} accept="image/*" onChange={(evnt) => { onFileChange(evnt) }} label='Image' />
+                        <p>{selectedImageName}</p>
                     </div>
                 </div>
             </div>
@@ -309,7 +354,6 @@ export const AddAndEditService = ({ editing = false }) => {
 
     return (
         <>
-
             <ToastContainer />
             {
                 type == 2 && (
@@ -397,6 +441,7 @@ export const AddAndEditService = ({ editing = false }) => {
                                     </div>
                                     <div>
                                         <button type="button" class="btn btn-primary btn-lg btn-open-modal" onClick={() => {
+
                                             if (validateData()) {
                                                 register()
                                             }
@@ -409,7 +454,7 @@ export const AddAndEditService = ({ editing = false }) => {
                         </div>
 
                         <DetailPreview currentService={currentService} professional={seller} />
-                        <PremiumServiceCardPreview data={currentService} setRatingId={()=>{}}/>
+                        <PremiumServiceCardPreview data={currentService} setRatingId={() => { }} />
                     </>
                 )
             }
@@ -463,7 +508,7 @@ export const AddAndEditService = ({ editing = false }) => {
                             </div>
                         </div>
 
-                        <PremiumServiceCardPreview data={currentService} setRatingId={()=>{}}/>
+                        <PremiumServiceCardPreview data={currentService} setRatingId={() => { }} />
                     </>
                 )
             }

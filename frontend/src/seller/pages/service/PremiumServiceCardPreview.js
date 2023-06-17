@@ -11,10 +11,10 @@ export const PremiumServiceCardPreview = ({ data }) => {
     const [ratingView, setRatingView] = useState([])
 
     let body = ""
-    if (data.overview.length < 60) {
-        body = data.overview
+    if (data?.overview.length < 60) {
+        body = data?.overview
     } else {
-        body = data.overview.substring(0, 59) + '...'
+        body = data?.overview?.substring(0, 59) + '...'
     }
 
 
@@ -22,16 +22,16 @@ export const PremiumServiceCardPreview = ({ data }) => {
 
     let title = ""
 
-    if (data.title.length < 16) {
-        title = data.title
+    if (data?.title.length < 16) {
+        title = data?.title
     } else {
-        title = data.title.substring(0, 15) + '...'
+        title = data?.title.substring(0, 15) + '...'
     }
 
 
 
     useEffect(() => {
-        let rating = data.rating ? data.rating : 0
+        let rating = data?.rating ? data?.rating : 0
         let tmp = []
 
 

@@ -35,6 +35,35 @@ function get_services(data, callback){
 function toggle_status(data, callback){
     networkCall(data, callback, 'POST', 'services/toggle_status')
 }
+
+function register_service(data, callback){
+    networkCall(data, callback, 'POST', 'services/register')
+}
+
+function search_professional(data, callback){
+    networkCall(data, callback, 'POST', 'admin/search_professional')
+}
+
+function login(data, callback){
+    networkCall(data, callback, 'POST', 'admin/login')
+}
+
+function is_logged_in(data, callback){
+    networkCall(data, callback, 'POST', 'admin/is_logged_in')
+}
+
+function register(data, callback){
+    networkCall(data, callback, 'POST', 'admin/register')
+}
+
+function logout(callback){
+    networkCall({}, callback, 'GET', 'admin/logout')
+}
+
+function get_admin(data, callback){
+    networkCall(data, callback, 'POST', 'admin/get_admin')
+}
+
 export {
     get_pending_services,
     approve_service,
@@ -44,5 +73,12 @@ export {
     get_info,
     get_professionals,
     get_services,
-    toggle_status
+    toggle_status,
+    register_service,
+    search_professional,
+    login,
+    is_logged_in,
+    register,
+    logout,
+    get_admin,
 }

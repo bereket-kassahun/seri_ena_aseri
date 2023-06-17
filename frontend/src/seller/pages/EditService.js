@@ -309,8 +309,11 @@ export const EditService = () => {
                                         <div class="col-md-6">
                                             {basicServiceForm}
                                         </div>
+                                        
                                         <div class="col-md-6">
                                             {aboutYou}
+                                        </div>
+                                        <div class="col-md-12">
 
                                             <div class="card card-secondary margin-top-30">
                                                 <div class="card-header">

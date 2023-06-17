@@ -153,16 +153,23 @@ export default function Container({ children }) {
                                     +2519543476
                                 </a>
                             </li>
-                            <li>
-                                <Link className="btn-header" to="/login">
-                                    Sign In
-                                </Link>
-                            </li>
-                            <li>
-                                <Link className="btn-blog" to="/register">
-                                    Join Us
-                                </Link>
-                            </li>
+                            {
+                                !isSellerLoggedIn && (
+                                    <>
+                                        <li>
+                                            <Link className="btn-header" to="/login">
+                                                Sign In
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <Link className="btn-blog" to="/register">
+                                                Join Us
+                                            </Link>
+                                        </li>
+                                    </>
+                                )
+                            }
+
 
                             {
                                 isSellerLoggedIn &&
@@ -220,7 +227,7 @@ export default function Container({ children }) {
             <footer id="footer">
 
 
-                <div class="footer-top" style={{padding: '0px'}}>
+                <div class="footer-top" style={{ padding: '0px' }}>
                     <div class="container">
                         <div class="row">
 
@@ -252,14 +259,14 @@ export default function Container({ children }) {
                             </div>
 
                             <div class="col-lg-3 col-md-6 footer-links">
-                                <h4>Our Services</h4>
+                                {/* <h4>Our Services</h4>
                                 <ul>
                                     <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
                                     <li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
                                     <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
                                     <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
                                     <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
-                                </ul>
+                                </ul> */}
                             </div>
 
                             <div class="col-lg-3 col-md-6 footer-links">
@@ -281,10 +288,10 @@ export default function Container({ children }) {
 
                 <div class="container footer-bottom clearfix">
                     <div class="copyright">
-                       &copy; Copyright <strong><span>SERRALE {new Date().getFullYear()}</span></strong>. All Rights Reserved
+                        &copy; Copyright <strong><span>SERRALE {new Date().getFullYear()}</span></strong>. All Rights Reserved
                     </div>
                     <div class="credits">
-                        Designed by <a href="/">SERRALE Team</a>  <img style={{height: '60px', width: '60px'}} src='imgs/white_logo.png' alt="Logo DevLoad" /> 
+                        Designed by <a href="/">SERRALE Team</a>  <img style={{ height: '60px', width: '60px' }} src='imgs/white_logo.png' alt="Logo DevLoad" />
                     </div>
                 </div>
             </footer>

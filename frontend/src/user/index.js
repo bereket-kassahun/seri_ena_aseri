@@ -35,7 +35,6 @@ export const User = () => {
                     <Route exact path='service' element={<Service />}></Route>
                     <Route exact path='login' element={<Login />}></Route>
                     <Route exact path='register' element={<Register />}></Route>
-                    <Route exact path='admin' element={<AdminLogin />}></Route>
                     <Route exact path='privacy' element={<PrivacyPolicy />}></Route>
                     <Route exact path='howto' element={<HowTo />}></Route>
                     <Route exact path='review' element={<LeaveReview />}></Route>

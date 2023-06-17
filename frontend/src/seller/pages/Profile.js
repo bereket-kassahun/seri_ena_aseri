@@ -13,7 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 export const Profile = () => {
 
-    const {seller, updateCurrentSeller} = useContext(SellerContext);
+    const { seller, updateCurrentSeller } = useContext(SellerContext);
 
     const [uploadingInProgress, setUploadingInProgress] = useState(false)
     const [errorMsg, setErrorMsg] = useState("")
@@ -38,8 +38,15 @@ export const Profile = () => {
 
 
     const onFileChange = (evnt) => {
+
+        let files = Array.from(evnt.target.files)
+
+        if (files.length == 0) {
+            return;
+        }
+
         setUploadingInProgress(true)
-        const files = Array.from(evnt.target.files)
+
         const formData = new FormData()
 
         files.forEach((file, i) => {
@@ -47,11 +54,15 @@ export const Profile = () => {
         })
 
         uploadImage(formData, (res) => {
-            res.forEach((data, i) => {
-                // setImg(data.secure_url)
-                setImg(data.secure_url)
-            })
-            setUploadingInProgress(false)
+            if (res.success) {
+                res.payload.forEach((data, i) => {
+                    setImg(data.secure_url)
+                    setUploadingInProgress(false)
+                })
+            } else {
+                if (res.error.message)
+                    notifyError(res.error.message)
+            }
         })
     }
 
@@ -118,7 +129,7 @@ export const Profile = () => {
                                 <div class="card-body text-center">
                                     <img class="img-account-profile rounded-circle mb-2" src={img} alt="" />
                                     <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
-                                    <input type='file' id='single' accept="image/png, image/gif, image/jpeg" name="Upload new image" onChange={(evnt) => { onFileChange(evnt) }} />
+                                    <input type='file' id='single' accept="image/png,  image/jpeg" name="Upload new image" onChange={(evnt) => { onFileChange(evnt) }} />
                                 </div>
                             </div>
 

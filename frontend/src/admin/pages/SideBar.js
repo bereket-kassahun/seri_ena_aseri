@@ -2,6 +2,9 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
+import { is_logged_in, logout } from '../api'
+import { ADMIN_HIDDEN_URL } from '../../config'
+import { useEffect } from 'react'
 
 export default function SideBar({ children }) {
 
@@ -12,10 +15,26 @@ export default function SideBar({ children }) {
 
     const navigate = useNavigate()
 
-    const logout = () => {
-        navigate("/")
+    const adminLogout = () => {
+        logout((res) => {
+            if(res.success){
+                navigate('/'+ADMIN_HIDDEN_URL+'/login')
+            }else{
+                console.log(res)
+            }
+        });
     }
 
+
+    useEffect(() => {
+        is_logged_in({}, (res) => {
+            if (res.success) {
+                // navigator('dashboard')
+            } else {
+                navigate('/'+ADMIN_HIDDEN_URL+'/login')
+            }
+        })
+    }, [activePage])
 
     return (
         <>
@@ -32,7 +51,7 @@ export default function SideBar({ children }) {
                     <hr class="sidebar-divider my-0" />
 
                     <li class="nav-item">
-                        <Link to='' className={"nav-link " + (activePage == 1 ? 'active' : '')} onClick={() => { setActivePage(1); setTitle("Dashboard") }}>
+                        <Link to='dashboard' className={"nav-link " + (activePage == 1 ? 'active' : '')} onClick={() => { setActivePage(1); setTitle("Dashboard") }}>
                             <a > <i class="las la-th"></i><span> Dashboard</span>  </a>
                         </Link>
                     </li>
@@ -68,7 +87,7 @@ export default function SideBar({ children }) {
                         </Link>
                     </li> */}
                     <li class="nav-item">
-                        <Link to='/' className={"nav-link " + (activePage == 8 ? 'active' : '')} onClick={() => { logout() }}>
+                        <Link  className={"nav-link " + (activePage == 8 ? 'active' : '')} onClick={() => { adminLogout() }}>
                             <a> <i class="fas fa-sign-out-alt"></i><span>Log Out</span>  </a>
                         </Link>
                     </li> 

@@ -36,22 +36,22 @@ export const Dashboard = () => {
         get_info((res) => {
             if (res.success) {
                 const info = res.info
-                const temp1 = info?.currentMonthRegisteredServices
+                const temp1 = info?.currentWeekRegisteredServices
                 let temp2 = []
                 let count1 = 1
                 for (var propt in temp1) {
                     // console.log(propt + ': ' + obj[propt]);
-                    temp2.push({ x: new Date((new Date).getFullYear(), (new Date).getMonth(), count1), y: temp1[propt] })
+                    temp2.push(temp1[propt])
                     count1++
                 }
                 setServiceData([...temp2])
 
-                const temp3 = info?.currentMonthRegisteredSellers
+                const temp3 = info?.currentWeekRegisteredSellers
                 let temp4 = []
                 let count2 = 1
                 for (var propt in temp3) {
                     // console.log(propt + ': ' + obj[propt]);
-                    temp4.push({ x: new Date((new Date).getFullYear(), (new Date).getMonth(), count2), y: temp3[propt] })
+                    temp4.push(temp3[propt])
                     count2++
                 }
                 setSellerData([...temp4])
@@ -128,12 +128,12 @@ export const Dashboard = () => {
                 <div class="col-md-6 col-lg-6 single-chart-summery">
                     <div class="card">
                         <div class="card-header">
-                            <h5>This Month Registered Professionals</h5>
+                            <h5>This Week Registered Professionals</h5>
                         </div>
                         <div class="card-block">
                             <div class="">
 
-                                <AreaGraph data={sellerData}
+                                <AreaGraph data={sellerData} title={"professionals"}
                                     lineStroke="#200066FF"
                                 />
                             </div>
@@ -144,11 +144,11 @@ export const Dashboard = () => {
                 <div class="col-md-6 col-lg-6 single-chart-summery">
                     <div class="card">
                         <div class="card-header">
-                            <h5>This Month Registered Services</h5>
+                            <h5>This Week Registered Services</h5>
                         </div>
                         <div class="card-block">
                             <div class="">
-                                <AreaGraph data={serviceData}
+                                <AreaGraph data={serviceData} title={"services"}
                                     lineStroke="#2BAE66FF"
                                 />
                             </div>
