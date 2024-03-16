@@ -45,11 +45,11 @@ function search_professional(data, callback){
 }
 
 function login(data, callback){
-    networkCall(data, callback, 'POST', 'admin/login')
+    networkCall(data, callback, 'POST', 'admin/sub_admin_login')
 }
 
 function is_logged_in(data, callback){
-    networkCall(data, callback, 'POST', 'admin/is_logged_in')
+    networkCall(data, callback, 'POST', 'admin/sub_admin_is_logged_in')
 }
 
 function register(data, callback){

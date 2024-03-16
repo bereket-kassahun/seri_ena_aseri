@@ -1,13 +1,12 @@
 import { useState, useContext, useEffect } from "react"
 
 import { sellerLogout } from '../api/sellerLogout'
-import { SellerContext } from '../context/seller-context'
+import { SellerContext, english_text, amhairc_text } from '../context/seller-context'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import { useNavigate, } from 'react-router-dom'
 export const SideBar = ({ children }) => {
     const [toggled, setToggled] = useState(false)
     const { seller, updateCurrentSeller } = useContext(SellerContext);
-
 
     const [title, setTitle] = useState("Dashboard")
     const [activePage, setActivePage] = useState(1)
@@ -29,6 +28,10 @@ export const SideBar = ({ children }) => {
     useEffect(() => {
         console.log(seller)
     }, [])
+
+
+    const [toggleDropDown, setToggleDropDown] = useState(false)
+
     return (
         <>
             <div id="wrapper">
@@ -44,37 +47,37 @@ export const SideBar = ({ children }) => {
                                 <div class="sidebar-brand-text mx-3">  {seller.firstName}</div>
                             </a>
                             <a class="d-flex align-items-center justify-content-center" href="/">
-                                visit site
+                                {seller?.text?.home?.visitSite}
                             </a>
                         </div>
                     </div>
                     <hr class="sidebar-divider my-0" />
 
                     <li class="nav-item">
-                        <Link to='' className={"nav-link " + (activePage == 1 ? 'active' : '')} onClick={() => { setActivePage(1); setTitle("Dashboard") }}>
-                            <a > <i class="las la-th"></i><span> Dashboard</span>  </a>
+                        <Link to='' className={"nav-link " + (activePage == 1 ? 'active' : '')} onClick={() => { setActivePage(1); setTitle(seller?.text?.home?.dashboard) }}>
+                            <a > <i class="las la-th"></i><span>{seller?.text?.home?.dashboard}</span>  </a>
                         </Link>
                     </li>
                     <li class="nav-item">
-                        <Link to='services' className={"nav-link " + (activePage == 2 ? 'active' : '')} onClick={() => { setActivePage(2); setTitle("Add Services") }}>
-                            <a > <i class="las la-gifts"></i><span> Add Service</span></a>
-                        </Link>
-                    </li>
-
-                    <li class="nav-item">
-                        <Link to='service_list' className={"nav-link " + (activePage == 3 ? 'active' : '')} onClick={() => { setActivePage(3); setTitle("Services") }}>
-                            <a > <i class="las la-gifts"></i><span>Services</span> </a>
+                        <Link to='services' className={"nav-link " + (activePage == 2 ? 'active' : '')} onClick={() => { setActivePage(2); setTitle(seller?.text?.home?.add_service) }}>
+                            <a > <i class="las la-gifts"></i><span>{seller?.text?.home?.add_service}</span></a>
                         </Link>
                     </li>
 
                     <li class="nav-item">
-                        <Link to='profile' className={"nav-link " + (activePage == 4 ? 'active' : '')} onClick={() => { setActivePage(4); setTitle("Profile") }}>
-                            <a > <i class="las la-user"></i> <span>Profile</span> </a>
+                        <Link to='service_list' className={"nav-link " + (activePage == 3 ? 'active' : '')} onClick={() => { setActivePage(3); setTitle(seller?.text?.home?.services) }}>
+                            <a > <i class="las la-gifts"></i><span>{seller?.text?.home?.services}</span> </a>
+                        </Link>
+                    </li>
+
+                    <li class="nav-item">
+                        <Link to='profile' className={"nav-link " + (activePage == 4 ? 'active' : '')} onClick={() => { setActivePage(4); setTitle(seller?.text?.home?.profile) }}>
+                            <a > <i class="las la-user"></i> <span>{seller?.text?.home?.profile}</span> </a>
                         </Link>
                     </li>
                     <li class="nav-item">
                         <Link to='' className={"nav-link " + (activePage == 8 ? 'active' : '')} onClick={() => { logout() }}>
-                            <a> <i class="fas fa-sign-out-alt"></i><span>Log Out</span>  </a>
+                            <a> <i class="fas fa-sign-out-alt"></i><span>{seller?.text?.home?.logout}</span>  </a>
                         </Link>
                     </li>
 
@@ -94,7 +97,25 @@ export const SideBar = ({ children }) => {
                             <button id="sidebarToggleTop" onClick={(evnt) => { setToggled(!toggled) }} class="btn btn-link d-md-none rounded-circle mr-3">
                                 <i class="fa fa-bars"></i>
                             </button>
-                            <div class="sidebar-brand-text mx-3"> {title}</div>
+                            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%" }} >
+                                <h3 style={{ marginLeft: "30px" }}>{title}</h3>
+
+                                <div className={"dropdown "} style={{ alignItems: "center", marginRight: "20px" }}>
+                                    <a href="" onClick={(evnt) => {
+                                        evnt.preventDefault()
+                                        setToggleDropDown(!toggleDropDown)
+                                    }}>
+                                        <span style={{ color: "black" }}>{seller?.language == "english" ? "Eng" : "Amh"}</span>
+                                        <i class="bi bi-chevron-down" style={{ color: "black" }}></i>
+                                    </a>
+                                    <ul className={((toggleDropDown) ? 'dropdown-active' : '')} style={{ width: "100px" }}>
+                                        <li onClick={(evnt) => { updateCurrentSeller({ ...seller, language: "english", text: english_text }) }}><a style={{ cursor: "pointer" }}>Eng</a></li>
+                                        <li onClick={(evnt) => { updateCurrentSeller({ ...seller, language: "amharic", text: amhairc_text }) }}><a style={{ cursor: "pointer" }}>Amh</a></li>
+                                    </ul>
+                                </div>
+
+
+                            </div>
                         </nav>
                         <div class="container-fluid">
                             {children}

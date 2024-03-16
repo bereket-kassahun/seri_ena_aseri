@@ -23,7 +23,7 @@ export default function Dashboard() {
 
     useEffect(() => {
         getSeller((data) => {
-            setSeller(data)
+            setSeller({..._seller, ...data})
         })
     }, [])
 

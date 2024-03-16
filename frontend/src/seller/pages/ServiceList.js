@@ -143,13 +143,14 @@ export const ServiceList = () => {
                                 row.status == 0 ? (
                                     <button _ngcontent-serverapp-c81="" data-cy="buyNowFreelancer" class="btn btn-primary my-3 fw-500"
                                         onClick={(evnt) => {
-                                            check_publishing_ability({ serviceId: row._id, serviceType: row.serviceType, professionalId: row.professionalId }, (res) => {
-                                                if (res.success) {
-                                                    notifySuccess("Published  Selected Service")
-                                                } else {
-                                                    navigate("/seller/payment", { state: row })
-                                                }
-                                            })
+                                            navigate("/seller/payment", { state: row })
+                                            // check_publishing_ability({ serviceId: row._id, serviceType: row.serviceType, professionalId: row.professionalId }, (res) => {
+                                            //     if (res.success) {
+                                            //         notifySuccess("Published  Selected Service")
+                                            //     } else {
+                                                    
+                                            //     }
+                                            // })
                                         }}>
                                         <span _ngcontent-serverapp-c81="">Publish</span>
                                     </button>

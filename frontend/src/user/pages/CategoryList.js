@@ -3,7 +3,9 @@
 import { useNavigate } from 'react-router-dom'
 import '../../style/hover-zoom.css'
 import { categories } from '../../utils/categories'
-import { useEffect } from 'react'
+import { useContext, useEffect, useState } from 'react'
+import { ThemeContext } from '../context/theme-context'
+import { categories_amharic } from '../../utils/categories_amharic'
 export default function CategoryList() {
 
     const navigate = useNavigate()
@@ -11,25 +13,36 @@ export default function CategoryList() {
     useEffect(() => {
         window.scrollTo(0, 0)
     }, [])
+
+    const { currentTheme, updateLanguage } = useContext(ThemeContext);
+    const [data, setData] = useState(categories);
+    useEffect(() => {
+        if(currentTheme?.language === "english"){
+            setData(categories);
+        }else{
+            setData(categories_amharic);
+        }
+        
+    },[currentTheme])
     return (
         <>
 
-            <div style={{ height: "13vh", background: " #2f3831" }}>
+            <div style={{ height: "100px", background: " #2f3831" }}>
 
             </div>
 
-            <div class="container" style={{ marginTop: "30px" }}>
+            <div class="" style={{ marginTop: "30px" }}>
 
                 {
-                    categories.map((value, index) => {
+                    data.map((value, index) => {
                         const ret = (
                             <>
-                                <div class="row">
-                                    <div class="d-flex col-12 justify-content-between ">
+                                <div class="row" style={{justifyContent: "center"}}>
+                                    <div class="d-flex col-10 justify-content-between ">
                                         <h4 class="discover-section-title">{value.category}</h4>
                                     </div>
                                 </div>
-                                <div class="row flex-nowrap scroll-touch ">
+                                <div class="row flex scroll-touch " style={{justifyContent: "center"}}>
                                     <div class="col-8 col-md-3 card">
                                         <div class="disc-item d-flex flex-column" data-category-id="179">
                                             <div class="img-fluid discover-image-wrapper hover-zoom" data-remotable="Available online">

@@ -34,7 +34,7 @@ export const SearchHeader = ({ hint, callback }) => {
                 result.push(value.title)
 
             })
-            setSearchResult([...result])
+            setSearchResult([...result,...searchResult])
         })
     }
 

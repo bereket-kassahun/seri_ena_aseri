@@ -16,14 +16,16 @@ import { theme, ThemeContext } from './user/context/theme-context'
 import { useEffect } from 'react';
 import { getCurrentClient } from './user/api';
 import { AdminDashboard } from './admin/pages/index'
+import { SubAdminDashboard } from './sub-admin/pages/index'
 import { Login as AdminLogin } from './admin/pages/Login'
+import { Login as SubAdminLogin } from './sub-admin/pages/Login'
 
 import { User } from './user'
 import { PrivateRoutes } from './utils/PrivateRoutes';
 
 import { isLoggedIn } from './user/api';
 import { Navigate } from 'react-router-dom';
-import { ADMIN_HIDDEN_URL } from './config';
+import { ADMIN_HIDDEN_URL, SUB_ADMIN_HIDDEN_URL } from './config';
 // import { Test2 } from './Test2';
 function App() {
 
@@ -83,7 +85,9 @@ function App() {
             {/* <Route exact path='/about' element={<PrivateRoutes/>}> */}
             <Route exact path='/seller/*' element={<PrivateRoutes><Dashboard /></PrivateRoutes>}></Route>
             <Route exact path={'/' + ADMIN_HIDDEN_URL + '/login'} element={<AdminLogin />}></Route>
+            <Route exact path={'/' + SUB_ADMIN_HIDDEN_URL + '/login'} element={<SubAdminLogin />}></Route>
             <Route exact path={'/' + ADMIN_HIDDEN_URL + '/*'} element={<AdminDashboard />}></Route>
+            <Route exact path={'/' + SUB_ADMIN_HIDDEN_URL + '/*'} element={<SubAdminDashboard />}></Route>
             {/* <Route exact path='/test/*' element={<Test />}></Route> */}
             {/* <Route exact path='/test/card' element={<Test2 />}></Route> */}
             {/* </Route> */}

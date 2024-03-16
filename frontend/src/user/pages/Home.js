@@ -28,7 +28,7 @@ export const Home = () => {
       {/* <ProfessionalServices /> */}
       {/* <TradersServices /> */}
       <WorkWithUs/>
-      <Marketing/>
+      {/* <Marketing/> */}
     </div>
   );
 }

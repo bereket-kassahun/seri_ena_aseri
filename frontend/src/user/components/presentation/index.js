@@ -33,7 +33,7 @@ const Presentation = () => {
       })
       console.log(search_word)
       console.log(result)
-      setSearchResult([...result])
+      setSearchResult([...result, ...searchResult])
     })
   }
 

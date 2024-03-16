@@ -11,6 +11,7 @@ import { search } from '../api'
 
 import { saveRating } from "../api"
 import networkCall from "../../utils/networkCall"
+import { ToastContainer, toast } from "react-toastify"
 export const LeaveReview = () => {
     const { currentClient, addServiceIdToRatings, updateClient } = useContext(ClientContext);
 
@@ -59,7 +60,7 @@ export const LeaveReview = () => {
     //   }, [rating, price, type])
 
     function getData(page = 1, word = searchWord) {
-        search({ rating: '-1', price: '-1', type: '-1', word: word, page: 1, limit: 20 }, (results) => {
+        search({ rating: '-1', price: '-1', type: '-1', paymentType: '-1', word: word, page: 1, limit: 20 }, (results) => {
             const tmp = results.docs
             const pageNo = results.total / 20
             console.log(results)
@@ -75,9 +76,22 @@ export const LeaveReview = () => {
         setSearchWord(word)
     }
 
+
+    const notifySuccess = (msg) =>
+        toast.success(msg, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+        });
+
+
     const temp = { title: 'sdsd ', body: 'adffffff', overview: ' who cares who cares ' }
     return (
         <>
+            <ToastContainer />
             <ReviewHeader hint={''} callback={callback} />
             <div className="row" style={{ margin: '0px' }}>
 
@@ -138,6 +152,7 @@ export const LeaveReview = () => {
                                     if (!clientRatedService) {
                                         addServiceIdToRatings(currentServiceId)
                                         saveCurrentRating()
+                                        notifySuccess("You have Succefully Rated Your Service")
                                     }
                                 }}>
                                     {

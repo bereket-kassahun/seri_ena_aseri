@@ -18,13 +18,13 @@ export const JoinUs = () => {
                         {/* <h2 class="title">{currentTheme.text.home.text6}</h2> */}
                         {/* <h2 class="title">Do You Want to be a Seller?</h2> */}
                         {/* <span class="join-para">{currentTheme.text.home.text7}</span> */}
-                        <span class="join-para" style={{display: 'inline', marginRight: '40px'}}>Become A Member</span>
+                        <span class="join-para" style={{display: 'inline', marginRight: '40px'}}>{currentTheme?.text?.home?.text23}</span>
                         <div class="btn-wrapper margin-top-50" style={{display: 'inline'}}>
                             <Link to="/register">
                                 <a href="" class="cmn-btn btn-bg-3" style={{fontSize: '2em',textTransform: 'lowercase' }}
                                     >
                                     {/* {currentTheme.text.home.text8} */}
-                                    apply online!
+                                    {currentTheme?.text?.home?.text24}
                                 </a>
                             </Link>
                         </div>

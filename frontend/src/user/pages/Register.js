@@ -1,8 +1,8 @@
-import { useState, useEffect  } from "react"
+import { useState, useEffect } from "react"
 import { Footer } from "../components/footer/Footer"
 import { Header } from "../components/header"
 import { sendEmail } from "../api/send_email"
-import { verifyEmail } from "../api/verifyEmail"
+import { verifyEmail, verifyClientEmail } from "../api/verifyEmail"
 import { useNavigate } from "react-router-dom"
 import { registerClient } from '../api'
 import { useLocation } from "react-router-dom"
@@ -35,6 +35,7 @@ const Register = () => {
     const [confirmPassword, setConfirmPassword] = useState("")
 
     const [code, setCode] = useState("")
+    const [clientCode, setClientCode] = useState("")
 
     const [terms, setTerms] = useState(false)
 
@@ -103,7 +104,13 @@ const Register = () => {
     };
 
     const sendVerificationEmail = () => {
-        sendEmail(email, (result) => {
+        let em = "";
+        if(isClient){
+            em = clientEmail;
+        }else{
+            em = email;
+        }
+        sendEmail(em, (result) => {
             console.log(result)
             if (result.success) {
                 setVerificationSuccessMsg("We Have Sent An Email Containing Your Verification Code")
@@ -113,6 +120,20 @@ const Register = () => {
                 setVerificationSuccessMsg("")
             }
         })
+    }
+
+    const verifyClientEmailAddress = () => {
+        verifyClientEmail({ email: clientEmail, code: clientCode, username: clientUsername, password: clientPassword }, (result) => {
+            if (result.success) {
+                setVerificationSuccessMsg("You have Been Successfully Registered")
+                setVerificationErrorMsg("")
+                navigate("/login")
+            } else {
+                setVerificationErrorMsg("Invalid code!")
+                setVerificationSuccessMsg("")
+            }
+        })
+
     }
 
     const verifyEmailAddress = () => {
@@ -132,7 +153,7 @@ const Register = () => {
         setIsClient(isClient)
     }
     useEffect(() => {
-      window.scrollTo(0, 0)
+        window.scrollTo(0, 0)
     }, [])
     return (
         <>
@@ -145,24 +166,30 @@ const Register = () => {
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="registration-seller-btn">
-                                <ul class="registration-tabs tabs" style={{gap: '10px'}}>
-                                    <li  style={{padding: '3px 10px'}} data-tab="tab_one" className={"is_user_seller " + (isClient ? 'active' : '')} onClick={() => { setIsClient(true) }}>
+                                <ul class="registration-tabs tabs" style={{ gap: '10px' }}>
+                                    <li style={{ padding: '3px 10px' }} data-tab="tab_one" className={"is_user_seller " + (isClient ? 'active' : '')} onClick={() => { setIsClient(true) }}>
 
                                         <div class="single-tabs-registration" >
                                             <div class="icon">
                                                 <i class="las la-user-alt"></i>
                                             </div>
-                                            <div class="contents">
+                                            <div class="contents"
+                                                onClick={(evnt) => {
+                                                    setActiveElement(1)
+                                                }}>
                                                 <h4 class="title" id="buyer"> Customer </h4>
                                             </div>
                                         </div>
                                     </li>
-                                    <li  style={{padding: '3px 10px'}} data-tab="tab_two" className={"is_user_seller " + (!isClient ? 'active' : '')} onClick={() => { setIsClient(false) }}>
+                                    <li style={{ padding: '3px 10px' }} data-tab="tab_two" className={"is_user_seller " + (!isClient ? 'active' : '')} onClick={() => { setIsClient(false) }}>
                                         <div class="single-tabs-registration">
                                             <div class="icon">
                                                 <i class="las la-briefcase"></i>
                                             </div>
-                                            <div class="contents">
+                                            <div class="contents"
+                                                onClick={(evnt) => {
+                                                    setActiveElement(1)
+                                                }}>
                                                 <h4 class="title" id="seller"> Professional </h4>
                                             </div>
                                         </div>
@@ -171,9 +198,18 @@ const Register = () => {
                             </div>
                             <div class={"tabs"}>
                                 <div className={"tab-content " + (isClient ? 'active' : '')} id="tab_one">
-                                    <form id="msform-one" class="msform user-register-form" >
-                                        <div class="registration-step-form margin-top-10 ">
-                                            <div className={"fieldset-info user-information another-tab-content "}  >
+                                    <div class="registration-step-form margin-top-55 tabs">
+                                        <form id="msform-one" class="msform user-register-form" >
+
+                                            <ul class="registration-list step-list-two">
+                                                <li className={"list " + (activeElement == 1 || activeElement == 2 ? 'active' : '')} data-tab="tab1" >
+                                                    <a class="list-click" href="javascript:void(0)"> 1 </a>
+                                                </li>
+                                                <li className={"list " + (activeElement == 2 ? 'active' : '')} data-tab="tab2" >
+                                                    <a class="list-click" href="javascript:void(0)"> 2 </a>
+                                                </li>
+                                            </ul>
+                                            <div className={"fieldset-info user-information tab-content another-tab-content " + (activeElement == 1 ? 'active' : '')} id="tab2" >
 
                                                 {
                                                     clientErrorMsg.length > 0 && (
@@ -197,7 +233,7 @@ const Register = () => {
                                                             <div class="single-content margin-top-30">
                                                                 <label class="forms-label"> Username* </label>
                                                                 <input class="form--control" type="text" name="username" id="username"
-                                                                    placeholder="Type Email" onChange={(evnt) => { setClientUsername(evnt.target.value) }} />
+                                                                    placeholder="Type Username" onChange={(evnt) => { setClientUsername(evnt.target.value) }} />
                                                             </div>
                                                         </div>
                                                         <div class="single-forms">
@@ -215,10 +251,42 @@ const Register = () => {
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <input type="button" name="next" class=" action-button" value="Submit" data-tab="tab1" onClick={() => { if (validateClientData()) registerCurrentClient(2) }} />
+                                                <input type="button" name="next" class=" action-button" value="Next" data-tab="tab1" onClick={() => { if (validateClientData()) {setActiveElement(2); sendVerificationEmail();} }} />
+
                                             </div>
-                                        </div>
-                                    </form>
+                                            <div className={"fieldset-service terms-conditions tab-content another-tab-content " + (activeElement == 2 ? 'active' : '')} id="tab1" >
+                                                {
+                                                    verificationErrorMsg.length > 0 && (
+                                                        <div class="alert alert-danger margin-top-20" role="alert">
+                                                            {verificationErrorMsg}
+                                                        </div>
+                                                    )
+                                                }
+                                                {
+                                                    verificationSuccessMsg.length > 0 && (
+                                                        <div class="alert alert-primary margin-top-20" role="alert">
+                                                            {verificationSuccessMsg}
+                                                        </div>
+                                                    )
+                                                }
+                                                <div class="single-content padding-top-20">
+                                                    <h3 class="register-title margin-bottom-40" style={{ textAlign: 'center' }}> Verify Your Account </h3>
+                                                    <div class="single-forms">
+                                                        <input class="form--control" type="text" name="name" id="verify"
+                                                            placeholder="Enter your code" onChange={(evnt) => { setClientCode(evnt.target.value) }} />
+                                                    </div>
+                                                </div>
+                                                <div class="resend-verify-code-wrap" style={{ cursor: "pointer" }}>
+                                                    <a class="text-center" onClick={() => { sendVerificationEmail() }}>Resend Code</a>
+                                                </div>
+                                                <input type="hidden" name="get_user_type" id="get_user_type" value="1" />
+                                                <input type="button" name="previous" class=" action-button-previous" value="Previous" data-tab="tab2" onClick={() => { setActiveElement(1) }} />
+                                                <input type="button" name="submit" class="next action-button" value="Submit" onClick={() => { verifyClientEmailAddress() }} />
+                                                {/* <input type="button" name="next" class=" action-button" value="Submit" data-tab="tab1" onClick={() => { if (validateClientData()) sendVerificationEmail(); }} /> */}
+
+                                            </div>
+                                        </form>
+                                    </div>
                                 </div>
                                 <div className={"tab-content another-tab-content " + (!isClient ? 'active' : '')} id="tab_two">
                                     <div class="registration-step-form margin-top-55 tabs">

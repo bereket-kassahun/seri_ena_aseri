@@ -50,6 +50,7 @@ export const AddAndEditService = ({ editing = false }) => {
     const [bio, setBio] = useState("")
     const [img, setImg] = useState("")
     const [city, setCity] = useState("")
+    const [specificLocation, setSpecificLocation] = useState("")
     const [specificAdress, setSpecificAdress] = useState("")
     const [deliveryDay, setDeliveryDay] = useState("")
     const [professionalStatus, setProfessionalStatus] = useState(type)
@@ -57,6 +58,7 @@ export const AddAndEditService = ({ editing = false }) => {
     const [serviceRegistered, setServiceRegistered] = useState(false)
     const [imageUploadStarted, setImageUploadStarted] = useState(false)
     const [imageUploadEnded, setImageUploadEnded] = useState(false)
+    const [experience, setExperience] = useState(0)
 
     const [latitude, setLatitued] = useState("")
     const [longitude, setLongitued] = useState("")
@@ -67,8 +69,8 @@ export const AddAndEditService = ({ editing = false }) => {
 
     if (seller) {
         currentService = {
-            title, overview, category, subcategory, price, paymentType, bio, city, specificAdress, deliveryDay, professionalStatus, img, detail: editorState,
-            professionalFirstName: seller.firstName, professionalLastName: seller.lastName, professionalImage: seller.img, latitude, longitude, status: 2
+            title, overview, category, subcategory, price, experience, paymentType, bio, city, specificAdress, deliveryDay, professionalStatus, img, detail: editorState,
+            professionalFirstName: seller.firstName, professionalLastName: seller.lastName, professionalImage: seller?.img, latitude, longitude, status: 2
         }
     }
 
@@ -99,14 +101,14 @@ export const AddAndEditService = ({ editing = false }) => {
     const onFileChange = (evnt) => {
         let files = Array.from(evnt.target.files)
 
-        if(files.length == 0){
+        if (files.length == 0) {
             return;
         }
 
-        
+
         setImageUploadStarted(true)
         setImageUploadEnded(false)
-        
+
         const formData = new FormData()
 
         files.forEach((file, i) => {
@@ -174,10 +176,11 @@ export const AddAndEditService = ({ editing = false }) => {
             } else if (img == "") {
                 notifyError("Please pick an image")
                 return false
-            } else if (!checkLocationPermission()) {
-                notifyError("Please allow location Permission")
-                return false
             }
+            // else if (!checkLocationPermission()) {
+            //     notifyError("Please allow location Permission")
+            //     return false
+            // }
         }
 
         if (type == '1') {
@@ -191,9 +194,10 @@ export const AddAndEditService = ({ editing = false }) => {
             } else if (img == "") {
                 notifyError("Please pick an image")
                 return false
-            } else if (!checkLocationPermission()) {
-                return false
             }
+            // else if (!checkLocationPermission()) {
+            //     return false
+            // }
         }
 
         if (type == '0') {
@@ -217,13 +221,13 @@ export const AddAndEditService = ({ editing = false }) => {
         const professionalId = seller._id
         const professionalFirstName = seller.firstName
         const professionalLastName = seller.lastName
-        const professionalImage = seller.img
+        const professionalImage = seller?.img
         const professionalPhoneNumber = seller.phoneNumber
         const serviceType = type
 
         console.log(typeof (detail), detail, editorState.isEmpty)
 
-        serviceRegister({ title, price, overview, category, subcategory, bio, city, specificAdress, detail, img, deliveryDay, professionalId, professionalFirstName, professionalLastName, professionalImage, professionalStatus, serviceType, professionalPhoneNumber, paymentType, latitude, longitude}, (res) => {
+        serviceRegister({ title, price, experience, overview, category, subcategory, bio, city, specificAdress, detail, img, deliveryDay, professionalId, professionalFirstName, professionalLastName, professionalImage, professionalStatus, serviceType, professionalPhoneNumber, paymentType, latitude, longitude, specificLocation }, (res) => {
             if (res.success) {
                 notifySuccess("Service Registered")
                 setServiceRegistered(true)
@@ -252,18 +256,18 @@ export const AddAndEditService = ({ editing = false }) => {
     const basicServiceForm = (
         <div class="card card-primary">
             <div class="card-header">
-                <h3 class="card-title"><b> Basic Info </b></h3>
+                <h3 class="card-title"><b> {seller?.text?.create_service?.basicInfo} </b></h3>
             </div>
             <div class="card-body">
                 <div class="form-group input-group">
                     <div class="input-group-prepend">
-                        <span class="input-group-text"> <b> Service Title </b> </span>
+                        <span class="input-group-text"> <b>{seller?.text?.create_service?.serviceTitle}</b> </span>
                     </div>
                     <input class="form-control" name="title" id="title" type="text" placeholder="Add title" onChange={(evnt) => { setTitle(evnt.target.value) }} />
                 </div>
                 <div class="form-group input-group">
                     <div class="input-group-prepend">
-                        <span class="input-group-text"> <b> Category </b> </span>
+                        <span class="input-group-text"> <b> {seller?.text?.create_service?.category} </b> </span>
                     </div>
                     <select class="custom-select" onChange={(evnt) => {
                         setCategory(evnt.target.value)
@@ -278,7 +282,7 @@ export const AddAndEditService = ({ editing = false }) => {
                 </div>
                 <div class="form-group input-group">
                     <div class="input-group-prepend">
-                        <span class="input-group-text"> <b> SubCategory </b> </span>
+                        <span class="input-group-text"> <b> {seller?.text?.create_service?.subCategory} </b> </span>
                     </div>
                     <select class="custom-select" onChange={(evnt) => { setSubcategory(evnt.target.value) }}>
                         {
@@ -290,7 +294,7 @@ export const AddAndEditService = ({ editing = false }) => {
                 </div>
                 <div class="form-group input-group">
                     <div class="input-group-prepend">
-                        <span class="input-group-text"> <b> Price </b> </span>
+                        <span class="input-group-text"> <b> {seller?.text?.create_service?.price} </b> </span>
                     </div>
                     <select class="custom-select" style={{ maxwidth: "60px" }} onChange={(evnt) => { setPaymentType(evnt.target.value) }}>
                         <option value={0} selected="">Fixed Price</option>
@@ -300,8 +304,14 @@ export const AddAndEditService = ({ editing = false }) => {
                     </select>
                     <input class="form-control" name="title" id="title" type="number" placeholder="Add price" onChange={(evnt) => { setPrice(evnt.target.value) }} />
                 </div>
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <b> Experience(In Years) </b> </span>
+                    </div>
+                    <input class="form-control" name="experience" id="experience" type="number" placeholder="Experience" onChange={(evnt) => { setExperience(evnt.target.value) }} />
+                </div>
                 <div class="form-group">
-                    <label for="message-text" class="col-form-label">Overivew: {letterCountOverview}/90</label>
+                    <label for="message-text" class="col-form-label">{seller?.text?.create_service?.overview}: {letterCountOverview}/90</label>
                     <textarea class="form-control" name="title" id="title" rows="3" type="text" placeholder="Add overview" maxlength="90"
                         onChange={(evnt) => {
                             setOverview(evnt.target.value)
@@ -310,10 +320,10 @@ export const AddAndEditService = ({ editing = false }) => {
                     </textarea>
                 </div>
                 <div class="form-group">
-                    <label for="title" class="info-title"> <b> Service Image </b>  </label>
+                    <label for="title" class="info-title"> <b> {seller?.text?.create_service?.imageInfo} </b>  </label>
                     <div class="media-upload-btn-wrapper" style={{ position: 'relative', float: "right" }} >
-                        <label for="image" class="btn btn-secondary">Select Image</label>
-                        <input type='file' id='image' style={{visibility:"hidden"}} accept="image/*" onChange={(evnt) => { onFileChange(evnt) }} label='Image' />
+                        <label for="image" class="btn btn-secondary"> {seller?.text?.create_service?.selectImage}</label>
+                        <input type='file' id='image' style={{ visibility: "hidden" }} accept="image/*" onChange={(evnt) => { onFileChange(evnt) }} label='Image' />
                         <p>{selectedImageName}</p>
                     </div>
                 </div>
@@ -326,24 +336,38 @@ export const AddAndEditService = ({ editing = false }) => {
     const aboutYou = (
         <div class="card card-secondary" style={{ height: '100%' }}>
             <div class="card-header">
-                <h3 class="card-title"> <b> About You </b></h3>
+                <h3 class="card-title"> <b> {seller?.text?.create_service?.aboutYou} </b></h3>
             </div>
             <div class="card-body">
                 <div class="form-group input-group">
                     <div class="input-group-prepend">
-                        <span class="input-group-text"> <b> City </b> </span>
+                        <span class="input-group-text"> <b>  {seller?.text?.create_service?.city}  </b> </span>
                     </div>
                     <input class="form-control" name="title" id="title" type="text" placeholder="Add city" onChange={(evnt) => { setCity(evnt.target.value) }} />
                 </div>
                 <div class="form-group input-group">
                     <div class="input-group-prepend">
-                        <span class="input-group-text"> <b> Location </b> </span>
+                        <span class="input-group-text"> <b>  {seller?.text?.create_service?.specificLocation}  </b> </span>
+                    </div>
+                    <select class="custom-select" style={{ maxwidth: "60px" }} onChange={(evnt) => { setSpecificLocation(evnt.target.value) }}>
+                        <option value={"Kechene"} selected="">Kechene</option>
+                        <option value={"Bole"} >Bole</option>
+                        <option value={"Tor-Hayiloch"} >Tor-Hayiloch</option>
+                        <option value={"HayaHulet"} >HayaHulet</option>
+                        <option value={"CMC"} >CMC</option>
+                        <option value={"Ayer-Tena"} >Ayer-Tena</option>
+                    </select>
+                </div>
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <b>  {seller?.text?.create_service?.location}  </b> </span>
                     </div>
                     <input class="form-control" name="latitude" id="title" type="number" value={latitude} />
                     <input class="form-control" name="longitued" id="title" type="number" value={longitude} />
                 </div>
+
                 <div class="form-group">
-                    <label for="title" class="info-title"> <b>Bio</b>  </label>
+                    <label for="title" class="info-title"> <b> {seller?.text?.create_service?.bio} </b>  </label>
                     <textarea class="form-control" name="title" id="title" rows="6" type="text" placeholder="write your personal info that clients can see" onChange={(evnt) => { setBio(evnt.target.value) }} />
                 </div>
             </div>
@@ -373,7 +397,7 @@ export const AddAndEditService = ({ editing = false }) => {
                                         <div class="col-md-8">
                                             <div class="card card-secondary margin-top-30">
                                                 <div class="card-header">
-                                                    <h3 class="card-title"> <b> Service Detail </b></h3>
+                                                    <h3 class="card-title"> <b> {seller?.text?.create_service?.serviceDetail} </b></h3>
                                                 </div>
                                                 <div class="card-body">
                                                     <div class="single-dashboard-input">
@@ -387,26 +411,26 @@ export const AddAndEditService = ({ editing = false }) => {
                                         <div class='col-md-4'>
                                             <div class="card card-secondary margin-top-30">
                                                 <div class="card-header">
-                                                    <h3 class="card-title"> <b> Notes! </b></h3>
+                                                    <h3 class="card-title"> <b> {seller?.text?.create_service?.notes} </b></h3>
                                                 </div>
                                                 <div class="card-body">
                                                     <div class="single-dashboard-input">
                                                         <div class="single-info-input margin-top-30" >
                                                             <div class="list-group">
                                                                 <a class="list-group-item list-group-item-action">
-                                                                    <p class="mb-1">Add content:</p>
-                                                                    <p style={{ fontSize: '11px' }}>To add content, simply click inside the editor and start typing. You can also paste text from another source, like a Word document or email.</p>
+                                                                    <p class="mb-1">{seller?.text?.create_service?.note1Title}</p>
+                                                                    <p style={{ fontSize: '11px' }}>{seller?.text?.create_service?.note1Text}</p>
                                                                 </a>
                                                                 <a class="list-group-item list-group-item-action">
 
-                                                                    <p class="mb-1">Formatting:</p>
-                                                                    <p style={{ fontSize: '11px' }}>To format your text, use the toolbar at the top of the editor. You can change the font, size, and color of your text, as well as add bold, italic, and underline formatting. You can also create bulleted or numbered lists and align your text to the left, center, or right.</p>
+                                                                    <p class="mb-1">{seller?.text?.create_service?.note2Title}</p>
+                                                                    <p style={{ fontSize: '11px' }}>{seller?.text?.create_service?.note2Text}</p>
 
                                                                 </a>
                                                                 <a class="list-group-item list-group-item-action">
 
-                                                                    <p class="mb-1">Add links:</p>
-                                                                    <p style={{ fontSize: '11px' }}>To add links to your content, select the text you want to link and click on the "Insert Link" button in the toolbar. You can link to another page on our website or to an external website.</p>
+                                                                    <p class="mb-1">{seller?.text?.create_service?.note13Title}</p>
+                                                                    <p style={{ fontSize: '11px' }}>{seller?.text?.create_service?.note3Text}</p>
 
                                                                 </a>
                                                             </div>
@@ -559,9 +583,6 @@ export const AddAndEditService = ({ editing = false }) => {
                     </>
                 )
             }
-
-
-
         </>
     )
 }

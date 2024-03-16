@@ -7,7 +7,7 @@ import "../../../style/payment-card.css"
 
 export const AddService = () => {
 
-    const {seller, updateCurrentSeller} = useContext(SellerContext);
+    const { seller, updateCurrentSeller } = useContext(SellerContext);
 
     return (
         <>
@@ -23,33 +23,33 @@ export const AddService = () => {
                     <div class="card h-100 zi-1">
                         <div class="card-header text-center">
                             <div class="mb-2">
-                                <span class="fs-5 align-top text-dark fw-semi-bold">Birr</span>
+                                <span class="fs-5 align-top text-dark fw-semi-bold">{seller?.text?.add_service?.basic?.text0}</span>
                                 <span id="pricingCount1" class="fs-1 text-dark fw-semi-bold" data-hs-toggle-switch-item-options="{
                              &quot;min&quot;: 29,
                              &quot;max&quot;: 19
-                           }">39</span>
+                           }">{seller?.text?.add_service?.basic?.text1}</span>
                                 {/* <span>/mo</span> */}
                             </div>
 
-                            <h3 class="card-title">Basic Service</h3>
+                            <h3 class="card-title">{seller?.text?.add_service?.basic?.text2}</h3>
                             <div _ngcontent-serverapp-c81="" class="small mb-2">
-                                For services that take minimal space when displayed to clients
+                                {seller?.text?.add_service?.basic?.text3}
                             </div>
                         </div>
 
                         <div class="card-body d-flex justify-content-center py-0">
                             <ul class="list-checked list-checked-soft-bg-primary">
-                                <li class="list-checked-item">Title</li>
-                                <li class="list-checked-item">Full Name</li>
-                                <li class="list-checked-item">rating</li>
-                                <li class="list-checked-item">Shown in List Format</li>
+                                <li class="list-checked-item">{seller?.text?.add_service?.basic?.text4}</li>
+                                <li class="list-checked-item">{seller?.text?.add_service?.basic?.text5}</li>
+                                <li class="list-checked-item">{seller?.text?.add_service?.basic?.text6}</li>
+                                <li class="list-checked-item">{seller?.text?.add_service?.basic?.text7}</li>
                             </ul>
                         </div>
 
                         <div class="card-footer text-center" style={{ borderTop: "none" }}>
                             <div class="d-grid mb-2">
-                                <Link to="add_edit_service" state={{type: 0}} style={{ margin: "auto" }}>
-                                    <button type="button" class="btn btn-ghost-primary">Create Service</button>
+                                <Link to="add_edit_service" state={{ type: 0 }} style={{ margin: "auto" }}>
+                                    <button type="button" class="btn btn-ghost-primary">{seller?.text?.add_service?.createService}</button>
                                 </Link>
                             </div>
                         </div>
@@ -59,36 +59,36 @@ export const AddService = () => {
                     <div class="card h-100 zi-1 bg-primary text-white">
                         <div class="card-header text-center">
                             <div class="mb-2">
-                                <span class="fs-5 align-top  fw-semi-bold ">Birr</span>
+                                <span class="fs-5 align-top  fw-semi-bold ">{seller?.text?.add_service?.standard?.text0}</span>
                                 <span id="pricingCount1" class="fs-1  fw-semi-bold " data-hs-toggle-switch-item-options="{
                              &quot;min&quot;: 29,
                              &quot;max&quot;: 19
-                           }" >59</span>
+                           }" >{seller?.text?.add_service?.standard?.text1}</span>
                                 {/* <span>/mo</span> */}
                             </div>
 
-                            <h3 class="card-title text-white">Standard Service</h3>
+                            <h3 class="card-title text-white">{seller?.text?.add_service?.standard?.text2}</h3>
                             <div _ngcontent-serverapp-c81="" class="small mb-2 text-white">
-                                For services that will be displayed in a card format to clients
+                            {seller?.text?.add_service?.standard?.text3}
                             </div>
                         </div>
 
                         <div class="card-body d-flex justify-content-center py-0">
                             <ul class="list-checked list-checked-soft-bg-primary text-white">
 
-                                <li class="list-checked-item-white text-white">Title</li>
-                                <li class="list-checked-item-white text-white">Full Name</li>
-                                <li class="list-checked-item-white text-white">Header Image</li>
-                                <li class="list-checked-item-white text-white">Overview</li>
-                                <li class="list-checked-item-white text-white">Shown in a card format</li>
-                                <li class="list-checked-item-white text-white">Shown at top</li>
+                                <li class="list-checked-item-white text-white">{seller?.text?.add_service?.standard?.text4}</li>
+                                <li class="list-checked-item-white text-white">{seller?.text?.add_service?.standard?.text5}</li>
+                                <li class="list-checked-item-white text-white">{seller?.text?.add_service?.standard?.text6}</li>
+                                <li class="list-checked-item-white text-white">{seller?.text?.add_service?.standard?.text7}</li>
+                                <li class="list-checked-item-white text-white">{seller?.text?.add_service?.standard?.text8}</li>
+                                <li class="list-checked-item-white text-white">{seller?.text?.add_service?.standard?.text9}</li>
                             </ul>
                         </div>
 
                         <div class="card-footer text-center" style={{ borderTop: "none" }}>
                             <div class="d-grid mb-2">
-                                <Link to="add_edit_service" state={{type: 1}} style={{ margin: "auto" }}>
-                                    <button type="button" class="btn btn-ghost-primary text-white">Create Service</button>
+                                <Link to="add_edit_service" state={{ type: 1 }} style={{ margin: "auto" }}>
+                                    <button type="button" class="btn btn-ghost-primary text-white">{seller?.text?.add_service?.createService}</button>
                                 </Link>
 
                             </div>
@@ -99,37 +99,37 @@ export const AddService = () => {
                     <div class="card h-100 zi-1">
                         <div class="card-header text-center">
                             <div class="mb-2">
-                                <span class="fs-5 align-top text-dark fw-semi-bold">Birr</span>
+                                <span class="fs-5 align-top text-dark fw-semi-bold">{seller?.text?.add_service?.premium?.text0}</span>
                                 <span id="pricingCount1" class="fs-1 text-dark fw-semi-bold" data-hs-toggle-switch-item-options="{
                              &quot;min&quot;: 29,
                              &quot;max&quot;: 19
-                           }">79</span>
+                           }">{seller?.text?.add_service?.premium?.text1}</span>
                                 {/* <span>/mo</span> */}
                             </div>
 
-                            <h3 class="card-title">Premium Service</h3>
+                            <h3 class="card-title">{seller?.text?.add_service?.premium?.text2}</h3>
                             <div _ngcontent-serverapp-c81="" class="small mb-2">
-                                For services that  will be displayed in a card form and have detail pages
+                            {seller?.text?.add_service?.premium?.text3}
                             </div>
                         </div>
 
                         <div class="card-body d-flex justify-content-center py-0">
                             <ul class="list-checked list-checked-soft-bg-primary">
 
-                                <li class="list-checked-item">Title</li>
-                                <li class="list-checked-item">Full Name</li>
-                                <li class="list-checked-item">Header Image</li>
-                                <li class="list-checked-item">Overview</li>
-                                <li class="list-checked-item">Shown in a card format</li>
-                                <li class="list-checked-item">Shown at top</li>
-                                <li class="list-checked-item">Contains a detail page</li>
+                                <li class="list-checked-item">{seller?.text?.add_service?.premium?.text4}</li>
+                                <li class="list-checked-item">{seller?.text?.add_service?.premium?.text5}</li>
+                                <li class="list-checked-item">{seller?.text?.add_service?.premium?.text6}</li>
+                                <li class="list-checked-item">{seller?.text?.add_service?.premium?.text7}</li>
+                                <li class="list-checked-item">{seller?.text?.add_service?.premium?.text8}</li>
+                                <li class="list-checked-item">{seller?.text?.add_service?.premium?.text9}</li>
+                                <li class="list-checked-item">{seller?.text?.add_service?.premium?.text10}</li>
                             </ul>
                         </div>
 
                         <div class="card-footer text-center" style={{ borderTop: "none" }}>
                             <div class="d-grid mb-2">
-                                <Link to="add_edit_service" state={{type: 2}} style={{ margin: "auto" }}>
-                                    <button type="button" class="btn btn-ghost-primary">Create Service</button>
+                                <Link to="add_edit_service" state={{ type: 2 }} style={{ margin: "auto" }}>
+                                    <button type="button" class="btn btn-ghost-primary">{seller?.text?.add_service?.createService}</button>
                                 </Link>
                             </div>
                         </div>

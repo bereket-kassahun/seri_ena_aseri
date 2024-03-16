@@ -19,7 +19,7 @@ export const HowTo = () => {
                 <div class="container">
                     <div class="row text-center">
 
-                        <div class="col-lg-9 col-lg-offset-3 col-md-10 col-md-offset-3 col-sm-12 col-sm-offset-3 col-xs-12  head-line">
+                        <div class="">
                             <h2>{currentTheme.text.how_to.text1} </h2>
                             <hr />
                         </div>

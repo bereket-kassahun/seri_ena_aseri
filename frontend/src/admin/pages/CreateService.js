@@ -57,7 +57,7 @@ export const CreateService = () => {
                     <label class="small mb-1" for="inputLastName">Select Type of Service</label>
                     <select class="form-select" aria-label="Default select example"
                         onChange={(evnt) => { setServiceType(evnt.target.value) }}>
-                        <option value="0">Basic Service</option>
+                        <option value="0" selected>Basic Service</option>
                         <option value="1">Standard Service</option>
                         <option value="2">Premium Service</option>
                     </select>

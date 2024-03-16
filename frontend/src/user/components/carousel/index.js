@@ -2,13 +2,17 @@ import './styles.css'
 import '../../../style/hover-zoom.css'
 import { Link } from 'react-router-dom'
 
-import {categories} from '../../../utils/categories'
+import { ThemeContext } from "../../context/theme-context"
+import { categories } from '../../../utils/categories'
+import { useContext } from 'react'
 export const Carousel = () => {
+
+    const { currentTheme, updateLanguage } = useContext(ThemeContext);
 
     const subCategories = [
         {
             imgUrl: 'imgs/categories/1.png',
-            title: 'Accounting' 
+            title: 'Accounting'
         },
         {
             imgUrl: 'imgs/categories/2.png',
@@ -100,13 +104,13 @@ export const Carousel = () => {
                             categories.map((value, index) => {
                                 return (
                                     <div class="slide" >
-                                        <Link to="/paginated_category_services" state={{useSubcategory: false, category: value.category}} >
+                                        <Link to="/paginated_category_services" state={{ useSubcategory: false, category: value.category }} >
                                             <div className={'hover-zoom disc-item d-flex flex-column ' + ((index % 2 == 0) ? "upperImage" : "lowerImage")} data-category-id="179" style={{ textAlign: 'left' }}>
                                                 <div class="img-fluid discover-image-wrapper " data-remotable="Available online">
                                                     <img class="br-top img-fluid object-fit-cover lazy loaded" alt={value.category} width="400" height="260" title="Gardening" data-src={value.img} src={value.img} />
                                                     {/* <p class="disc-title p-3 br-bottom mb-0" style={{ marginTop: '-80px', color: "white", fontSize: "1.5em" }}>{value.title}</p> */}
-                                                    <button  style={{ textAlign: 'left',  marginTop: '-60px', color: "white", padding: '0px', paddingRight: '2px', paddingLeft: '2px', borderRadius:'0px', backgroundColor: '#2f3831', width: '100%' }} type="button" class="br-top img-fluid object-fit-cover lazy loaded btn btn-dark ">{value.category}</button>
-                                                    
+                                                    <button style={{ textAlign: 'left', marginTop: '-60px', color: "white", padding: '0px', paddingRight: '2px', paddingLeft: '2px', borderRadius: '0px', backgroundColor: '#2f3831', width: '100%' }} type="button" class="br-top img-fluid object-fit-cover lazy loaded btn btn-dark ">{value.category}</button>
+
                                                 </div>
                                             </div>
                                         </Link>
@@ -116,10 +120,9 @@ export const Carousel = () => {
                         }
                     </div>
                 </div>
-
                 <Link to='/category_list' >
                     <button type="button" class="btn btn-primary" style={{ borderRadius: '20px', fontSize: '1.3em', }}>
-                        View All Categories &nbsp;<i class="bi bi-arrow-right"></i>
+                        {currentTheme.text.home.text25} &nbsp;<i class="bi bi-arrow-right"></i>
                     </button>
                 </Link>
             </div>

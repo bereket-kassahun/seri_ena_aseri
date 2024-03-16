@@ -52,7 +52,7 @@ export const SearchBody = ({ data, cardCount = 6, ratingEnabled = false }) => {
                 )
 
             } */}
-            <div class="row" style={{ padding: "20px" }}>
+            <div class="row" style={{ padding: "20px", justifyContent: "center" }}>
                 {
                     data.map((value, index) => {
                         if (value.serviceType == 2)
@@ -69,7 +69,7 @@ export const SearchBody = ({ data, cardCount = 6, ratingEnabled = false }) => {
                 borderTop: "1px solid rgba(0, 0, 0, 0.1)"
             }}
             />
-            <div class="row" style={{ padding: "10px" }}>
+            <div class="row" style={{ padding: "10px", justifyContent: "center" }}>
                 {
                     data.map((value, index) => (
                         value.serviceType == 0 && <BasicCard data={value} setRatingId={setRatingId} cardCount={cardCount / 2} />

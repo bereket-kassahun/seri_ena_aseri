@@ -13,7 +13,7 @@ function sendEmail(email, callback){
 //     networkCall(data, callback, 'POST', 'professional/login')
 // }
 function search(query, callback){
-    networkCall({}, callback, 'GET', 'services/search?word=' + query.word+'&page='+query.page+'&limit='+query.limit+'&price='+query.price+'&rating='+query.rating+'&type='+query.type)
+    networkCall({}, callback, 'GET', 'services/search?word=' + query.word+'&page='+query.page+'&limit='+query.limit+'&price='+query.price+'&rating='+query.rating+'&type='+query.type+'&paymentType='+query.paymentType+'&experience='+query.experience)
 }
 function recommend(word, callback){
     networkCall({}, callback, 'GET', 'services/recommend?word=' + word)

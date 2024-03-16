@@ -83,7 +83,7 @@ export const Login = () => {
             </div>
             <div class="banner-area  margin-bottom-150">
                 <div class="container">
-                    <div class="signup-wrapper" style={{padding: '20px 100px',}}>
+                    <div class="signup-wrapper">
                         <div class="signup-contents">
 
                             <h3 class="signup-title"> Sign In</h3>

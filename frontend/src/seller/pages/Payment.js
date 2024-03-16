@@ -8,7 +8,7 @@ import { useLocation, useNavigate } from "react-router-dom"
 import { ToastContainer, toast } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
-import { get_payment_link, verify_payment } from '../api';
+import { check_publishing_ability, get_payment_link, verify_payment } from '../api';
 export const Payment = () => {
 
     const navigate = useNavigate()
@@ -20,19 +20,28 @@ export const Payment = () => {
     const {seller, updateCurrentSeller} = useContext(SellerContext);
 
     let temp = ""
-    switch (service.serviceType) {
-        case 0:
-            temp = "39"
-            break;
-        case 1:
-            temp = "59"
-            break;
-        case 2:
-            temp = "79"
-            break;
-        default:
-            break;
+    if (service.serviceType == 0 || service.serviceType == "0"){
+        temp = "39"
     }
+    if (service.serviceType == 1 || service.serviceType == "1"){
+        temp = "59"
+    }
+    if (service.serviceType == 2 || service.serviceType == "2"){
+        temp = "79"
+    }
+    // switch (service.serviceType) {
+    //     case 0:
+    //         temp = "39"
+    //         break;
+    //     case 1:
+    //         temp = "59"
+    //         break;
+    //     case 2:
+    //         temp = "79"
+    //         break;
+    //     default:
+    //         break;
+    // }
 
     const info = {
         amount: temp,
@@ -74,13 +83,15 @@ export const Payment = () => {
                 window.open(res.checkout_url, '_blank');
                 setVerifyVisible(true)
             } else {
+                console.log(res);
+                console.log(info);
                 notifyError("Error Occured")
             }
         })
     }
 
     const verifyPayment = () => {
-        verify_payment({_id: seller._id}, (res) => {
+        check_publishing_ability({professionalId: seller._id, serviceId: service._id}, (res) => {
             if(res.success){
                 notifySuccess("Your Payment was Successfull!")
                 navigate('/seller/service_list')

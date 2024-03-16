@@ -85,17 +85,17 @@ export default function Container({ children }) {
     return (
         <>
             <header id="header" class="fixed-top ">
-                <div class="container d-flex align-items-center">
+                <div class="d-flex align-items-center">
 
                     {/* <h1 class="logo me-auto"><a href="/">Sira-Alle</a></h1> */}
 
-                    <div className="logo-new me-auto">
+                    <div className="logo-new me-auto" style={{ marginLeft: "30px", height: "110px", width: "110px" }}>
                         <Link to="/" >
                             <img src='imgs/white_logo.png' alt="Logo DevLoad" />
                         </Link>
                     </div>
 
-                    <nav id="navbar" className={"navbar " + (toggleNavigation ? 'navbar-mobile' : '')} >
+                    <nav id="navbar" className={"navbar " + (toggleNavigation ? 'navbar-mobile' : '')} style={{ marginRight: "30px" }}>
                         <ul className='custom-ul' style={{ backgroundColor: (toggleNavigation ? '#201e1e' : '') }}>
 
                             {/* {
@@ -137,17 +137,17 @@ export default function Container({ children }) {
 
 
 
-                            <li>
+                            <li onClick={(evnt) => { setToggleNavigation(false); }}>
                                 <Link className="btn-header" to="/howto">
-                                    How To
+                                    {currentTheme?.text?.navbar?.howTo}
                                 </Link>
                             </li>
-                            <li>
+                            <li onClick={(evnt) => { setToggleNavigation(false); }}>
                                 <Link className="btn-header" to="/review">
-                                    Leave A Review
+                                    {currentTheme?.text?.navbar?.leaveAReview}
                                 </Link>
                             </li>
-                            <li>
+                            <li onClick={(evnt) => { setToggleNavigation(false); }}>
                                 <a href={"tel:+2519543476"} className="btn-header">
                                     <i class="bi bi-telephone-outbound"></i>
                                     +2519543476
@@ -156,15 +156,24 @@ export default function Container({ children }) {
                             {
                                 !isSellerLoggedIn && (
                                     <>
-                                        <li>
+                                        <li onClick={(evnt) => { setToggleNavigation(false) }}>
                                             <Link className="btn-header" to="/login">
-                                                Sign In
+                                                {currentTheme?.text?.navbar?.signIn}
                                             </Link>
                                         </li>
-                                        <li>
-                                            <Link className="btn-blog" to="/register">
-                                                Join Us
-                                            </Link>
+                                        <li onClick={(evnt) => { setToggleNavigation(false); }}>
+                                            {
+                                                toggleNavigation ? (
+                                                    <Link className="btn-header" to="/register">
+                                                        {currentTheme?.text?.navbar?.joinUs}
+                                                    </Link>
+                                                ) : (
+                                                    <Link className="btn-blog" to="/register">
+                                                        {currentTheme?.text?.navbar?.joinUs}
+                                                    </Link>
+                                                )
+                                            }
+
                                         </li>
                                     </>
                                 )
@@ -215,13 +224,14 @@ export default function Container({ children }) {
                         }}></i>
                     </nav>
                 </div>
-            </header>
+            </header >
             {children}
-            <a className={"back-to-top d-flex align-items-center justify-content-center " + (active ? 'active' : '')} onClick={(evnt) => {
+            < a className={"back-to-top d-flex align-items-center justify-content-center " + (active ? 'active' : '')} onClick={(evnt) => {
                 setActive(!active)
                 window.scrollTo(0, 0)
-            }}><i class="bi bi-arrow-up-short"></i>
-            </a>
+            }
+            }> <i class="bi bi-arrow-up-short"></i>
+            </a >
 
 
             <footer id="footer">
@@ -242,7 +252,7 @@ export default function Container({ children }) {
                                     Addis Ababa, AA 535022<br />
                                     Ethiopia <br /><br />
                                     <strong>Phone:</strong> +251 95698 7809<br />
-                                    <strong>Email:</strong> seri.ena.aseri@gmail.com<br />
+                                    <strong>Email:</strong> serrale@gmail.com<br />
                                 </p>
                             </div>
 
@@ -271,7 +281,7 @@ export default function Container({ children }) {
 
                             <div class="col-lg-3 col-md-6 footer-links">
                                 <h4>Our Social Networks</h4>
-                                <p>Cras fermentum odio eu feugiat lide par naso tierra videa magna derita valies</p>
+                                <p>Please follow us on our social medias</p>
                                 <div class="social-links mt-3">
                                     <a href="#" class="twitter"><i class="fab fa-twitter"></i></a>
                                     <a href="#" class="facebook"><i class="fab fa-facebook"></i></a>

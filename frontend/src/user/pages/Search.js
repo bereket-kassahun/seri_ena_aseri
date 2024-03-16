@@ -23,6 +23,9 @@ const Search = () => {
   const [rating, setRating] = useState("-1")
   const [price, setPrice] = useState("-1")
   const [type, setType] = useState("-1")
+  const [paymentType, setPaymentType] = useState("-1")
+  const [experience, setExperience] = useState("-1")
+  
 
   // fetching data when loading for first time
   useEffect(() => {
@@ -32,10 +35,10 @@ const Search = () => {
   // fetching data when rating, price, type change
   useEffect(() => {
     getData()
-  }, [rating, price, type])
+  }, [rating, price, type, paymentType, experience])
 
   function getData(page = 1, word = searchWord) {
-    search({rating: rating, price: price, type: type, word: word, page: page, limit: PAGE_LIMIT }, (results) => {
+    search({ rating: rating, price: price, type: type, word: word, page: page, experience: experience, limit: PAGE_LIMIT, paymentType: paymentType }, (results) => {
       const tmp = results.docs
       const pageNo = results.total / PAGE_LIMIT
       setData([...tmp])
@@ -45,7 +48,7 @@ const Search = () => {
   }
 
   function callback(word) {
-    getData(undefined,  word)
+    getData(undefined, word)
     setSearchWord(word)
   }
 
@@ -59,10 +62,10 @@ const Search = () => {
       <div class="container" style={{ paddingTop: "10px" }}>
         <form method="get" id="search_service_list_form">
           <div class="row">
-            <div class="col-lg-4 col-sm-6">
+            <div class="col-lg-3 col-sm-6">
               <div class="input-group mb-3">
                 <label class="input-group-text" for="inputGroupSelect01">Rating</label>
-                <select class="form-select" id="inputGroupSelect01" onChange={(evnt) => {setRating(evnt.target.value)}}>
+                <select class="form-select" id="inputGroupSelect01" onChange={(evnt) => { setRating(evnt.target.value) }}>
                   <option selected value="-1">All</option>
                   <option value="5">{`5`}</option>
                   <option value="4">{`4`}</option>
@@ -71,10 +74,10 @@ const Search = () => {
                 </select>
               </div>
             </div>
-            <div class="col-lg-4 col-sm-6">
+            <div class="col-lg-3 col-sm-6">
               <div class="input-group mb-3">
                 <label class="input-group-text" for="inputGroupSelect01">Price</label>
-                <select class="form-select" id="inputGroupSelect01" onChange={(evnt) => {setPrice(evnt.target.value)}}>
+                <select class="form-select" id="inputGroupSelect01" onChange={(evnt) => { setPrice(evnt.target.value) }}>
                   <option value="-1" selected>All</option>
                   <option value="4">{`Greater Than 5000`}</option>
                   <option value="3">{`1000 to 5000`}</option>
@@ -83,15 +86,33 @@ const Search = () => {
                 </select>
               </div>
             </div>
-            <div class="col-lg-4 col-sm-6">
+            <div class="col-lg-3 col-sm-6">
               <div class="input-group mb-3">
                 <label class="input-group-text" for="inputGroupSelect01">Category</label>
-                <select class="form-select" id="inputGroupSelect01" onChange={(evnt) => {setType(evnt.target.value); console.log(evnt.target.value)}}>
+                <select class="form-select" id="inputGroupSelect01" onChange={(evnt) => { setType(evnt.target.value); console.log(evnt.target.value) }}>
                   <option value="-1" selected>All</option>
                   <option value="2">{`Premium`}</option>
                   <option value="1">{`Standard`}</option>
                   <option value="0">{`Basic`}</option>
                 </select>
+              </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+              <div class="input-group mb-3">
+                <label class="input-group-text" for="inputGroupSelect01">Payment Type</label>
+                <select class="form-select" id="inputGroupSelect01" onChange={(evnt) => { setPaymentType(evnt.target.value); console.log(evnt.target.value) }}>
+                  <option value={-1} selected="">All</option>
+                  <option value={0} >Fixed Price</option>
+                  <option value={1} >Per Hour</option>
+                  <option value={2} >Starting From</option>
+                  <option value={3} >Please Call</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+              <div class="input-group mb-3">
+                <label class="input-group-text" for="inputGroupSelect01">Experience</label>
+                <input class="form-control" name="experience" id="experience" type="number" placeholder="Experience" onChange={(evnt) => { setExperience(evnt.target.value) }} />
               </div>
             </div>
           </div>

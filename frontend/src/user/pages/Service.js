@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { Footer } from "../components/footer/Footer"
 import { Header } from "../components/header"
 import { ServiceHeader } from "../components/service/ServiceHeader"
@@ -18,10 +18,12 @@ const Service = () => {
     const professionalId = state.professionalId
     const [professional, setProfessional] = useState({})
     const [currentService, setCurrentService] = useState({})
-
+    const mapUrl = "https://maps.google.com/maps?width=100%25&amp;height=300&amp;hl=en&amp;q=8.983299, 38.698674&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
 
     const [activeElement, setActiveElement] = useState(1)
-
+    const [iframSrc, setIframeUrl] = useState(mapUrl);
+    const refIframe = useRef(null);
+    const [map, setMap] = useState()
     useEffect(() => {
         professional_services(professionalId, (res) => {
             if (res.success) {
@@ -36,6 +38,12 @@ const Service = () => {
             professional.service_data.forEach((service) => {
                 if (service._id == currentServiceId) {
                     setCurrentService(service)
+                    if (service?.latitude && service?.longitude) {
+                        const addr = service.latitude + ", " + service.longitude;
+                        setMap(
+                            "<iframe width='425' height='350' frameborder='0'scrolling='no' marginheight='0' marginwidth='0' src='https://maps.google.com/maps?&amp;q=" + encodeURIComponent(addr) + "&amp;output=embed'></iframe>"
+                        )
+                    }
                 }
             })
         }
@@ -54,12 +62,12 @@ const Service = () => {
                 })
             }
         }
-        return (<SearchBody data={ret} cardCount={4}/>)
+        return (<SearchBody data={ret} cardCount={4} />)
     }
 
     useEffect(() => {
         window.scrollTo(0, 0)
-      }, [])
+    }, [])
     return (
         <>
             <ServiceHeader title={currentService.title} />
@@ -88,7 +96,7 @@ const Service = () => {
                                             <a>
                                                 <div class="authors">
                                                     <div class="thumb">
-                                                    <img src={currentService.professionalImage != "" ? currentService.professionalImage : "imgs/user_profile.png"} alt="" />
+                                                        <img src={currentService.professionalImage != "" ? currentService.professionalImage : "imgs/user_profile.png"} alt="" />
                                                         <span class="notification-dot"></span>
                                                     </div>
                                                     <span class="author-title"> {professional.firstName} {professional.lastName} </span>
@@ -109,7 +117,7 @@ const Service = () => {
                                             About Seller
                                         </li>
                                     </ul>
-                                    <div className={"tab-content another-tab-content " + (activeElement == 1 ? 'active' : '')} id="tab1" style={{marginTop: "20px"}}>
+                                    <div className={"tab-content another-tab-content " + (activeElement == 1 ? 'active' : '')} id="tab1" style={{ marginTop: "20px" }}>
                                         <div class="details-content-tab padding-top-10 " dangerouslySetInnerHTML={{ __html: currentService.detail }} className="custom-editor">
 
                                         </div>
@@ -119,7 +127,7 @@ const Service = () => {
                                             <div class="about-seller-tab margin-top-30">
                                                 <div class="about-seller-flex-content">
                                                     <div class="about-seller-thumb">
-                                                        <img src={currentService.professionalImage != "" ? currentService.professionalImage : "imgs/user_profile.png"}  alt="" />
+                                                        <img src={currentService.professionalImage != "" ? currentService.professionalImage : "imgs/user_profile.png"} alt="" />
                                                     </div>
                                                     <div class="about-seller-content">
                                                         <h5 class="title">  {professional.firstName} {professional.lastName}</h5>
@@ -130,7 +138,7 @@ const Service = () => {
                                                         <li class="box-list"> From
                                                             <strong>
                                                                 <h6>
-                                                                    {currentService.city}, Latitude: {currentService.latitude}, Longitude: {currentService.longitude}
+                                                                    {currentService.city}
                                                                 </h6>
                                                             </strong>
                                                         </li>
@@ -151,6 +159,7 @@ const Service = () => {
                                                             </strong>
                                                         </li>
                                                     </ul>
+                                                    <div dangerouslySetInnerHTML={{ __html: map }}></div>
                                                     <p class="seller-details-para">{currentService.bio} </p>
                                                 </div>
                                             </div>
@@ -167,82 +176,12 @@ const Service = () => {
                                     {
                                         otherServices()
                                     }
-                                    {/* <div class="col-md-6 margin-top-30">
-                                        <div class="single-service no-margin">
-                                            <a href="cleaning-your-old-house-from-our-expert-cleaner-team-at-low-cost.html" class="service-thumb service-bg-thumb-format" style={{ backgroundImage: ` url(../assets/uploads/media-uploader/young-beautiful-cleaner-woman-holding-bucket-with-products-pointing-camera-against-blue-backdrop-591644647980.png)` }}>
-
-                                                <div class="country_city_location">
-                                                    <span class="single_location"> <i class="las la-map-marker-alt"></i> Dhaka, Bangladesh </span>
-                                                </div>
-                                            </a>
-                                            <div class="services-contents">
-                                                <ul class="author-tag">
-                                                    <li class="tag-list">
-                                                        <a href="../test_seller.html">
-                                                            <div class="authors">
-                                                                <div class="thumb">
-                                                                    <img src="imgs/sample_category.jpg" alt="" />
-                                                                    <span class="notification-dot"></span>
-                                                                </div>
-                                                                <span class="author-title"> Nazmul Hoque  </span>
-                                                            </div>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                                <h5 class="common-title"> <a href="cleaning-your-old-house-from-our-expert-cleaner-team-at-low-cost.html">Cleaning Your Old House From Our Expert Cleaner Team at Low Cost</a> </h5>
-                                                <p class="common-para"> It is a long established fact that a reader will be distracted by the readable content of a page whe... </p>
-                                                <div class="service-price">
-                                                    <span class="starting">Starting at</span>
-                                                    <span class="prices"> $35 </span>
-                                                </div>
-                                                <div class="btn-wrapper d-flex flex-wrap">
-                                                    <a href="book-now/cleaning-your-old-house-from-our-expert-cleaner-team-at-low-cost.html" class="cmn-btn btn-small btn-bg-1"> Book Now </a>
-                                                    <a href="cleaning-your-old-house-from-our-expert-cleaner-team-at-low-cost.html" class="cmn-btn btn-small btn-outline-1 ml-auto"> View Details </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 margin-top-30">
-                                        <div class="single-service no-margin">
-                                            <a href="get-beard-shaving-service-at-low-price.html" class="service-thumb service-bg-thumb-format" style={{ backgroundImage: `url(imgs/sample_category.jpg` }}>
-
-                                                <div class="country_city_location">
-                                                    <span class="single_location"> <i class="las la-map-marker-alt"></i> New York, United States (USA) </span>
-                                                </div>
-                                            </a>
-                                            <div class="services-contents">
-                                                <ul class="author-tag">
-                                                    <li class="tag-list">
-                                                        <a href="../test_seller.html">
-                                                            <div class="authors">
-                                                                <div class="thumb">
-                                                                    <img src="imgs/sample_category.jpg" alt="" />
-                                                                    <span class="notification-dot"></span>
-                                                                </div>
-                                                                <span class="author-title"> Nazmul Hoque  </span>
-                                                            </div>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                                <h5 class="common-title"> <a href="get-beard-shaving-service-at-low-price.html">Get Beard Shaving Service At Low Price</a> </h5>
-                                                <p class="common-para"> It is a long established fact that a reader will be distracted by the readable content of a page whe... </p>
-                                                <div class="service-price">
-                                                    <span class="starting">Starting at</span>
-                                                    <span class="prices"> $10 </span>
-                                                </div>
-                                                <div class="btn-wrapper d-flex flex-wrap">
-                                                    <a href="book-now/get-beard-shaving-service-at-low-price.html" class="cmn-btn btn-small btn-bg-1"> Book Now </a>
-                                                    <a href="get-beard-shaving-service-at-low-price.html" class="cmn-btn btn-small btn-outline-1 ml-auto"> View Details </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> */}
                                 </div>
                             </div>
 
                         </div>
                         <div class="col-lg-4 margin-top-30  order-1 order-lg-2">
-                            <Chat data={currentService.reviews ? currentService.reviews : []}/>
+                            <Chat data={currentService.reviews ? currentService.reviews : []} />
                             <div class="service-details-package">
                                 <div class="single-packages">
                                     <ul class="package-price">

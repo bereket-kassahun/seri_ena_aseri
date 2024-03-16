@@ -37,7 +37,7 @@ function ReviewHeader({ hint, callback }) {
             })
             console.log(search_word)
             console.log(result)
-            setSearchResult([...result])
+            setSearchResult([...result, ...searchResult])
         })
     }
 

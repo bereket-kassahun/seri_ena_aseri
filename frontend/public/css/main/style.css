@@ -312,7 +312,7 @@ h6 {
   right: 0;
   left: 0;
   bottom: 0;
-  background: rgba(40, 58, 90, 0.9);
+  /* background: rgba(40, 58, 90, 0.9); */
   transition: 0.3s;
   z-index: 999;
 }
@@ -339,7 +339,7 @@ h6 {
 
 .navbar-mobile a,
 .navbar-mobile a:focus {
-  padding: 10px 20px;
+  padding: 10px 0px;
   font-size: 15px;
   color: #37517e;
 }
@@ -1839,6 +1839,12 @@ section {
 }
 
 @media (max-width: 768px) {
+  #footer {
+    text-align: center;
+  }
+  #footer .footer-top .footer-links ul li {
+    display: inline;
+  }
   #footer .footer-bottom {
     padding-top: 20px;
     padding-bottom: 20px;
